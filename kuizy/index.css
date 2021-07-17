@@ -1,0 +1,25 @@
+.name{
+    font-size: 17px;
+    line-height: 20px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.name:after{
+    display: block;
+    margin-top: 10px;
+    width: 120px;
+    height: 2px;
+    background-color: #00AB36;
+    content: '';
+}
+
+li{
+    display: block;
+    border: 1px solid #ebebeb;
+    padding: 13px;
+    margin: 10px 0;
+    font-weight: 600;
+    cursor: pointer;
+    -webkit-box-shadow: 0 3px 2px -2px rgb(0 0 0 / 13%);
+}
