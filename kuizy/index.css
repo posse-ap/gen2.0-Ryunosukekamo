@@ -14,7 +14,37 @@
     content: '';
 }
 
-li{
+/* li{
+    display: block;
+    border: 1px solid #ebebeb;
+    padding: 13px;
+    margin: 10px 0;
+    font-weight: 600;
+    cursor: pointer;
+    -webkit-box-shadow: 0 3px 2px -2px rgb(0 0 0 / 13%);
+} */
+
+.button_style1{
+    display: block;
+    border: 1px solid #ebebeb;
+    padding: 13px;
+    margin: 10px 0;
+    font-weight: 600;
+    cursor: pointer;
+    -webkit-box-shadow: 0 3px 2px -2px rgb(0 0 0 / 13%);
+}
+
+.button_style2{
+    display: block;
+    border: 1px solid #ebebeb;
+    padding: 13px;
+    margin: 10px 0;
+    font-weight: 600;
+    cursor: pointer;
+    -webkit-box-shadow: 0 3px 2px -2px rgb(0 0 0 / 13%);
+}
+
+.buttton_style3{
     display: block;
     border: 1px solid #ebebeb;
     padding: 13px;
@@ -29,15 +59,61 @@ margin:0 auto;
 width: 45%;
 }
 
-#button1 {   
+/* #button1 {   
 background-color: #FFFFFF;
-}
+} */
 
-#button1.blue {
+/* #button1.blue {
  background-color:#287DFF;
+} */
+
+.result1{
+    background: #f5f5f5;
+    padding: 17px;
+    border-radius: 3px;
+    height: 80px;
+    display: none;
 }
 
-.white{
+.result2{
+    background: #f5f5f5;
+    padding: 17px;
+    border-radius: 3px;
+    height: 80px;
+    display: none;
+}
+
+.correct{
+    line-height: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    padding-bottom: 0px 0px 3px;
+    margin-bottom: 0px 0px 10px;
+    display: inline-block;
+    border-bottom: 3px solid #287dff;
+}
+
+.wrong{
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    padding-bottom: 3px;
+    margin-bottom: 10px;
+    display: inline-block;
+    border-bottom: 3px solid #FF5128;
+}
+
+.display{
+   padding: 3px;
+}
+
+.display2{
+    padding: 3px;
+}
+
+
+
+/* .white{
     color:#FFFFFF;
 }
 
@@ -53,6 +129,6 @@ background-color: #FFFFFF;
     border-radius: 3px;
 }
 
-.appearance1{
-    text-decoration-line: underline;
-   text-decoration-color: blueviolet;
+p::after{
+content: "たくし";
+} */
