@@ -1,8 +1,6 @@
 "use strict";
 
-//ループ
-
-let contents = document.getElementById('contents'); //contentsのidを取得
+    let contents = document.getElementById('contents'); //contentsのidを取得
 
 //jsでは、img srcは''を使っているため、文字列でしかない。しかし、結局はHTMLに戻すから、それでOK.
 //ちなみに、なぜ、''を使って文字列にしているのかというと、img srcが使えないから。前述したが、この無理やり文字列に変えるという手法ができるのも、最終的にはHTMLに戻すから。＊HTMLではimg srcが普通にできる。
@@ -36,9 +34,9 @@ main +='<div class="parent">'
      //2.  JSでは、代入先は文字列でないため、そのまま（''）などをつけなくて書ける。
      //3.  しかし、代入先が今回のように文字列の中に書かなければならない際は、文字列と区別するために  +[代入先]+  とする。
      // 1.2.3の知識を使うと下記のようになり、問題ごとに、違う選択肢を表示させることができる。
-     +'<li id="button1" class="button_style1" onclick="正解()">'+[QuestionNames1[i]]+'</li>'
-     +'<li id="button2" class="button_style2" onclick="不正解()">'+[QuestionNames2[i]]+'</li>'
-     +'<li id="button3" class="buttton_style3" onclick="不正解()">'+[QuestionNames3[i]]+'</li>'
+     +'<li id="button1-'+[i]+'" class="button_style1" onclick="Correct()">'+[QuestionNames1[i]]+'</li>'//id=buttonというのは、js上でidを取得してクリックできるシステムのこと。一方、このonclick = Correct()というのは、HTMLでかくことができる。idを使わずにjsでクリックできる処理をかける。
+     +'<li id="button2-'+[i]+'" class="button_style2" onclick="Wrong()">'+[QuestionNames2[i]]+'</li>'// button2-1,button2-2....
+     +'<li id="button3-'+[i]+'" class="buttton_style3" onclick="Wrong()">'+[QuestionNames3[i]]+'</li>'//
      +'<div id="result1" class="result1">'
      +'<span class="correct">正解！</span>'
      +'<p>'
@@ -56,49 +54,37 @@ main +='<div class="parent">'
 
      contents.innerHTML = main;
 };
+     let i = [0,1,2,3,4,5,6,7,8,9];
+     let button1 = document.getElementById('button1-'+[i]+'');
+     let button2 = document.getElementById('button2-'+[i]+'');
+     let button3 = document.getElementById('button3-'+[i]+'');
 
-         
-    
-    // let button1 = document.getElementById("button1");
-    // let button2 = document.getElementById("button2");
-    // let button3 = document.getElementById("button3");
-    // let result1 = document.getElementById("result1");
-    // let result2 = document.getElementById("result2");
-    
-    
 
-    // button1.onclick = function() {
-    //     document.getElementById("button1").style.backgroundColor = "#287DFF";//「たかなわ」をクリックすると、「たかなわ」の背景色が青に変化する
-    //     result1.style.display ="block"; //「たかなわ」をクリックすると、result1が表示される
-    //     button1.style.color = "#FFFFFF";//「たかなわ」をクリックすると、「たかなわ」の文字の色が白に変化する
-    //     button2.style.pointerEvents= "none";//「たかなわ」をクリックすると、「こうわ」が押せなくなる
-    //     button3.style.pointerEvents= "none";//「たかなわ」をクリックすると、「たかわ」が押せなくなる
-    //        }
+    button1.onclick = function() {
+        document.getElementById("button1").style.backgroundColor = "#287DFF";//「たかなわ」をクリックすると、「たかなわ」の背景色が青に変化する
+        result1.style.display ="block"; //「たかなわ」をクリックすると、result1が表示される
+        button1.style.color = "#FFFFFF";//「たかなわ」をクリックすると、「たかなわ」の文字の色が白に変化する
+        button2.style.pointerEvents= "none";//「たかなわ」をクリックすると、「こうわ」が押せなくなる
+        button3.style.pointerEvents= "none";//「たかなわ」をクリックすると、「たかわ」が押せなくなる
+           }
 
-    // button2.onclick = function(){
-    //     document.getElementById("button2").style.backgroundColor = "#FF5128";//「こうわ」をクリックすると、「こうわ」の背景色が赤に変化する
-    //     result2.style.display ="block";//「こうわ」をクリックすると、result2が表示される
-    //     button1.style.color = "#FFFFFF";//「こうわ」をクリックすると、「たかなわ」の文字の色が白に変化する
-    //     button2.style.color = "#FFFFFF";//「こうわ」をクリックすると、「こうわ」の文字の色が白に変化する
-    //     button1.style.backgroundColor = "#287DFF";//「こうわ」をクリックすると、「たかなわ」の背景色が青に変化する
-    //     button1.style.pointerEvents= "none";//「こうわ」をクリックすると、「たかなわ」が押せなくなる
-    //     button3.style.pointerEvents= "none";//「こうわ」をクリックすると、「たかわ」が押せなくなる
-    //         }
+    button2.onclick = function(){
+        document.getElementById("button2").style.backgroundColor = "#FF5128";//「こうわ」をクリックすると、「こうわ」の背景色が赤に変化する
+        result2.style.display ="block";//「こうわ」をクリックすると、result2が表示される
+        button1.style.color = "#FFFFFF";//「こうわ」をクリックすると、「たかなわ」の文字の色が白に変化する
+        button2.style.color = "#FFFFFF";//「こうわ」をクリックすると、「こうわ」の文字の色が白に変化する
+        button1.style.backgroundColor = "#287DFF";//「こうわ」をクリックすると、「たかなわ」の背景色が青に変化する
+        button1.style.pointerEvents= "none";//「こうわ」をクリックすると、「たかなわ」が押せなくなる
+        button3.style.pointerEvents= "none";//「こうわ」をクリックすると、「たかわ」が押せなくなる
+            }
      
-    // button3.onclick = function(){
-    //     document.getElementById("button3").style.backgroundColor = "#FF5128";//「たかわ」をクリックすると、「たかわ」の背景色が赤に変化する
-    //     result2.style.display ="block";//「たかわ」をクリックすると、result2が表示される
-    //     button1.style.color = "#FFFFFF";//「たかわ」をクリックすると、「たかなわ」の文字の色が白に変化する
-    //     button3.style.color = "#FFFFFF";//「たかわ」をクリックすると、「たかわ」の文字の色が白に変化する
-    //     button1.style.backgroundColor = "#287DFF";//「たかわ」をクリックすると、「たかなわ」の背景色が青に変化する
-    //     button1.style.pointerEvents= "none";//「たかわ」をクリックすると、「たかなわ」が押せなくなる
-    //     button2.style.pointerEvents= "none";//「たかわ」をクリックすると、「こうわ」が押せなくなる
+    button3.onclick = function(){
+        document.getElementById("button3").style.backgroundColor = "#FF5128";//「たかわ」をクリックすると、「たかわ」の背景色が赤に変化する
+        result2.style.display ="block";//「たかわ」をクリックすると、result2が表示される
+        button1.style.color = "#FFFFFF";//「たかわ」をクリックすると、「たかなわ」の文字の色が白に変化する
+        button3.style.color = "#FFFFFF";//「たかわ」をクリックすると、「たかわ」の文字の色が白に変化する
+        button1.style.backgroundColor = "#287DFF";//「たかわ」をクリックすると、「たかなわ」の背景色が青に変化する
+        button1.style.pointerEvents= "none";//「たかわ」をクリックすると、「たかなわ」が押せなくなる
+        button2.style.pointerEvents= "none";//「たかわ」をクリックすると、「こうわ」が押せなくなる
     
-    // }
-
-    //n-1 n-2 n-3 result1-1 result1-2 result1-3
-
-
-    
-    
-    
+    }
