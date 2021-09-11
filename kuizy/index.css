@@ -14,16 +14,6 @@
     content: '';
 }
 
-/* li{
-    display: block;
-    border: 1px solid #ebebeb;
-    padding: 13px;
-    margin: 10px 0;
-    font-weight: 600;
-    cursor: pointer;
-    -webkit-box-shadow: 0 3px 2px -2px rgb(0 0 0 / 13%);
-} */
-
 .button_style1{
     display: block;
     border: 1px solid #ebebeb;
@@ -58,14 +48,6 @@
 margin:0 auto;
 width: 45%;
 }
-
-/* #button1 {   
-background-color: #FFFFFF;
-} */
-
-/* #button1.blue {
- background-color:#287DFF;
-} */
 
 .result1{
     background: #f5f5f5;
@@ -113,22 +95,3 @@ background-color: #FFFFFF;
 
 
 
-/* .white{
-    color:#FFFFFF;
-}
-
-
-.underline{
-    text-decoration-line: underline;
-    text-decoration-color: blue;
-}
-
-.appearance{
-    background:#f5f5f5;
-    padding: 17px;
-    border-radius: 3px;
-}
-
-p::after{
-content: "たくし";
-} */
