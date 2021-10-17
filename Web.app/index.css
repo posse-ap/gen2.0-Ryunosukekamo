@@ -1,0 +1,165 @@
+body {
+    background-color: #EEEEEE;
+    margin: 0;
+}
+
+#title {
+    margin-top: 0;
+}
+
+header {
+    height: 64px;
+    text-align: right;
+    background-color: #FFFFFF;
+    vertical-align: top;
+}
+
+/* ロゴをblock要素にすることで、text alignで右よせにならないようにした。 */
+
+.Logo{
+    margin-top: 15px;
+}
+
+.Logo img {
+    width: 130px;
+    height: auto;
+    display: block;
+    /* text-align: right; */
+}
+
+.record_post {
+    /* color: white;
+    border: solid 1px blue;
+    border-radius: 15px;
+    padding-left: 10px;
+    padding-right: 10px; */
+    display: inline-block
+}
+
+/* ------------------------------------------------------------------ */
+
+/* ここから中身/content */
+
+.Content {
+    margin-top: 20px;
+}
+
+.Content ul {
+    display: flex;
+}
+
+.Content li {
+    list-style: none;
+    background-color: #FFFFFF;
+}
+
+/* Today 3 hour のように要素を縦に並べる */
+
+.Content li div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 3の位置を少し右によせ真ん中にもってくる */
+
+.Today_actual_hour {
+    margin-left: 13px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.Actual_Month {
+    margin-left: -1px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.Actual_Today_hours {
+    margin-left: -7px;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.Today_hour {
+    margin-left: 4px;
+    font-weight: 500;
+    color: #BAD3FF;
+}
+
+.Monthly_hour {
+    margin-left: 4px;
+    margin-top: 4px;
+    font-weight: 500;
+    color: #BAD3FF;
+}
+
+.Total_hours {
+    margin-left: 4px;
+    margin-top: 7px;
+    font-weight: 500;
+    color: #BAD3FF;
+}
+
+.Today {
+    border: solid 1px;
+    border: solid 1px #FFFFFF;
+    border-radius: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.Month {
+    margin-left: 20px;
+    border: solid 1px #FFFFFF;
+    border-radius: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.Total {
+    margin-left: 20px;
+    border: solid 1px #FFFFFF;
+    border-radius: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.today {
+    font-weight: bold;
+    color: #2C7CFF;
+}
+
+.month {
+    font-weight: bold;
+    color: #2C7CFF;
+}
+
+.total {
+    font-weight: bold;
+    color: #2C7CFF;
+}
+
+
+
+
+
+
+/* -------------------------------------------------------------------------- */
+
+/* Histgram */
+
+.Hist_gram {
+    margin-top: 20px;
+    margin-left: 42px;
+}
+
+.Hist_gram img {
+    width: 500px;
+    height: auto;
+}
