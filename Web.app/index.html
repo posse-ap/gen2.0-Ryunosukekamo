@@ -2,58 +2,126 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="index.css">
+	<title>Document</title>
 </head>
 
 <body>
 
-    <body>
-        <header>
+	<body>
+		<header>
 
-            <div id="Logo" class="Logo"><img src="https://posse.anti-pattern.co.jp/img/posseLogo.png" alt=""
-                    class="logo_image">
-            </div>
+			<div id="Logo" class="Logo">
 
-            <p>4th week</p>
+				<img src="https://posse.anti-pattern.co.jp/img/posseLogo.png" alt="" class="logo_image">
 
-            <div id="record_post" class="record_post">
-                <p>記録と投稿</p>
-            </div>
+				<p>4th week</p>
 
 
+			</div>
 
 
-        </header>
-
-        <div class="Content">
-            <div id="Time" class="Time">
-                <ul>
-
-                    <li id="Today" class="Today"> <span class="today">Today</span>
-                        <div><span class="Today_actual_hour">3</span> <span class="Today_hour">hour</span></div>
-                    </li>
-                    <li id="Month" class="Month"><span class="month">Month</span>
-                        <div><span class="Actual_Month">120</span> <span class="Monthly_hour">hour</span></div>
-                    </li>
-                    <li id="Total" class="Month"><span class="total">Total</span>
-                        <div><span class="Actual_Today_hours">1348</span> <span class="Total_hours">hour</span></div>
-                    </li>
+			<div id="record_post" class="record_post">
+				<p>記録と投稿</p>
+			</div>
 
 
-                </ul>
-            </div>
+		</header>
 
-            <div id="Hist_gram" class="Hist_gram">
-                <img src="https://backlog.com/wp-blog-app/uploads/sites/6/2019/09/article-image05-yugami.png" alt="">
-            </div>
+		<div class="Content">
+			<div class="Split_left">
+				<div id="Time" class="Time">
+					<ul>
 
-        </div>
+						<li id="Today" class="Today"> <span class="today">Today</span>
+							<div><span class="Today_actual_hour">3</span> <span class="Today_hour">hour</span></div>
+						</li>
+						<li id="Month" class="Month"><span class="month">Month</span>
+							<div><span class="Actual_Month">120</span> <span class="Monthly_hour">hour</span></div>
+						</li>
+						<li id="Total" class="Month"><span class="total">Total</span>
+							<div><span class="Actual_Today_hours">1348</span> <span class="Total_hours">hour</span>
+							</div>
+						</li>
 
-        <script src="index.js"></script>
-    </body>
+
+					</ul>
+
+				</div>
+
+				<div>
+					<div id="Hist_gram" class="Hist_gram">
+						<img src="https://backlog.com/wp-blog-app/uploads/sites/6/2019/09/article-image05-yugami.png"
+							alt="">
+					</div>
+				</div>
+
+			</div>
+
+
+
+			<div id="Study" class="Study">
+				<!-- <div class="Split_right"> -->
+					<div id="Language_studied" class="Language_studied">
+
+						<p>学習言語</p>
+
+						<ul class="one">
+							<li>JavaScript</li>
+							<li> HTML</li>
+							<li>SHELL</li>
+							<li>情報システム基礎知識（その他）</li>
+						</ul>
+
+						<div class="two">
+							<ul>
+								<li>CSS</li>
+								<li>Laravel</li>
+							</ul>
+
+							<ul>
+								<li>PHP</li>
+								<li>SQL</li>
+							</ul>
+						</div>
+
+
+
+					</div>
+
+
+					<div id="Contents_studied" class="Contents_studied">
+						<p>学習コンテンツ</p>
+
+						<ul>
+							<li>ドットインストール</li>
+							<li>N予備校</li>
+							<li>POSSE課題</li>
+						</ul>
+					</div>
+
+				<!-- </div> -->
+
+
+
+			</div>
+
+
+			<p class="Date"><span>＜</span>　2020年 10月　<span>＞</span></p> 
+
+			<!-- <div id="modal-content">
+
+			<p>学習日</p>
+			<p>学習時間</p> -->
+
+
+
+		</div>
+
+			<script src="index.js"></script>
+	</body>
 
 </html>

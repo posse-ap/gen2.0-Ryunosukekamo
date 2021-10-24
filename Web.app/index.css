@@ -1,6 +1,7 @@
 body {
     background-color: #EEEEEE;
     margin: 0;
+    width: 100%;
 }
 
 #title {
@@ -9,31 +10,47 @@ body {
 
 header {
     height: 64px;
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
     background-color: #FFFFFF;
-    vertical-align: top;
+    margin-top: 15px;
+    padding-top: 15px;
+    padding-left: 45px;
+    box-sizing: border-box;
+    /* vertical-align: top; */
 }
 
 /* ロゴをblock要素にすることで、text alignで右よせにならないようにした。 */
 
-.Logo{
+/* .Logo{
     margin-top: 15px;
+} */
+
+.Logo{
+    display: flex;
 }
 
 .Logo img {
-    width: 130px;
+    width: 120px;
     height: auto;
     display: block;
     /* text-align: right; */
 }
 
+header p {
+    /* color: #BAD3FF */
+    /* margin-top: -20px;
+    margin-right: 500px; */
+}
+
 .record_post {
+    text-align: right;
     /* color: white;
     border: solid 1px blue;
     border-radius: 15px;
     padding-left: 10px;
     padding-right: 10px; */
-    display: inline-block
+    /* display: inline-block */
 }
 
 /* ------------------------------------------------------------------ */
@@ -42,20 +59,35 @@ header {
 
 .Content {
     margin-top: 20px;
+    display: flex;
+    /* width: 100%; */
+    display: table;
+    margin-left: 200px;
+
 }
 
-.Content ul {
+.Split_left{
+
+    display: table-cell;
+    /* width: 50%; */
+    /* position: absolute; */
+    margin-left: 150px;
+
+
+}
+
+.Time ul {
     display: flex;
 }
 
-.Content li {
+.Time li {
     list-style: none;
     background-color: #FFFFFF;
 }
 
 /* Today 3 hour のように要素を縦に並べる */
 
-.Content li div {
+.Time li div {
     display: flex;
     flex-direction: column;
 }
@@ -145,11 +177,6 @@ header {
     color: #2C7CFF;
 }
 
-
-
-
-
-
 /* -------------------------------------------------------------------------- */
 
 /* Histgram */
@@ -161,5 +188,74 @@ header {
 
 .Hist_gram img {
     width: 500px;
-    height: auto;
+    height: 364px;    
+}
+
+/* ------------------------------------------------------------------------ */
+
+/* 学習言語と学習コンテンツ */
+
+
+.Split_rigth{
+
+    display: table-cell;
+    /* width: 50%; */
+
+}
+
+.Study{
+    display: flex;
+    margin-left: 98px;
+    
+}
+
+
+
+/* .two {
+    display: flex;
+    margin-left: 15px;
+} */
+
+.Language_studied {
+    border: solid 1px #FFFFFF;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    height: 500px;
+    width: 310px;
+}
+
+.Language_studied p{
+    margin-left: 20px;
+}
+
+.Contents_studied {
+    border: solid 1px #FFFFFF;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    margin-left: 20px;
+    height: 500px;
+    width: 310px;
+}
+
+.Contents_studied p{
+    margin-left: 20px;
+}
+
+
+/* ----------------------------------------------------------------------- */
+.Date{
+    /* text-align: center; */
+    font-weight: bold;
+}
+
+.Date span{
+    color: #2C7CFF;
+}
+/* ------------------------------------------------------------------- */
+
+/* モーダル */
+
+.modal_content {
+    position: fixed;
+    z-index: 2;
 }
