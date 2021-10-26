@@ -9,119 +9,191 @@
 	<title>Document</title>
 </head>
 
+<html>
+
 <body>
+	<header>
 
-	<body>
-		<header>
+		<div id="Logo" class="Logo">
 
-			<div id="Logo" class="Logo">
+			<img src="https://posse.anti-pattern.co.jp/img/posseLogo.png" alt="" class="logo_image">
 
-				<img src="https://posse.anti-pattern.co.jp/img/posseLogo.png" alt="" class="logo_image">
-
-				<p>4th week</p>
-
-
-			</div>
-
-
-			<div id="record_post" class="record_post">
-				<p>記録と投稿</p>
-			</div>
-
-
-		</header>
-
-		<div class="Content">
-			<div class="Split_left">
-				<div id="Time" class="Time">
-					<ul>
-
-						<li id="Today" class="Today"> <span class="today">Today</span>
-							<div><span class="Today_actual_hour">3</span> <span class="Today_hour">hour</span></div>
-						</li>
-						<li id="Month" class="Month"><span class="month">Month</span>
-							<div><span class="Actual_Month">120</span> <span class="Monthly_hour">hour</span></div>
-						</li>
-						<li id="Total" class="Month"><span class="total">Total</span>
-							<div><span class="Actual_Today_hours">1348</span> <span class="Total_hours">hour</span>
-							</div>
-						</li>
-
-
-					</ul>
-
-				</div>
-
-				<div>
-					<div id="Hist_gram" class="Hist_gram">
-						<img src="https://backlog.com/wp-blog-app/uploads/sites/6/2019/09/article-image05-yugami.png"
-							alt="">
-					</div>
-				</div>
-
-			</div>
-
-
-
-			<div id="Study" class="Study">
-				<!-- <div class="Split_right"> -->
-					<div id="Language_studied" class="Language_studied">
-
-						<p>学習言語</p>
-
-						<ul class="one">
-							<li>JavaScript</li>
-							<li> HTML</li>
-							<li>SHELL</li>
-							<li>情報システム基礎知識（その他）</li>
-						</ul>
-
-						<div class="two">
-							<ul>
-								<li>CSS</li>
-								<li>Laravel</li>
-							</ul>
-
-							<ul>
-								<li>PHP</li>
-								<li>SQL</li>
-							</ul>
-						</div>
-
-
-
-					</div>
-
-
-					<div id="Contents_studied" class="Contents_studied">
-						<p>学習コンテンツ</p>
-
-						<ul>
-							<li>ドットインストール</li>
-							<li>N予備校</li>
-							<li>POSSE課題</li>
-						</ul>
-					</div>
-
-				<!-- </div> -->
-
-
-
-			</div>
-
-
-			<p class="Date"><span>＜</span>　2020年 10月　<span>＞</span></p> 
-
-			<!-- <div id="modal-content">
-
-			<p>学習日</p>
-			<p>学習時間</p> -->
-
+			<p>4th week</p>
 
 
 		</div>
 
-			<script src="index.js"></script>
-	</body>
+
+		<div id="record_post" class="record_post">
+			<p>記録・投稿</p>
+		</div>
+
+
+	</header>
+
+	<!-- モーダル -->
+
+	<div id="modal" class="modal">
+
+		<div id="modal_content" class="modal_content">
+			<div id="modal_contents_left_side" class="modal_contents_left_side">
+
+
+
+				<div id="day_for_study" class="day_for_study">
+					<span>学習日</span><br>
+					<input type="text" class="input_day_for_study">
+				</div>
+
+
+				<div id="contents_study" class="contents_study">
+					<span>学習コンテンツ（複数選択可）</span><br>
+					<div>
+						<span><input type="checkbox"><label for="">N予備校</label></span>
+						<span><input type="checkbox"><label for="">ドットインストール</label></span><br>
+						<span><input type="checkbox"><label for="">POSSE課題</label></span>
+					</div>
+
+				</div>
+
+				<div id="languages_study" class="languages_study">
+					<span>学習言語（複数選択可）</span><br>
+					<div>
+						<span><input type="checkbox" class="input_languages_study"><label for="">HTML</label></span>
+						<span><input type="checkbox" class="input_languages_study"><label for="">CSS</label></span>
+						<span><input type="checkbox" class="input_languages_study"><label
+								for="">JavaScript</label></span><br>
+						<span><input type="checkbox" class="input_languages_study"><label for="">PHP</label></span>
+						<span><input type="checkbox" class="input_languages_study"><label for="">Laravel</label></span>
+						<span><input type="checkbox" class="input_languages_study"><label for="">SQL</label></span>
+						<span><input type="checkbox" class="input_languages_study"><label
+								for="">SHELL</label></span><br>
+						<span><input type="checkbox" class="input_languages_study"><label
+								for="">情報処理システム基礎知識（その他</label></span><br>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div id="modal_contents_right_side" class="modal_contents_right_side">
+				<div id="study_time" class="study_time">
+					<span>学習時間</span>
+					<input type="text" class="input_study_time">
+	
+				</div>
+	
+				<div id="twitter" class="twitter">
+					<p>Twitter用コメント</p>
+					<input type="text">
+				</div>
+
+				<input type="checkbox"><label for="">Twitterにシャアする</label>
+			</div>
+	
+	
+			<!-- <div id="modal_record_post" class="modal_record_post">
+				<span>記録・投稿</span>
+			</div> -->
+
+		</div>
+		
+
+	</div>
+
+
+	<div id="modal_overlay" class="modal_overlay"></div>
+
+	<!-- コンテンツ -->
+
+	<div class="Content">
+		<div class="Split_left">
+			<div id="Time" class="Time">
+				<ul>
+
+					<li id="Today" class="Today"> <span class="today">Today</span>
+						<div><span class="Today_actual_hour">3</span> <span class="Today_hour">hour</span></div>
+					</li>
+					<li id="Month" class="Month"><span class="month">Month</span>
+						<div><span class="Actual_Month">120</span> <span class="Monthly_hour">hour</span></div>
+					</li>
+					<li id="Total" class="Month"><span class="total">Total</span>
+						<div><span class="Actual_Today_hours">1348</span> <span class="Total_hours">hour</span>
+						</div>
+					</li>
+
+
+				</ul>
+
+			</div>
+
+			<div>
+				<div id="Hist_gram" class="Hist_gram">
+					<img src="https://backlog.com/wp-blog-app/uploads/sites/6/2019/09/article-image05-yugami.png"
+						alt="">
+				</div>
+			</div>
+
+		</div>
+
+
+
+		<div id="Study" class="Study">
+			<!-- <div class="Split_right"> -->
+			<div id="Language_studied" class="Language_studied">
+
+				<p>学習言語</p>
+
+				<ul class="one">
+					<li>JavaScript</li>
+					<li> HTML</li>
+					<li>SHELL</li>
+					<li>情報システム基礎知識（その他）</li>
+				</ul>
+
+				<div class="two">
+					<ul>
+						<li>CSS</li>
+						<li>Laravel</li>
+					</ul>
+
+					<ul>
+						<li>PHP</li>
+						<li>SQL</li>
+					</ul>
+				</div>
+
+
+
+			</div>
+
+
+			<div id="Contents_studied" class="Contents_studied">
+				<p>学習コンテンツ</p>
+
+				<ul>
+					<li>ドットインストール</li>
+					<li>N予備校</li>
+					<li>POSSE課題</li>
+				</ul>
+			</div>
+
+		</div>
+
+
+
+	</div>
+
+
+
+
+
+
+	</div>
+	<p class="Date"><span>＜</span>　2020年 10月　<span>＞</span></p>
+
+	<script src="index.js"></script>
+</body>
 
 </html>
