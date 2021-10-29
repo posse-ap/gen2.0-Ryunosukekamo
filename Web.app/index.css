@@ -20,13 +20,8 @@ header {
     background-color: #FFFFFF;
     padding-top: 15px;
     box-sizing: border-box;
+    background: linear-gradient(to top, #FFFF 60%, #DDDDDD)
 }
-
-/* ロゴをblock要素にすることで、text alignで右よせにならないようにした。 */
-
-/* .Logo{
-    margin-top: 15px;
-} */
 
 .Logo {
     display: flex;
@@ -251,7 +246,7 @@ header {
     width: 900px;
 }
 
-.modal_content{
+.modal_content {
     display: flex;
 }
 
@@ -279,42 +274,35 @@ header {
     width: 374px;
 }
 
-.contents_study{
-    
+.contents_study {
     margin-top: 15px;
-    
 }
 
-.contents_study input[type="checkbox"]+label:before{
-
-    border-radius: 50%;    
-
+.contents_study input[type="checkbox"]+label:before {
+    border-radius: 50%;
 }
 
-.contents_study div{
+.contents_study div {
     margin-top: 10px;
 }
 
-.contents_study div span{
+.contents_study div span {
     border-radius: 15px;
     border-color: transparent;
-    background-color:#F5F5F8;
+    background-color: #F5F5F8;
     width: 200px;
 }
 
-
-
-.languages_study{
+.languages_study {
     margin-top: 20px;
 }
 
-.languages_study div span{
+.languages_study div span {
     border-radius: 15px;
     border-color: transparent;
-    background-color:#F5F5F8;
+    background-color: #F5F5F8;
     width: 200px;
 }
-
 
 /* 右側 */
 
@@ -324,8 +312,7 @@ header {
     margin-top: 50px;
 }
 
-.input_study_time{
-
+.input_study_time {
     background-color: #F5F5F8;
     border-radius: 8px;
     border-color: transparent;
@@ -333,26 +320,75 @@ header {
     width: 374px;
 }
 
-.twitter input{
+.twitter input {
     width: 374px;
     height: 200px;
     border-radius: 20px;
     border-color: transparent;
     background-color: #F5F5F8;
-
 }
 
-
 /* 記録・投稿- modal */
+
+/* widthで右側を広げ、paddingで文字を右に動かした 　たぶん、他にちゃんとしたやり方があるはず。*/
 
 .modal_record_post {
     background: linear-gradient(to right, #0F72BD 20%, #3BCDFE);
     border-radius: 100px;
     color: #FFFFFF;
-    box-shadow: -4px 4px 4px 4px #CCF1FF;
+    box-shadow: -4px 4px 4px 4px #ccf1ff;
+    cursor: pointer;
+    width: 341px;
+    margin-top: 30px;
+    margin-left: 279px;
+    padding-left: 126px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 11px;
+}
+
+.modal_record_post span {}
+
+.span_contents_stud {
+    margin-top: 15px;
+}
+
+/* バツボタン */
+
+.clear_btn {
+    float: right;
+    margin-right: 25px;
     cursor: pointer;
 }
 
-.span_contents_stud{
-    margin-top: 15px;
+/*  */
+
+.loader_wrap{
+    display: none;
+    position: fixed;
+    z-index: 2;
+    background-color: #FFFFFF;
+    border-radius: 40px;
+    width: 900px;
+    height: 500px;
+}
+
+/* .new_div {
+    display: block;
+    position: fixed;
+    z-index: 2;
+    background-color: #FFFFFF;
+    border-radius: 40px;
+    width: 900px;
+    height: 500px;
+} */
+
+.calendar {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    background-color: #FFFFFF;
+    border-radius: 40px;
+    width: 900px;
+    height: 500px;
 }

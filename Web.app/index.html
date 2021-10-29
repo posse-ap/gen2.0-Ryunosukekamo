@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="index.css">
-	<title>Document</title>
+	<title>Web.app</title>
 </head>
 
 <html>
@@ -31,18 +31,24 @@
 
 	</header>
 
+
+
 	<!-- モーダル -->
 
 	<div id="modal" class="modal">
 
+		<span id="clear_btn" class="clear_btn">バツボタン</span>
+
 		<div id="modal_content" class="modal_content">
+			
+
 			<div id="modal_contents_left_side" class="modal_contents_left_side">
 
 
 
 				<div id="day_for_study" class="day_for_study">
 					<span>学習日</span><br>
-					<input type="text" class="input_day_for_study">
+					<input type="text" id="input_day_for_study" class="input_day_for_study">
 				</div>
 
 
@@ -81,29 +87,64 @@
 				<div id="study_time" class="study_time">
 					<span>学習時間</span>
 					<input type="text" class="input_study_time">
-	
+
 				</div>
-	
+
 				<div id="twitter" class="twitter">
 					<p>Twitter用コメント</p>
 					<input type="text">
 				</div>
 
-				<input type="checkbox"><label for="">Twitterにシャアする</label>
+				<input type="checkbox"><label for="">Twitterにシェアする</label>
 			</div>
-	
-	
-			<!-- <div id="modal_record_post" class="modal_record_post">
-				<span>記録・投稿</span>
-			</div> -->
 
 		</div>
+
+		<div id="modal_record_post" class="modal_record_post">
+			<span>記録・投稿</span>
+		</div>
+
+	</div>  <!-- モーダルここまで -->
+
+	<!-- <div id="freamework" class="freamework"></div> -->
+
+
+	<!-- カレンダー作成 -->
+	<div id="calendar" class="calendar">
+		<!-- xxxx年xx月を表示 -->
+		<span id="header"></span>
+	
+		<!-- ボタンクリックで月移動 -->
+		<div id="next-prev-button">
+			<span id="prev" onclick="prev()"></span>
+			<span id="next" onclick="next()"></span>
+		</div>
+	
+		<!-- カレンダー -->
+		<div id="calendar_contents"></div>
+	</div>
+
+	<!-- カレンダー ここまで -->
+
+	<!-- ロード画面 -->
+
+	<div id="loader_wrap" class="loader_wrap">
+		<!-- <div class="loader">Loading...</div> -->
+	</div> <!-- ロード画面ここまで -->
+	
+
+	<div id="modal_overlay" class="modal_overlay"></div>
+
+	<!-- 完了 -->
+
+	<div id="done" class="done">
 		
 
 	</div>
 
+	<!-- 完了 ここまで -->
 
-	<div id="modal_overlay" class="modal_overlay"></div>
+
 
 	<!-- コンテンツ -->
 
@@ -191,6 +232,7 @@
 
 
 	</div>
+	<!-- divを使うとその行全てがdivになる。 -->
 	<p class="Date"><span>＜</span>　2020年 10月　<span>＞</span></p>
 
 	<script src="index.js"></script>
