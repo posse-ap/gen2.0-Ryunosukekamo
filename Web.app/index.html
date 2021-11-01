@@ -5,8 +5,10 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="index.css">
-	<title>Web.app</title>
+    <title>Web.app</title>
 </head>
 
 <html>
@@ -37,10 +39,11 @@
 
 	<div id="modal" class="modal">
 
-		<span id="clear_btn" class="clear_btn">バツボタン</span>
+	    <!-- バツボタン -->
+		<span id="btn_close" class="btn_close"></span>
 
 		<div id="modal_content" class="modal_content">
-			
+
 
 			<div id="modal_contents_left_side" class="modal_contents_left_side">
 
@@ -55,9 +58,25 @@
 				<div id="contents_study" class="contents_study">
 					<span>学習コンテンツ（複数選択可）</span><br>
 					<div>
-						<span><input type="checkbox"><label for="">N予備校</label></span>
-						<span><input type="checkbox"><label for="">ドットインストール</label></span><br>
-						<span><input type="checkbox"><label for="">POSSE課題</label></span>
+						<span id="A" class="O" ><i id="E" class="fas fa-check-circle"></i>N予備校</span>
+
+						<span id="B" class="O"><i class="fas fa-check-circle"></i>ドットインストール</span><br>
+
+						<span id="C" class="O"><i class="fas fa-check-circle"></i>POSSE課題</span>
+						
+						<!-- <span id="A" onclick="click1()">N予備校</span>
+
+						<span id="B" onclick="click2()">ドットインストール</span><br>
+
+						<span id="C" onclick="click3()">POSSE課題</span> -->
+
+						<!-- <span><i class="fas fa-check-circle"></i>N予備校</span>
+
+						<span><i class="fas fa-check-circle"></i>ドットインストール</span><br>
+						
+						<span><i class="fas fa-check-circle"></i>POSSE課題</span> -->
+
+
 					</div>
 
 				</div>
@@ -65,7 +84,17 @@
 				<div id="languages_study" class="languages_study">
 					<span>学習言語（複数選択可）</span><br>
 					<div>
-						<span><input type="checkbox" class="input_languages_study"><label for="">HTML</label></span>
+						<span><i class="fas fa-check-circle"></i>HTML</span>
+						<span><i class="fas fa-check-circle"></i>CSS</span>
+						<span><i class="fas fa-check-circle"></i>JavaScript</span><br>
+						<span><i class="fas fa-check-circle"></i>PHP</span>
+						<span><i class="fas fa-check-circle"></i>Laravel</span>
+						<span><i class="fas fa-check-circle"></i>SQL</span>
+						<span><i class="fas fa-check-circle"></i>SHELL</span><br>
+						<span><i class="fas fa-check-circle"></i>情報処理システム基礎知識（その他）</span><br>
+
+
+						<!-- <span><input type="checkbox" class="input_languages_study"><label for="">HTML</label></span>
 						<span><input type="checkbox" class="input_languages_study"><label for="">CSS</label></span>
 						<span><input type="checkbox" class="input_languages_study"><label
 								for="">JavaScript</label></span><br>
@@ -75,7 +104,7 @@
 						<span><input type="checkbox" class="input_languages_study"><label
 								for="">SHELL</label></span><br>
 						<span><input type="checkbox" class="input_languages_study"><label
-								for="">情報処理システム基礎知識（その他</label></span><br>
+								for="">情報処理システム基礎知識（その他</label></span><br> -->
 
 					</div>
 
@@ -95,8 +124,10 @@
 					<input type="text">
 				</div>
 
-				<input type="checkbox"><label for="">Twitterにシェアする</label>
+				<!-- <input type="checkbox"><label for="">Twitterにシェアする</label> -->
+				<p class="Tweet"><i class="fas fa-check-circle"></i>Twitterにシェアする</p>
 			</div>
+
 
 		</div>
 
@@ -104,7 +135,7 @@
 			<span>記録・投稿</span>
 		</div>
 
-	</div>  <!-- モーダルここまで -->
+	</div> <!-- モーダルここまで -->
 
 	<!-- <div id="freamework" class="freamework"></div> -->
 
@@ -113,13 +144,13 @@
 	<div id="calendar" class="calendar">
 		<!-- xxxx年xx月を表示 -->
 		<span id="header"></span>
-	
+
 		<!-- ボタンクリックで月移動 -->
 		<div id="next-prev-button">
 			<span id="prev" onclick="prev()"></span>
 			<span id="next" onclick="next()"></span>
 		</div>
-	
+
 		<!-- カレンダー -->
 		<div id="calendar_contents"></div>
 	</div>
@@ -131,14 +162,14 @@
 	<div id="loader_wrap" class="loader_wrap">
 		<!-- <div class="loader">Loading...</div> -->
 	</div> <!-- ロード画面ここまで -->
-	
+
 
 	<div id="modal_overlay" class="modal_overlay"></div>
 
 	<!-- 完了 -->
 
 	<div id="done" class="done">
-		
+
 
 	</div>
 
@@ -156,9 +187,11 @@
 					<li id="Today" class="Today"> <span class="today">Today</span>
 						<div><span class="Today_actual_hour">3</span> <span class="Today_hour">hour</span></div>
 					</li>
+
 					<li id="Month" class="Month"><span class="month">Month</span>
 						<div><span class="Actual_Month">120</span> <span class="Monthly_hour">hour</span></div>
 					</li>
+
 					<li id="Total" class="Month"><span class="total">Total</span>
 						<div><span class="Actual_Today_hours">1348</span> <span class="Total_hours">hour</span>
 						</div>
@@ -186,7 +219,9 @@
 
 				<p>学習言語</p>
 
-				<ul class="one">
+				<div id="donut_single"></div>
+				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+				<!-- <ul class="one">
 					<li>JavaScript</li>
 					<li> HTML</li>
 					<li>SHELL</li>
@@ -203,7 +238,7 @@
 						<li>PHP</li>
 						<li>SQL</li>
 					</ul>
-				</div>
+				</div> -->
 
 
 
