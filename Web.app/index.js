@@ -33,50 +33,66 @@ btn_close.addEventListener("click", function () {
 
 // カレンダー
 
-input_day_for_study.addEventListener("click", function () {
+// input_day_for_study.addEventListener("click", function () {
 
-    modal.style.display = "none";
-    calendar.style.display = "block";
+//     modal.style.display = "none";
+//     calendar.style.display = "block";
 
-    // let freamework = document.getElementById('freamework');
-    // let new_div = document.createElement('div');
+//     // let freamework = document.getElementById('freamework');
+//     // let new_div = document.createElement('div');
 
-    // freamework.appendChild(new_div);
-    // document.getElementById('modal').innerHTML = new_div
+//     // freamework.appendChild(new_div);
+//     // document.getElementById('modal').innerHTML = new_div
 
-    // new_div.innerHTML = calendar
+//     // new_div.innerHTML = calendar
 
-    // only_freamework.style.display = "block"; 
+//     // only_freamework.style.display = "block"; 
+
+// });
+
+
+
+let study_n = document.getElementById('study_n');
+let study_d = document.getElementById('study_d');
+let icon_check_one = document.getElementById('icon_check_one');
+let icon_check_two = document.getElementById('icon_check_two');
+// const F = getComputedStyle(document.querySelector("#icon_check_one"),"::before").content;
+let A = study_n.getElementsByClassName('fas fa-check-circle');
+
+
+
+icon_check_one.addEventListener("click", function () {
+    // $("icon_check_one").css('color','')
+    // icon_check_one.classList.remove('study_n');
+    // icon_check_one.classList.toggle('change_icon');
+
+    A.style.display="none";
+    document.getElementById('change_icon').style.display="block";
+
+    // icon_check_one.classList.add('change_icon');
+    // icon_check_one.classList.toggle('change_icon');
+    // study_n.classList.toggle('add_new_property');
+
+
+
 
 });
 
 
 
-let A = document.getElementById('A');
-let E = document.getElementById('E');
-let C = document.getElementById('C');
-let D = document.getElementsByClassName('fas fa-check-circle');
-const F = getComputedStyle(document.querySelector("#E"),"::before").content;
+// $("icon_check_one, .fa-check-circle").on("click", function() {
+//     $(this).toggleClass('fa-check-circle2');
+//     // study_n.classList.remove('check_same_property');
+//     // study_n.classList.toggle('add_new_property');
 
-// function ryuがあるため、他の✓の色がつかなくなった。ryuはspanタグについてるから・
-// function ryu() {
-   
+// });
 
+// $("icon_check_two, .fa-check-circle").on("click", function() {
+//     $(this).toggleClass('fa-check-circle2');
+//     // study_d.classList.remove('check_same_property');
+//     // study_d.classList.toggle('add_new_property');
 
-   
- 
-
-// };
-
-
-
-$("#E, .fa-check-circle").on("click", function() {
-    $(this).toggleClass('fa-check-circle2');
-    A.classList.remove('O');
-    A.classList.toggle('AB');
-
-});
-
+// });
 
 
 
