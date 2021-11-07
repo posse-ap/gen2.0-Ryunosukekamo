@@ -177,14 +177,14 @@ header {
 
 /* Histgram */
 
-.Hist_gram {
+.Histo_gram {
     margin-top: 20px;
     margin-left: 42px;
+    background-color: #FFFFFF;
 }
 
-.Hist_gram img {
-    width: 100%;
-    height: 364px;
+.myBarChart {
+    /* border: solid 10px blue; */
 }
 
 /* ------------------------------------------------------------------------ */
@@ -209,11 +209,20 @@ header {
     border-radius: 15px;
     background-color: #FFFFFF;
     box-shadow: 0px 0px 7px #dddddd;
-    width: 47%;
+    width: 50%;
+    /* height: 430px; */
 }
 
 .Language_studied p {
     margin-left: 20px;
+}
+
+.Language_studied rect {
+    display: none;
+}
+
+.Contents_studied rect {
+    display: none;
 }
 
 .Contents_studied {
@@ -222,11 +231,43 @@ header {
     background-color: #FFFFFF;
     box-shadow: 0px 0px 7px #dddddd;
     margin-left: 20px;
-    width: 43%;
+    width: 50%;
 }
 
 .Contents_studied p {
     margin-left: 20px;
+}
+
+/* ドーナツ型グラフの上下の位置、なぜかmargin-bottomが効かない */
+
+svg {
+    margin-top: -95px;
+}
+
+.one, .two {
+    margin-top: -15px;
+    display: flex;
+    /* flex-direction: row; */
+}
+
+.three {
+    margin-top: -15px;
+}
+
+.li_CSS {
+    margin-left: 30px;
+}
+
+.li_PHP {
+    margin-left: 30px;
+}
+
+.li_Laravel {
+    margin-left: 30px;
+}
+
+.li_SQL {
+    margin-left: 30px;
 }
 
 /* ----------------------------------------------------------------------- */
@@ -253,34 +294,26 @@ header {
     border-radius: 40px;
     width: 900px;
     height: 550px;
-    margin:0 auto;
-
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .modal_content {
     width: 900px;
-}
-
-.modal_content {
+    left: 50%;
     display: flex;
 }
+
+/* 左側 */
 
 .modal_contents_left_side {
     margin-left: 56px;
     margin-top: 50px;
 }
 
-.modal_overlay {
-    z-index: 1;
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 120%;
-    background-color: rgba(68, 68, 68, 0.8);
-    /* text-align: center; */
-}
+/* 学習日 */
 
 .input_day_for_study {
     background-color: #F5F5F8;
@@ -290,66 +323,64 @@ header {
     width: 374px;
 }
 
-.contents_study {
-    margin-top: 15px;
-}
-
-/* .modal_content .contents_study i{
-
-    content: "\f058";
-    color: #CCCCCC;
-} */
-
-.study_n i{
-
-    content: "\f058";
-    color: #CCCCCC;
-}
-
-/* .fa-check-circle:before {
-    content: "\f058";
-    color: #CCCCCC;
-} */
-
-
-
-.fa-check-circle2:before {
-    content: "\f058";
-    color: #0E70BC;
-}
-
-
-/* spanタグはmargin top 効かない */
-
-.Tweet {
-    margin-top: 20px;
-}
-
-.Tweet .fa-check-circle:before {
-    content: "\f058";
-    color: #0F71BD;
-    font-size: 26px;
-}
-
-
-
+/* 学習コンテンツの全体に対して
 .contents_study div {
     margin-top: 10px;
-}
+} */
 
+/* 学習言語の全体に対して */
 
 .languages_study {
     margin-top: 20px;
 }
+
+/* 学習言語のspan対して */
 
 .languages_study div span {
     border-radius: 15px;
     border-color: transparent;
     background-color: #F5F5F8;
     width: 200px;
+    padding: 4px 10px;
 }
 
-/* 右側 */
+.contents_study {
+    margin-top: 15px;
+}
+
+.contents_study i {
+    color: #CCCCCC;
+    margin-top: 10px;
+    /* margin-left: 10px;  */
+}
+
+/* 学習言語チェックボックス */
+
+.languages_study i {
+    color: #CCCCCC;
+    margin-top: 10px;
+    /* margin-left: 10px; */
+    /* margin-right: 10px; */
+}
+
+
+/* 選択肢の上下の間隔*/
+
+.study_p{
+    margin-top: 3px;
+}
+
+
+
+/* 学習言語 */
+
+.contents_study div span {
+    border-radius: 15px;
+    border-color: transparent;
+    background-color: #F5F5F8;
+    width: 200px;
+    padding: 4px 10px;
+}
 
 .modal_contents_right_side {
     margin-right: 56px;
@@ -365,6 +396,8 @@ header {
     width: 374px;
 }
 
+/* twitter用コメント */
+
 .twitter input {
     width: 374px;
     height: 200px;
@@ -372,6 +405,26 @@ header {
     border-color: transparent;
     background-color: #F5F5F8;
 }
+
+/* Twitterにシェアする */
+
+/* spanタグはmargin top 効かない */
+
+.Tweet {
+    margin-top: 20px;
+}
+
+.Tweet i {
+    content: "\f058";
+    color: #CCCCCC;
+    font-size: 26px;
+}
+
+.Tweet i.check {
+    color: #0E70BC;
+}
+
+/* ---------------------------------------------------------------------------------------- */
 
 /* 記録・投稿- modal */
 
@@ -392,11 +445,11 @@ header {
     padding-right: 11px;
 }
 
-.modal_record_post span {}
-
 .span_contents_stud {
     margin-top: 15px;
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------- */
 
 /* バツボタン */
 
@@ -431,44 +484,51 @@ header {
 
 .btn_close::after {
     transform: translate(-50%, -50%) rotate(-45deg);
-
-    
 }
 
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+/* チェックすると変化する */
 
 /* addもtoggleは追加することしかできない。つまり、何もないところに追加は出来るが、元々には追加できない。文字を赤だと最初から指定していたらaddなどで変更できない。 */
 
 /* モーダルのチェックできる箇所全て同じcss except twitter（以外） */
-.check_same_property{
-    border-radius: 15px;
-    border-color: transparent;
-    background-color: #F5F5F8;
-    width: 200px;
-    
-}
 
 /* クリックした時の色の変更 */
-.add_new_property{
-    border-radius: 15px;
-    border-color: transparent;
-    width: 200px;
-    background-color: #E7F5FF;
-    
-}
 
-
-#change_icon{
-    display: none;  
+.contents_study i.check {
     color: #0E70BC;
-
-    
 }
 
+.languages_study i.check {
+    color: #0E70BC;
+}
 
+.contents_study span.add{
+    background-color:#E7F5FF;
+}
 
+.languages_study span.add{
+    background-color:#E7F5FF;
+}
+/* ---------------------------------------------------------------------------- */
 
-/*  */
+/* overlay */
+
+.modal_overlay {
+    z-index: 1;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-color: rgba(68, 68, 68, 0.8);
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+/* ローディング画面 */
 
 .loader_wrap {
     display: none;
@@ -478,22 +538,16 @@ header {
     border-radius: 40px;
     width: 900px;
     height: 500px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
-
-/* .new_div {
-    display: block;
-    position: fixed;
-    z-index: 2;
-    background-color: #FFFFFF;
-    border-radius: 40px;
-    width: 900px;
-    height: 500px;
-} */
-
 
 /* --------------------------------------------------------------------------- */
 
 /* カレンダー */
+
 .calendar {
     display: none;
     position: fixed;
@@ -502,14 +556,60 @@ header {
     border-radius: 40px;
     width: 900px;
     height: 500px;
-    margin-left: 314px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
+/* ---------------------------------------------------------------------------------- */
+
+/* 記録・投稿完了画面 */
+
+.done_recod_post{
+text-align: center;
 
 
+display: none;
+position: fixed;
+z-index: 2;
+background-color: #FFFFFF;
+border-radius: 40px;
+width: 900px;
+height: 500px;
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);}
 
-
-.donut_single{
-    width: 900px;
-    height: 500px;
+.done_recod_post i{
+    color:#BEE360;
+    font-size: 60px;
 }
+
+.awesome{
+    color:#BEE360;
+    font-size: 17px;
+}
+
+.text_record_post{
+    font-size: 20px;
+}
+
+/* ------------------------------------------------------------------------------------------------- */
+
+/* ドーナツ型のグラフ */
+
+/* 効いてないかも */
+
+.doughnut_chart_one {
+    margin: 0px auto;
+}
+
+.doughnut_chart_two {
+    margin: 0px auto;
+}
+
+/* ------------------------------------------------------------------------------- */
+
+/* 縦棒グラフ */
