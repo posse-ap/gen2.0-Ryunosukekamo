@@ -1,0 +1,149 @@
+@media screen and (max-width:376px) {
+    /* ------------------------------------------------------------- */
+    /* header */
+    header {
+        display: block;
+        width: 100%;
+    }
+    .Logo {
+        margin-left: 10px;
+    }
+    .Logo img {
+        height: 24px;
+    }
+    /* first-viewのheaderの中にある記録・投稿ボタンをなくす */
+    .record_post {
+        display: none;
+    }
+    /* --------------------------------------------------------- */
+    /* Content （全体）*/
+    .Content {
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+    }
+    /* 棒グラフまで *（上半分）*/
+    .Split_left {
+        width: 98%;
+        margin: 0 auto;
+        margin-bottom: 16px;
+    }
+    .Time ul {
+        padding: 0;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .Histo_gram {
+        margin-top: 16px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    #myBarChart {
+        width: 100%;
+    }
+    /* --------------------------------------------------------------- */
+    /* ドーナツ型のグラフ（下半分） */
+    /* 左右にmarginつけるとなんか大きくなる。見れば分かる */
+    .Study {
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 16px;
+        margin-left: 20px;
+        margin-right: 20px;
+        /* margin-rightは一応つけておくだけ、ふつうはmargin 0 autoだから、margin-left動かしたら、rightも児童で動く */
+    }
+    .Language_studied {
+        margin-right: 8px;
+    }
+    .Contents_studied {
+        margin-left: 8px;
+    }
+    /* --------------------------------------------------------------------- */
+    /* 新しい記録・投稿ボタン（下部にあるもの） */
+    .btn_for_responsive {
+        display: block;
+        background: linear-gradient(to right, #0F72BD 20%, #3BCDFE);
+        padding-left: 60px;
+        padding-right: 60px;
+        border-radius: 100px;
+        color: #FFFFFF;
+        box-shadow: 2px 4px 4px 4px #CCF1FF;
+        cursor: pointer;
+        margin: 0 auto;
+    }
+    /* ------------------------------------------------------------------------------- */
+    /* モーダル */
+    .modal_for_responsive {
+        display: none;
+        z-index: 2;
+        border-radius: 25px 25px 0 0;
+        width: 100%;
+        height: 100%;
+        margin-top: 70px;
+        position: fixed;
+        z-index: 2;
+        background-color: #FFFFFF;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    /* 綺麗に20pxづつなる 90%だとmargin-rightの20pxがつく。 */
+    .modal_content {
+        display: block;
+        width: 90%;
+        margin: 0 auto;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 55px;
+    }
+    /* 同じclassを使っているため、事故防止のためにidにつけた。idはclassより優先的に読み取られる。 */
+    #btn_close_for_respnsive {
+        display: block;
+        position: relative;
+        width: 30px;
+        height: 30px;
+        border: 2px solid transparent;
+        border-radius: 50%;
+        background-color: #F5F5F8;
+        float: right;
+        margin-right: 25px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    .modal_above {
+        width: 100%;
+    }
+    /* 学習日 */
+    .input_day_for_study {
+        height: 100%;
+        width: 100%;
+    }
+    /* 学習時間 */
+    .input_study_time {
+        background-color: #F5F5F8;
+        border-radius: 8px;
+        border-color: transparent;
+        height: 42px;
+        width: 100%;
+    }
+    /* twiter用コメント */
+    .twitter input {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .responsive_modal_record_post {
+        background: linear-gradient(to right, #0F72BD 20%, #3BCDFE);
+        border-radius: 100px;
+        color: #FFFFFF;
+        box-shadow: -4px 4px 4px 4px #ccf1ff;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 15px;
+        padding-left: 126px;
+        padding-top: 12px;
+        padding-bottom: 10px;
+        padding-right: 11px;
+    }
+}

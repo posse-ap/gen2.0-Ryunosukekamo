@@ -4,7 +4,7 @@ let btn_record_post = document.getElementById('record_post');
 let modal = document.getElementById('modal');
 let modal_record_post = document.getElementById('modal_record_post');
 let done = document.getElementById('done');
-let loader_wrap = document.getElementById('loader_wrap');
+let modal_loader = document.getElementById('modal_loader');
 let modal_overlay = document.getElementById('modal_overlay');
 let btn_close = document.getElementById('btn_close');
 let input_day_for_study = document.getElementById('input_day_for_study');//学習日欄
@@ -14,22 +14,28 @@ let input_day_for_study = document.getElementById('input_day_for_study');//学�
 // バツボタンを押した時にモーダルを閉じる処理
 
 btn_close.addEventListener("click", function () {
-
+   let modal_overlay = document.getElementById('modal_overlay');
     modal.style.display = "none";
     modal_overlay.style.display = "none";
+    modal_overlay.style.display="none";
 
 
 
 });
-
+// ローディング画面から離れる時のバツボタン
 document.getElementById('btn_close two').addEventListener("click", function () {
 
-    document.getElementById('done_recod_post').style.display = "none";
-    modal.style.display="none";
+    modal.style.display = "none";
     modal_overlay.style.display = "none";
+    document.getElementById('modal_loader').style.display = "none";
+    document.getElementById('done_recod_post').classList.add("fadeout");
 
+});
 
-
+// レスポンシブ用のモーダルを閉じるバツボタン
+document.getElementById('btn_close_for_responsive').addEventListener("click",function(){
+    document.getElementById('modal_for_responsive').style.display="none";
+    document.getElementById('modal_overlay').style.display="none";
 });
 
 
@@ -43,11 +49,24 @@ btn_record_post.addEventListener("click", function () {
 
 });
 
+// レスポンシブ用のモーダルを表示する際に必要な、ボタンを押した時の処理
+let btn_for_responsive = document.getElementById('btn_for_responsive');
+btn_for_responsive.addEventListener("click", function () {
+    let modal_for_responsive = document.getElementById('modal_for_responsive');
+    let modal_overlay = document.getElementById('modal_overlay');
+    modal_for_responsive.style.display = "block";
+    modal_overlay.style.display = "block";
+    // document.body.classList.toggle('open');
+   
+
+});
+
+
 // ---------------------------------------------------------------------------------------------------------------
 //ローディング画面の表示 
 modal_record_post.addEventListener("click", function () {
     modal.style.display = "none";
-    loader_wrap.style.display = "block";
+    modal_loader.style.display = "block";
 
 });
 
@@ -55,91 +74,91 @@ modal_record_post.addEventListener("click", function () {
 // チェックした時の処理
 
 let study_n = document.getElementById('study_n');
-let icon_check_one =document.getElementById('icon_check_one');
+let icon_check_one = document.getElementById('icon_check_one');
 
-study_n.addEventListener("click", function(){
+study_n.addEventListener("click", function () {
     icon_check_one.classList.toggle('check');
     study_n.classList.toggle('add');
 });
 
 
 let study_d = document.getElementById('study_d');
-let icon_check_two =document.getElementById('icon_check_two');
+let icon_check_two = document.getElementById('icon_check_two');
 
-study_d.addEventListener("click", function(){
+study_d.addEventListener("click", function () {
     icon_check_two.classList.toggle('check');
     study_d.classList.toggle('add');
 });
 
 let study_p = document.getElementById('study_p');
-let icon_check_three =document.getElementById('icon_check_three');
+let icon_check_three = document.getElementById('icon_check_three');
 
-study_p.addEventListener("click", function(){
+study_p.addEventListener("click", function () {
     icon_check_three.classList.toggle('check');
     study_p.classList.toggle('add');
 });
 
 let study_HTML = document.getElementById('study_HTML');
-let icon_check_four =document.getElementById('icon_check_four');
+let icon_check_four = document.getElementById('icon_check_four');
 
-study_HTML.addEventListener("click", function(){
+study_HTML.addEventListener("click", function () {
     icon_check_four.classList.toggle('check');
     study_HTML.classList.toggle('add');
 });
 
 
 let study_CSS = document.getElementById('study_CSS');
-let icon_check_five =document.getElementById('icon_check_five');
+let icon_check_five = document.getElementById('icon_check_five');
 
-study_CSS.addEventListener("click", function(){
+study_CSS.addEventListener("click", function () {
     icon_check_five.classList.toggle('check');
     study_CSS.classList.toggle('add');
 });
 
 let study_Js = document.getElementById('study_Js');
-let icon_check_six =document.getElementById('icon_check_six');
+let icon_check_six = document.getElementById('icon_check_six');
 
-study_Js.addEventListener("click", function(){
+study_Js.addEventListener("click", function () {
     icon_check_six.classList.toggle('check');
     study_Js.classList.toggle('add');
 });
 
 let study_PHP = document.getElementById('study_PHP');
-let icon_check_seven =document.getElementById('icon_check_seven');
+let icon_check_seven = document.getElementById('icon_check_seven');
 
-study_PHP.addEventListener("click", function(){
+study_PHP.addEventListener("click", function () {
     icon_check_seven.classList.toggle('check');
     study_PHP.classList.toggle('add');
 });
 
 let study_Laravel = document.getElementById('study_Laravel');
-let icon_check_eight =document.getElementById('icon_check_eight');
+let icon_check_eight = document.getElementById('icon_check_eight');
 
-study_Laravel.addEventListener("click", function(){
+study_Laravel.addEventListener("click", function () {
     icon_check_eight.classList.toggle('check');
     study_Laravel.classList.toggle('add');
 });
 
 let study_SQL = document.getElementById('study_SQL');
-let icon_check_nine =document.getElementById('icon_check_nine');
+let icon_check_nine = document.getElementById('icon_check_nine');
 
-study_SQL.addEventListener("click", function(){
+study_SQL.addEventListener("click", function () {
     icon_check_nine.classList.toggle('check');
     study_SQL.classList.toggle('add');
 });
 
 let study_SHELL = document.getElementById('study_SHELL');
-let icon_check_ten =document.getElementById('icon_check_ten');
+let icon_check_ten = document.getElementById('icon_check_ten');
 
-study_SHELL.addEventListener("click", function(){
+study_SHELL.addEventListener("click", function () {
     icon_check_ten.classList.toggle('check');
     study_SHELL.classList.toggle('add');
 });
 
 let study_others = document.getElementById('study_others');
-let icon_check_eleven =document.getElementById('icon_check_eleven');
+let icon_check_eleven = document.getElementById('icon_check_eleven');
 
-study_others.addEventListener("click", function(){
+study_others.addEventListener("click", function () {
     icon_check_eleven.classList.toggle('check');
     study_others.classList.toggle('add');
 });
@@ -148,21 +167,80 @@ study_others.addEventListener("click", function(){
 // ------------------------------------------------------------------------------------------
 // 記録・投稿完了画面
 
-document.getElementById('day_for_study').addEventListener("click",function(){
-    done_recod_post.style.display="block";
-})
+// document.getElementById('day_for_study').addEventListener("click",function(){
+//     done_recod_post.style.display="block";
+// })
 
 // ------------------------------------------------------------------------------
 
 let Tweet = document.getElementById('Tweet');
 let icon_check_twelve = document.getElementById('icon_check_twelve');
-Tweet.addEventListener('click',function(){
+Tweet.addEventListener('click', function () {
 
     icon_check_twelve.classList.toggle('check');
-    
+
 });
 
-// // ------------------------------------------------------------------
+
+// ------------------------------------------------------------------------------------
+// 3秒後にtwitter画面にとび、入力ホームの情報をtwitterに共有
+
+$("#Tweet").on("click", function () {
+
+    $("#modal_record_post").on("click", function () {
+        var loader = $('.loader_wrap');
+        var done_recod_post = $('#done_recod_post');
+        var btn_close = $('#btn_close two');
+        // var modal_loader = $('#modal_loader');
+
+        setTimeout(function () {
+            loader.fadeOut();
+            done_recod_post.fadeIn();
+            btn_close.fadeIn();
+        }, 3000);
+    });
+
+    document.getElementById("modal_record_post").addEventListener('click', function (event) {
+        event.preventDefault();
+        var left = Math.round(window.screen.width / 2 - 275);
+        var top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
+        window.open(
+            "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("twitter_text").value),
+            null,
+            "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
+    });
+
+});
+// ----------------------------------------------------------------------------------------------------------------------
+
+// ３秒後にアイコンがでる。
+// $('#Tweet').on("click", function () {
+//     $('#modal_record_post')[0].addEventListener('click', function () {
+//         setTimeout(function () {
+//             loader.fadeOut();
+//             done_recod_post.fadeIn();
+//             btn_close.fadeIn();
+//         }, 3000);
+
+//     });
+//     
+// });
+
+
+// -----------------------------------------------------------------------------------------------------
+// twitter画面にとび、入力ホームの情報をtwitterに共有
+
+// document.getElementById("modal_record_post").addEventListener('click', function (event) {
+//     event.preventDefault();
+//     var left = Math.round(window.screen.width / 2 - 275);
+//     var top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
+//     window.open(
+//         "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("twitter_text").value),
+//         null,
+//         "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
+// });
+
+// // -----------------------------------------------------------------------------------
 // ドーナツ型の円グラフ
 
 google.charts.load('current', { 'packages': ['corechart'] });
@@ -188,12 +266,12 @@ function drawChart() {
     var options = {
         pieHole: 0.5,
         width: 280,
-        height: 400,
+        height: 300,
         pieSliceTextStyle: {
             color: 'white',
         },
         legend: 'none',
-        colors: ['#0345EC', '#0F71BD', '#1CBCDE','#3CCEFE','#B29EF3','#6D46EC','#4A17EF','#3105C0'],
+        colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#3CCEFE', '#B29EF3', '#6D46EC', '#4A17EF', '#3105C0'],
     };
 
 
@@ -220,7 +298,7 @@ function drawChart_two() {
     var options = {
         pieHole: 0.5,
         width: 280,
-        height: 400,
+        height: 300,
         pieSliceTextStyle: {
             color: 'white',
         },
@@ -327,49 +405,50 @@ function drawChart_two() {
 //       chart.draw(data, options);
 //     }
 
-  
-  var ctx = document.getElementById("myBarChart");
-  var myBarChart = new Chart(ctx, {
+
+var ctx = document.getElementById("myBarChart");
+var myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
-     //凡例のラベル
-      labels: ['2', '4', '6', '8', '10','12','14','16','18','20','22','24','28','30'],
-      datasets: [
-        {
-          label: '訪問者数', //データ項目のラベル
-          data: [1,3,4,6,8], //グラフのデータ
-          backgroundColor: "#3ACCFD",
-          borderCapStyle: 'round',
-        // lineCap:'round'
-        // lineCap='round'
-        }
-        
-      ]
+        //凡例のラベル
+        labels: ['2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22', '24', '28', '30'],
+        datasets: [
+            {
+                label: '訪問者数', //データ項目のラベル
+                data: [1, 3, 4, 6, 8], //グラフのデータ
+                backgroundColor: "#3ACCFD",
+                //   backgrdoundcolor:linear-gradient();
+                borderCapStyle: 'round',
+                // lineCap:'round'
+                // lineCap='round'
+            }
+
+        ]
     },
     options: {
-       legend:{display:false,},
-      title: {
-        display: true,
-        //グラフタイトル
-        // text: 'Aサイト分析'
-      },
-      scales: {
-        xAxes:[{
-            gridLines:[display=false],
-        }],
-        yAxes: [{
-                 
-        gridLines:[display=false],
-          ticks: {
-            suggestedMax: 8, //最大値
-            suggestedMin: 0, //最小値
-            stepSize: 2, //縦ラベルの数値単位
-            userCallback: function(tick) {
-                return tick.toString() + 'h';
-            }
-            
-            }
-        }]
-      },
+        legend: { display: false, },
+        title: {
+            display: true,
+            //グラフタイトル
+            // text: 'Aサイト分析'
+        },
+        scales: {
+            xAxes: [{
+                gridLines: [display = false],
+            }],
+            yAxes: [{
+
+                gridLines: [display = false],
+                ticks: {
+                    suggestedMax: 8, //最大値
+                    suggestedMin: 0, //最小値
+                    stepSize: 2, //縦ラベルの数値単位
+                    userCallback: function (tick) {
+                        return tick.toString() + 'h';
+                    }
+
+                }
+            }]
+        },
     }
-  });
+});
