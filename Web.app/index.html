@@ -53,7 +53,7 @@
 
 
 				<div id="day_for_study" class="day_for_study">
-					<span>学習日</span><br>
+					<span>学習日</span>
 					<input type="date" id="input_day_for_study" class="input_day_for_study">
 				</div>
 
@@ -65,12 +65,14 @@
 							N予備校</span>
 
 						<span id="study_d" class="study_d"><i id="icon_check_two"
-								class="fas fa-check-circle"></i>ドットインストール</span><br>
+								class="fas fa-check-circle"></i>ドットインストール</span>
+						<br>
 
-						<span id="study_p" class="study_p"><i id="icon_check_three"
-								class="fas fa-check-circle"></i>POSSE課題</span>
-
+					    <span id="study_p" class="study_p"><i id="icon_check_three"
+									class="fas fa-check-circle"></i>POSSE課題</span>
 					</div>
+
+					
 
 				</div>
 
@@ -100,12 +102,11 @@
 
 				</div>
 
-				<div id="twitter" class="twitter">
-					<p>Twitter用コメント</p>
+				<div id="twitter" class="twitter"><br>
+					<span>Twitter用コメント</span>
 					<input type="text" id="twitter_text">
 				</div>
 
-				<!-- <input type="checkbox"><label for="">Twitterにシェアする</label> -->
 				<p id="Tweet" class="Tweet"><i id='icon_check_twelve' class="fas fa-check-circle"></i>Twitterにシェアする</p>
 			</div>
 
@@ -133,7 +134,7 @@
 
 
 				<div id="day_for_study" class="day_for_study">
-					<span>学習日</span><br>
+					<span>学習日</span>
 					<input type="date" id="input_day_for_study" class="input_day_for_study">
 				</div>
 
@@ -141,13 +142,13 @@
 				<div id="contents_study" class="contents_study">
 					<span>学習コンテンツ（複数選択可）</span>
 					<div>
-						<span id="study_n" class="study_n"><i id="icon_check_one" class="fas fa-check-circle"></i>
+						<span id="reponsive_study_n" class="reponsive_study_n"><i id="responsive_icon_check_one" class="fas fa-check-circle"></i>
 							N予備校</span>
 
-						<span id="study_d" class="study_d"><i id="icon_check_two"
+						<span id="reponsive_study_d" class="responsive_study_d"><i id="reponsive_icon_check_two"
 								class="fas fa-check-circle"></i>ドットインストール</span><br>
 
-						<span id="study_p" class="study_p"><i id="icon_check_three"
+						<span id="reponsive_study_p" class="reponsive_study_p"><i id="reponsive_icon_check_three"
 								class="fas fa-check-circle"></i>POSSE課題</span>
 
 					</div>
@@ -157,14 +158,14 @@
 				<div id="languages_study" class="languages_study">
 					<span>学習言語（複数選択可）</span>
 					<div>
-						<span id="study_HTML"><i id="icon_check_four" class="fas fa-check-circle"></i>HTML</span>
-						<span id="study_CSS"><i id="icon_check_five" class="fas fa-check-circle"></i>CSS</span>
-						<span id="study_Js"><i id="icon_check_six" class="fas fa-check-circle"></i>JavaScript</span><br>
-						<span id="study_PHP"><i id="icon_check_seven" class="fas fa-check-circle"></i>PHP</span>
-						<span id="study_Laravel"><i id="icon_check_eight" class="fas fa-check-circle"></i>Laravel</span>
-						<span id="study_SQL"><i id="icon_check_nine" class="fas fa-check-circle"></i>SQL</span>
-						<span id="study_SHELL"><i id="icon_check_ten" class="fas fa-check-circle"></i>SHELL</span><br>
-						<span id="study_others"><i id="icon_check_eleven"
+						<span id="reponsive_study_HTML"><i id="reponsive_icon_check_four" class="fas fa-check-circle"></i>HTML</span>
+						<span id="reponsive_study_CSS"><i id="reponsive_icon_check_five" class="fas fa-check-circle"></i>CSS</span>
+						<span id="reponsive_study_Js"><i id="reponsive_icon_check_six" class="fas fa-check-circle"></i>JavaScript</span><br>
+						<span id="reponsive_study_PHP"><i id="reponsive_icon_check_seven" class="fas fa-check-circle"></i>PHP</span>
+						<span id="reponsive_study_Laravel"><i id="reponsive_icon_check_eight" class="fas fa-check-circle"></i>Laravel</span>
+						<span id="reponsive_study_SQL"><i id="reponsive_icon_check_nine" class="fas fa-check-circle"></i>SQL</span>
+						<span id="reponsive_study_SHELL"><i id="reponsive_icon_check_ten" class="fas fa-check-circle"></i>SHELL</span><br>
+						<span id="reponsive_study_others"><i id="reponsive_icon_check_eleven"
 								class="fas fa-check-circle"></i>情報処理システム基礎知識（その他）</span><br>
 
 					</div>
@@ -180,12 +181,12 @@
 
 				</div>
 
-				<div id="twitter" class="twitter">
-					<p>Twitter用コメント</p>
+				<div id="twitter" class="twitter"><br>
+					<span>Twitter用コメント</span>
 					<input type="text" id="twitter_text">
 				</div>
 
-				<p id="Tweet" class="Tweet"><i id='icon_check_twelve' class="fas fa-check-circle"></i>Twitterにシェアする</p>
+				<div id="Tweet_in_reponsive" class="Tweet_in_reponsive"><i id='reponsive_icon_check_twelve' class="fas fa-check-circle"></i>Twitterにシェアする</div>
 			</div>
 
 			<div id="responsive_modal_record_post" class="responsive_modal_record_post">
@@ -238,6 +239,20 @@
 
 	</div> <!-- ロード画面ここまで -->
 
+	<!-- モダール用のロード画面 -->
+
+	<div id="reponsive_modal_loader" class="responsive_modal_loader">
+		<span id="btn_close three" class="btn_close"></span>
+
+		<div id="loader_wrap" class="loader_wrap">
+			<div class="loader">Loading...</div>
+		</div>
+
+	</div>
+
+
+	<!-- モダール用のロード画面　ここまで -->
+	
 
 	<!-- 記録・投稿完了画面 -->
 
@@ -251,6 +266,17 @@
 
 
 	<!-- 記録・投稿完了画面 ここまで-->
+
+	<!-- 記録・投稿完了画面 （レスポンシブ用）-->
+
+
+	<div id="done_recod_post" class="done_recod_post">
+		<span class="awesome">AWESOME!</span><br>
+		<i id="green_check" class="fas fa-check-circle"></i><br>
+		<span class="text_record_post">記録・投稿<br>完了しました</span>
+	</div>
+
+	<!-- 記録・投稿完了画面 （レスポンシブ用）ここまで-->
 
 
 
@@ -303,7 +329,6 @@
 
 
 		<div id="Study" class="Study">
-			<!-- <div class="Split_right"> -->
 			<div id="Language_studied" class="Language_studied">
 
 				<p>学習言語</p>
@@ -354,6 +379,59 @@
 				</div>
 			</div>
 
+            <!-- レスポンシブ用 -->
+			
+			<div id="Contents_studied_responsive" class="Contents_studied_responsive">
+				<p>学習コンテンツ</p>
+
+				<div id="doughnut_chart_three" class="doughnut_chart_three"></div>
+				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+				<div id="contents_studied" class="contents_studied">
+					<ul>
+						<li>ドットインストール</li>
+						<li>N予備校</li>
+						<li>POSSE課題</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="Language_studied_responsive" class="Language_studied_responsive">
+
+				<p>学習言語</p>
+
+				<div id="doughnut_chart_four" class="doughnut_chart_four"></div>
+				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+				<!-- liの文字はもともとspanで囲われてる -->
+				<div class="contents_of_Language_studied">
+
+					<ul class="one">
+						<li class="li_Js"><span>JavaScript<span></li>
+						<li class="li_CSS"> <span>CSS</span></li>
+						<li class="li_PHP"><span>PHP</span></li>
+
+					</ul>
+
+					<ul class="two">
+						<li class="li_HTML"><span>HTML</span></li>
+						<li class="li_Laravel"><span>Laravel</span></li>
+						<li class="li_SQL"><span>SQL</span></li>
+					</ul>
+
+					<ul class="three">
+						<li><span>SHELL</span></li>
+						<li><span>情報システム基礎知識（その他）</span></li>
+					</ul>
+
+				</div>
+
+
+
+			</div>
+
+
+
 		</div>
 
 
@@ -365,7 +443,7 @@
 
 
 
-	</div>
+	<!-- </div> -->
 	<!-- divを使うとその行全てがdivになる。 -->
 	<p class="Date"><span>＜</span>　2020年 10月　<span>＞</span></p>
 

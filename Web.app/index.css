@@ -64,7 +64,9 @@ header {
     display: flex;
     justify-content: center;
 }
+
 /* split right(study)が大きくなると、contentの中にあるから、こちらのheightも自動的に大きくなる。 */
+
 .Split_left {
     width: 40%;
     margin-right: 10px;
@@ -75,7 +77,6 @@ header {
     margin-top: 3px;
     height: 140px;
 }
-
 
 .Time li {
     list-style: none;
@@ -199,20 +200,13 @@ header {
 /* ------------------------------------------------------------------------ */
 
 /* 学習言語と学習コンテンツ */
-
-/* .Split_rigth{
-
-    display: table-cell;
-    width: 50%;
-
-} */
-
 .Study {
     display: flex;
     margin-left: 10px;
     width: 40%;
     height: 450px;
 }
+
 
 .Language_studied {
     border: solid 1px #FFFFFF;
@@ -264,29 +258,19 @@ svg {
     margin-top: -15px;
 }
 
-.contents_of_Language_studied{
+.contents_of_Language_studied {
     margin-top: -69px;
 }
 
-.contents_of_Language_studied span{
+.contents_of_Language_studied span {
     color: #000000;
     font-size: 15px;
 }
 
 
 
-.contents_of_Language_studied .li_Js,.li_Laravel,.li_PHP,.li_SQL,.li_CSS{
-
-    /* font-size: 10px; */
-
-}
-
-
-
-.li_Js{
-
+.li_Js {
     color: blue;
-
 }
 
 .li_CSS {
@@ -305,10 +289,20 @@ svg {
     margin-left: 30px;
 }
 
-
-.contents_studied{
+.contents_studied {
     margin-top: -69px;
 }
+
+/* レスポンシブ用の学習コンテンツ */
+.Contents_studied_responsive{
+    display: none;
+}
+
+/* レスポンシブ用の学習言語 */
+.Language_studied_responsive{
+    display: none;
+}
+
 
 /* ----------------------------------------------------------------------- */
 
@@ -339,8 +333,10 @@ svg {
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
 /* レスポンシブ用のモーダルを非表示にする */
-.modal_for_responsive{
+
+.modal_for_responsive {
     display: none;
 }
 
@@ -421,6 +417,15 @@ svg {
     width: 200px;
     padding: 4px 10px;
 }
+
+/* この三つを入れることでbrタグに高さを調節できる */
+
+br {
+    display: block;
+    content: "";
+    margin: 8px 0;
+}
+
 
 .modal_contents_right_side {
     margin-right: 56px;
@@ -583,95 +588,110 @@ svg {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-
     /* display: flex;
     align-items: center;
     justify-content: center;
     */
 }
 
-.loader_wrap{
-
+.loader_wrap {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-
-
 }
+
+
+.responsive_modal_loader {
+    display: none;
+    z-index: 2;
+    border-radius: 25px 25px 0 0;
+    width: 100%;
+    height: 121%;
+    margin-top: 150px;
+    position: fixed;
+    z-index: 2;
+    background-color: #FFFFFF;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 
 /* ローディング from Single Element CSS Spinners*/
 
-.loader,
-.loader:before,
-.loader:after {
-  border-radius: 50%;
+.loader, .loader:before, .loader:after {
+    border-radius: 50%;
 }
+
 .loader {
-  color: #1F92D1;
-  font-size: 11px;
-  text-indent: -99999em;
-  margin: 55px auto;
-  position: relative;
-  width: 10em;
-  height: 10em;
-  box-shadow: inset 0 0 0 1em;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
+    color: #1F92D1;
+    font-size: 11px;
+    text-indent: -99999em;
+    margin: 55px auto;
+    position: relative;
+    width: 10em;
+    height: 10em;
+    box-shadow: inset 0 0 0 1em;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
 }
-.loader:before,
-.loader:after {
-  position: absolute;
-  content: '';
+
+.loader:before, .loader:after {
+    position: absolute;
+    content: '';
 }
+
 .loader:before {
-  width: 5.2em;
-  height: 10.2em;
-  background: #FFFFFF;
-  border-radius: 10.2em 0 0 10.2em;
-  top: -0.1em;
-  left: -0.1em;
-  -webkit-transform-origin: 5.1em 5.1em;
-  transform-origin: 5.1em 5.1em;
-  -webkit-animation: load2 2s infinite ease 1.5s;
-  animation: load2 2s infinite ease 1.5s;
+    width: 5.2em;
+    height: 10.2em;
+    background: #FFFFFF;
+    border-radius: 10.2em 0 0 10.2em;
+    top: -0.1em;
+    left: -0.1em;
+    -webkit-transform-origin: 5.1em 5.1em;
+    transform-origin: 5.1em 5.1em;
+    -webkit-animation: load2 2s infinite ease 1.5s;
+    animation: load2 2s infinite ease 1.5s;
 }
+
 .loader:after {
-  width: 5.2em;
-  height: 10.2em;
-  /* background: #1F92D1; */
-  border-radius: 0 10.2em 10.2em 0;
-  top: -0.1em;
-  left: 4.9em;
-  -webkit-transform-origin: 0.1em 5.1em;
-  transform-origin: 0.1em 5.1em;
-  -webkit-animation: load2 2s infinite ease;
-  animation: load2 2s infinite ease;
+    width: 5.2em;
+    height: 10.2em;
+    /* background: #1F92D1; */
+    border-radius: 0 10.2em 10.2em 0;
+    top: -0.1em;
+    left: 4.9em;
+    -webkit-transform-origin: 0.1em 5.1em;
+    transform-origin: 0.1em 5.1em;
+    -webkit-animation: load2 2s infinite ease;
+    animation: load2 2s infinite ease;
 }
+
 @-webkit-keyframes load2 {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
+
 @keyframes load2 {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
-
-
 
 /* --------------------------------------------------------------------------- */
 
@@ -712,7 +732,8 @@ svg {
 }
  */
 
- /* idじゃないと効かない（display none） */
+/* idじゃないと効かない（display none） */
+
 .done_recod_post {
     display: none;
     position: absolute;
@@ -722,7 +743,7 @@ svg {
     z-index: 2;
 }
 
-.done_recod_post.fadeout{
+.done_recod_post.fadeout {
     z-index: -1;
 }
 
@@ -759,13 +780,10 @@ svg {
 
 /* 縦棒グラフ */
 
-
-
-
-
 /* -------------------------------------------------------------------------------------- */
+
 /* レスポンシブの時に、下部に表示される「記録・投稿ボタン」 */
 
-.btn_for_responsive{
+.btn_for_responsive {
     display: none;
 }

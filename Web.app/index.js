@@ -1,4 +1,4 @@
-"usestrict";
+"use strict";
 
 let btn_record_post = document.getElementById('record_post');
 let modal = document.getElementById('modal');
@@ -39,6 +39,18 @@ document.getElementById('btn_close_for_responsive').addEventListener("click",fun
 });
 
 
+// レスポンシブ用のロード画面から離れるとき
+
+document.getElementById('btn_close three').addEventListener("click", function () {
+
+    modal.style.display = "none";
+    modal_overlay.style.display = "none";
+    document.getElementById('reponsive_modal_loader').style.display = "none";
+    document.getElementById('done_recod_post').classList.add("fadeout");
+
+});
+
+
 // ------------------------------------------------------------------------------------------------------------------
 // overlayの表示
 btn_record_post.addEventListener("click", function () {
@@ -67,8 +79,18 @@ btn_for_responsive.addEventListener("click", function () {
 modal_record_post.addEventListener("click", function () {
     modal.style.display = "none";
     modal_loader.style.display = "block";
+    // document.getElementById('modal_for_responsive').style.display="none";
 
 });
+
+
+//モーダル用のローディング画面の表示
+document.getElementById('responsive_modal_record_post').addEventListener("click",function(){
+    document.getElementById('modal_for_responsive').style.display="none";
+    document.getElementById('reponsive_modal_loader').style.display="block";    
+
+
+})
 
 // ------------------------------------------------------------------------------------------------------------
 // チェックした時の処理
@@ -162,6 +184,97 @@ study_others.addEventListener("click", function () {
     icon_check_eleven.classList.toggle('check');
     study_others.classList.toggle('add');
 });
+// --------------------------------------------------------------------------------------------
+// チェックしたときの処理（レスポンシブ用）
+let reponsive_study_n = document.getElementById('reponsive_study_n');
+let responsive_icon_check_one = document.getElementById('responsive_icon_check_one');
+
+reponsive_study_n.addEventListener("click", function () {
+    responsive_icon_check_one.classList.toggle('check');
+    reponsive_study_n.classList.toggle('add');
+});
+
+
+let reponsive_study_d = document.getElementById('reponsive_study_d');
+let reponsive_icon_check_two = document.getElementById('reponsive_icon_check_two');
+
+reponsive_study_d.addEventListener("click", function () {
+    reponsive_icon_check_two.classList.toggle('check');
+    reponsive_study_d.classList.toggle('add');
+});
+
+let reponsive_study_p = document.getElementById('reponsive_study_p');
+let reponsive_icon_check_three = document.getElementById('reponsive_icon_check_three');
+
+reponsive_study_p.addEventListener("click", function () {
+    reponsive_icon_check_three.classList.toggle('check');
+    reponsive_study_p.classList.toggle('add');
+});
+
+let reponsive_study_HTML = document.getElementById('study_HTML');
+let reponsive_icon_check_four = document.getElementById('icon_check_four');
+
+reponsive_study_HTML.addEventListener("click", function () {
+    reponsive_icon_check_four.classList.toggle('check');
+    reponsive_study_HTML.classList.toggle('add');
+});
+
+
+let reponsive_study_CSS = document.getElementById('reponsive_study_CSS');
+let reponsive_icon_check_five = document.getElementById('reponsive_icon_check_five');
+
+reponsive_study_CSS.addEventListener("click", function () {
+    reponsive_icon_check_five.classList.toggle('check');
+    reponsive_study_CSS.classList.toggle('add');
+});
+
+let reponsive_study_Js = document.getElementById('reponsive_study_Js');
+let reponsive_icon_check_six = document.getElementById('reponsive_icon_check_six');
+
+reponsive_study_Js.addEventListener("click", function () {
+    reponsive_icon_check_six.classList.toggle('check');
+    reponsive_study_Js.classList.toggle('add');
+});
+
+let reponsive_study_PHP = document.getElementById('reponsive_study_PHP');
+let reponsive_icon_check_seven = document.getElementById('reponsive_icon_check_seven');
+
+reponsive_study_PHP.addEventListener("click", function () {
+    reponsive_icon_check_seven.classList.toggle('check');
+    reponsive_study_PHP.classList.toggle('add');
+});
+
+let reponsive_study_Laravel = document.getElementById('reponsive_study_Laravel');
+let reponsive_icon_check_eight = document.getElementById('reponsive_icon_check_eight');
+
+reponsive_study_Laravel.addEventListener("click", function () {
+    reponsive_icon_check_eight.classList.toggle('check');
+    reponsive_study_Laravel.classList.toggle('add');
+});
+
+let reponsive_study_SQL = document.getElementById('reponsive_study_SQL');
+let reponsive_icon_check_nine = document.getElementById('reponsive_icon_check_nine');
+
+reponsive_study_SQL.addEventListener("click", function () {
+    reponsive_icon_check_nine.classList.toggle('check');
+    reponsive_study_SQL.classList.toggle('add');
+});
+
+let reponsive_study_SHELL = document.getElementById('reponsive_study_SHELL');
+let reponsive_icon_check_ten = document.getElementById('reponsive_icon_check_ten');
+
+reponsive_study_SHELL.addEventListener("click", function () {
+    reponsive_icon_check_ten.classList.toggle('check');
+    reponsive_study_SHELL.classList.toggle('add');
+});
+
+let reponsive_study_others = document.getElementById('reponsive_study_others');
+let reponsive_icon_check_eleven = document.getElementById('reponsive_icon_check_eleven');
+
+reponsive_study_others.addEventListener("click", function () {
+    reponsive_icon_check_eleven.classList.toggle('check');
+    reponsive_study_others.classList.toggle('add');
+});
 
 
 // ------------------------------------------------------------------------------------------
@@ -181,6 +294,14 @@ Tweet.addEventListener('click', function () {
 
 });
 
+let Tweet_in_reponsive = document.getElementById('Tweet_in_reponsive');
+let reponsive_icon_check_twelve = document.getElementById('reponsive_icon_check_twelve');
+Tweet_in_reponsive.addEventListener('click', function () {
+
+    reponsive_icon_check_twelve.classList.toggle('check');
+
+});
+
 
 // ------------------------------------------------------------------------------------
 // 3秒後にtwitter画面にとび、入力ホームの情報をtwitterに共有
@@ -190,13 +311,13 @@ $("#Tweet").on("click", function () {
     $("#modal_record_post").on("click", function () {
         var loader = $('.loader_wrap');
         var done_recod_post = $('#done_recod_post');
-        var btn_close = $('#btn_close two');
+        var btn_close_two = $('#btn_close two');
         // var modal_loader = $('#modal_loader');
 
         setTimeout(function () {
             loader.fadeOut();
             done_recod_post.fadeIn();
-            btn_close.fadeIn();
+            btn_close_two.fadeIn();
         }, 3000);
     });
 
@@ -211,6 +332,39 @@ $("#Tweet").on("click", function () {
     });
 
 });
+
+
+// ３秒後にtwitter画面にとび、入力ホームの情報をtwitterに共有（レスポンシブ用）
+
+$("#Tweet_in_reponsive").on("click", function () {
+
+    $("#responsive_modal_record_post").on("click", function () {
+        var loader = $('.loader_wrap');
+        // var loader = $('.loader_wrap');
+        var done_recod_post = $('#done_recod_post');
+        var btn_close_three = $('btn_close three');
+        // var modal_loader = $('#modal_loader');
+
+        setTimeout(function () {
+            loader.fadeOut();
+            done_recod_post.fadeIn();
+            btn_close_three.fadeIn();
+        }, 3000);
+    });
+
+    document.getElementById("responsive_modal_record_post").addEventListener('click', function (event) {
+        event.preventDefault();
+        var left = Math.round(window.screen.width / 2 - 275);
+        var top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
+        window.open(
+            "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("twitter_text").value),
+            null,
+            "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
+    });
+
+});
+
+
 // ----------------------------------------------------------------------------------------------------------------------
 
 // ３秒後にアイコンがでる。
@@ -312,100 +466,78 @@ function drawChart_two() {
 }
 
 
+// レスポンシブ用のドーナツ型グラフ
+google.charts.load('current', { 'packages': ['corechart'] });
+google.charts.setOnLoadCallback(drawChart_three);
+
+function drawChart_three() {
+
+    var data = google.visualization.arrayToDataTable([
+        ['Effort', 'Amount given'],
+        ['JavaScript', 50.6],
+        ['HTML', 10],
+        ['SHEL', 10],
+        ['情報システム基礎知識 （その他）', 10],
+        ['CSS', 10],
+        ['Laravel', 10],
+        ['PHP', 10],
+        ['SQL', 10],
+
+
+
+    ]);
+
+    var options = {
+        pieHole: 0.5,
+        width: 220,
+        height: 200,
+        pieSliceTextStyle: {
+            color: 'white',
+        },
+        legend: 'none',
+        colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#3CCEFE', '#B29EF3', '#6D46EC', '#4A17EF', '#3105C0'],
+    };
+
+
+    var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_four'));
+    chart.draw(data, options);
+}
+
+
+// function名＝drawChart...を変える必要がある。
+
+google.charts.load('current', { 'packages': ['corechart'] });
+google.charts.setOnLoadCallback(drawChart_four);
+
+function drawChart_four() {
+
+    var data = google.visualization.arrayToDataTable([
+        ['Effort', 'Amount given'],
+        ['ドットインストール', 10],
+        ['N予備', 10],
+        ['Posse 課題', 10],
+
+    ]);
+
+    var options = {
+        pieHole: 0.5,
+        width: 220,
+        height: 200,
+        pieSliceTextStyle: {
+            color: 'white',
+        },
+        legend: 'none',
+        colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#f3b49f', '#f6c7b6']  //　色設定
+
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_three'));
+    chart.draw(data, options);
+}
+
 
 
 // ------------------------------------------------------------------------------
-// google.charts.load(
-//     'current',
-//      {'packages':['bar']}
-// )
-// .then(drawChart_three);
-
-// // グラフの設定・描画を行う関数
-// function drawChart_three() {
-//     // グラフのデータを設定するインスタンスを作成
-//     var data = new google.visualization.DataTable();
-//     data.addColumn('string');
-//     data.addColumn('number', '田中');
-//     data.addColumn('number', '山根');
-
-//     data.addRows([
-//         ["2020-01", 14, 28],
-//         ["2020-02", 16, 20],
-//         ["2020-03", 31, 15]
-//     ]);
-
-//     // グラフのオプションを設定
-//     var options = {
-//         title: '縦棒グラフの例',
-//         width:400,
-//         height:300,
-//         hAxis: {
-//             title: '年-月',
-//         },
-//         vAxis: {
-//             title: '売上',
-//             format:'#万円',
-//         },
-
-//         color:'#3ACCFD',
-//         legend: 'none',
-//     };
-
-//     // グラフを描画するためのインスタンスを作成
-//     var chart = new google.charts.Bar(document.getElementById('Histo_gram'));
-//     // グラフにデータ・オプションをセットして描画
-//     chart.draw(data, google.charts.Bar.convertOptions(options));
-// }
-
-// google.charts.load('current', {packages: ['corechart', 'bar']});
-// google.charts.setOnLoadCallback(drawBasic);
-
-// function drawBasic() {
-
-//       var data = new google.visualization.DataTable();
-//       data.addColumn('timeofday', 'Time of Day');
-//       data.addColumn('number', 'Motivation Level');
-
-//       data.addRows([
-//         [{v: [8, 0, 0], f: '8 am'}, 1],
-//         [{v: [9, 0, 0], f: '9 am'}, 2],
-//         [{v: [10, 0, 0], f:'10 am'}, 3],
-//         [{v: [11, 0, 0], f: '11 am'}, 4],
-//         [{v: [12, 0, 0], f: '12 pm'}, 5],
-//         [{v: [13, 0, 0], f: '1 pm'}, 6],
-//         [{v: [14, 0, 0], f: '2 pm'}, 7],
-//         [{v: [15, 0, 0], f: '3 pm'}, 8],
-//         [{v: [16, 0, 0], f: '4 pm'}, 9],
-//         [{v: [17, 0, 0], f: '5 pm'}, 10],
-//       ]);
-
-//       var options = {
-//         title: 'Motivation Level Throughout the Day',
-//         hAxis: {
-//           title: 'Time of Day',
-//           format: 'h:mm a',
-//           viewWindow: {
-//             min: [7, 30, 0],
-//             max: [17, 30, 0]
-//           },
-//           width:400,
-//           height:400,
-//         },
-//         vAxis: {
-//           title: 'Rating (scale of 1-10)'
-//         },
-//         color:'white',
-//         // legend: 'none',
-//       };
-
-//       var chart = new google.visualization.ColumnChart(
-//         document.getElementById('Histo_gram'));
-
-//       chart.draw(data, options);
-//     }
-
-
 var ctx = document.getElementById("myBarChart");
 var myBarChart = new Chart(ctx, {
     type: 'bar',
@@ -434,11 +566,18 @@ var myBarChart = new Chart(ctx, {
         },
         scales: {
             xAxes: [{
-                gridLines: [display = false],
+                // gridLines: [display = false],
+                gridLines: {
+                    display: false
+                  }
             }],
             yAxes: [{
 
-                gridLines: [display = false],
+                // gridLines: [display = false],
+                gridLines: {
+                    display: false
+                  },
+                
                 ticks: {
                     suggestedMax: 8, //最大値
                     suggestedMin: 0, //最小値
@@ -452,3 +591,4 @@ var myBarChart = new Chart(ctx, {
         },
     }
 });
+
