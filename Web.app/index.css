@@ -265,32 +265,152 @@ svg {
 .contents_of_Language_studied span {
     color: #000000;
     font-size: 15px;
+    margin-left: 10px;
+}
+
+.contents_of_Language_studied ul{
+   padding: 0;
+   margin-left: 10px;
+}
+
+.contents_of_Language_studied li{
+    list-style: none;
 }
 
 
-
-.li_Js {
-    color: blue;
+.li_Js::before {
+    content: '';
+    /* margin-left: 8px; */
+    width: 12px;
+    height: 12px;
+    display:inline-block;
+    background-color: #1754EF;
+    border-radius: 50%;
+    
 }
 
-.li_CSS {
-    margin-left: 30px;
+.li_CSS::before{
+    margin-left: 8px;
+    content: '';
+    width: 12px;
+    height: 12px;
+    display:inline-block;
+    background-color: #1754EF;
+    border-radius: 50%;
+   
 }
 
-.li_PHP {
-    margin-left: 30px;
+.li_PHP::before{
+    margin-left: 8px;
+    content: '';
+    width: 12px;
+    height: 12px;
+    display:inline-block;
+    background-color: #20BDDE;
+    border-radius: 50%;
 }
 
-.li_Laravel {
-    margin-left: 30px;
+.li_HTML::before{
+    content: '';
+    width: 12px;
+    height: 12px;
+    display:inline-block;
+    background-color: #3CCEFE;
+    border-radius: 50%;
 }
 
-.li_SQL {
-    margin-left: 30px;
+.li_Laravel::before{
+    margin-left: 8px;  
+    content: '';
+    width: 12px;
+    height: 12px;
+    display:inline-block;
+    background-color:#B29EF3;
+    border-radius: 50%; 
+}
+
+.li_SQL::before {
+    margin-left: 8px;
+    content: '';
+    width: 12px;
+    height: 12px;
+    display:inline-block;
+    background-color:#6D46EC;
+    border-radius: 50%;
+}
+
+.li_SHELL::before{
+    content: '';
+    width: 12px;
+    height: 12px;
+    display:inline-block;
+    background-color: #4A17EF;
+    border-radius: 50%;
+    
+
+}
+
+.li_others::before{
+    
+    content: '';
+    width: 12px;
+    height: 12px;
+    display:inline-block;
+    background-color: #3105C0;
+    border-radius: 50%;
+    
 }
 
 .contents_studied {
     margin-top: -69px;
+}
+
+.contents_studied li{
+    list-style: none;
+}
+
+.contents_studied ul{
+    padding: 0;
+    margin-left: 10px;
+}
+
+.contents_studied span{
+    color: #000000;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.d::before{
+    
+    content: '';
+    width: 12px;
+    height: 12px;
+    display:inline-block;
+    background-color: #1754EF;
+    border-radius: 50%;
+
+}
+
+.n::before{
+    
+    content: '';
+    width: 12px;
+    height: 12px;
+    display:inline-block;
+    background-color: #0F71BD;
+    border-radius: 50%;
+
+}
+
+.p::before{
+    
+    content: '';
+    width: 12px;
+    height: 12px;
+    display:inline-block;
+    background-color: #20BDDE;
+    border-radius: 50%;
+
 }
 
 /* レスポンシブ用の学習コンテンツ */

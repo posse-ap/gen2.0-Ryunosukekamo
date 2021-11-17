@@ -61,15 +61,13 @@ btn_record_post.addEventListener("click", function () {
 
 });
 
-// レスポンシブ用のモーダルを表示する際に必要な、ボタンを押した時の処理
+// レスポンシブ用のモーダルで、ボタンを押した時の処理
 let btn_for_responsive = document.getElementById('btn_for_responsive');
 btn_for_responsive.addEventListener("click", function () {
     let modal_for_responsive = document.getElementById('modal_for_responsive');
     let modal_overlay = document.getElementById('modal_overlay');
     modal_for_responsive.style.display = "block";
-    modal_overlay.style.display = "block";
-    // document.body.classList.toggle('open');
-   
+    modal_overlay.style.display = "block";   
 
 });
 
@@ -285,6 +283,7 @@ reponsive_study_others.addEventListener("click", function () {
 // })
 
 // ------------------------------------------------------------------------------
+// ツイートする際の処理
 
 let Tweet = document.getElementById('Tweet');
 let icon_check_twelve = document.getElementById('icon_check_twelve');
@@ -465,6 +464,7 @@ function drawChart_two() {
     chart.draw(data, options);
 }
 
+// 下部でwidthなどをかえると、div dir=itrが変化するのだが、ちょうどよいサイズにすると、margin的にはみ出てしまい、20pxでサイドをそろえることができない。
 
 // レスポンシブ用のドーナツ型グラフ
 google.charts.load('current', { 'packages': ['corechart'] });
@@ -489,8 +489,8 @@ function drawChart_three() {
 
     var options = {
         pieHole: 0.5,
-        width: 220,
-        height: 200,
+        width: '100%',
+        // height: 200,
         pieSliceTextStyle: {
             color: 'white',
         },
@@ -521,8 +521,8 @@ function drawChart_four() {
 
     var options = {
         pieHole: 0.5,
-        width: 220,
-        height: 200,
+        width: '100%',
+        // height: 200,
         pieSliceTextStyle: {
             color: 'white',
         },
@@ -549,10 +549,10 @@ var myBarChart = new Chart(ctx, {
                 label: '訪問者数', //データ項目のラベル
                 data: [1, 3, 4, 6, 8], //グラフのデータ
                 backgroundColor: "#3ACCFD",
-                //   backgrdoundcolor:linear-gradient();
-                borderCapStyle: 'round',
-                // lineCap:'round'
-                // lineCap='round'
+                borderColor:"#3ACCFD",
+                borderWidth:1,
+                borderRadius:20,
+                // borderSkipped:false,
             }
 
         ]
