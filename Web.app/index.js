@@ -7,7 +7,7 @@ let done = document.getElementById('done');
 let modal_loader = document.getElementById('modal_loader');
 let modal_overlay = document.getElementById('modal_overlay');
 let btn_close = document.getElementById('btn_close');
-let input_day_for_study = document.getElementById('input_day_for_study');//学習日欄
+let calendar = document.getElementById('input_day_for_study');//学習日欄
 
 
 // ----------------------------------------------------------------------------------------------------------------------
@@ -209,8 +209,8 @@ reponsive_study_p.addEventListener("click", function () {
     reponsive_study_p.classList.toggle('add');
 });
 
-let reponsive_study_HTML = document.getElementById('study_HTML');
-let reponsive_icon_check_four = document.getElementById('icon_check_four');
+let reponsive_study_HTML = document.getElementById('reponsive_study_HTML');
+let reponsive_icon_check_four = document.getElementById('reponsive_icon_check_four');
 
 reponsive_study_HTML.addEventListener("click", function () {
     reponsive_icon_check_four.classList.toggle('check');

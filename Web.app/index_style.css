@@ -76,6 +76,43 @@
     width: 50%;
 }
 
+.contents_studied span{
+    font-size: 8px;
+}
+
+.d::before{
+    
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #0F71BD;
+    border-radius: 50%;
+
+}
+
+.n::before{
+    
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #0F71BD;
+    border-radius: 50%;
+
+}
+
+.p::before{
+    
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #20BDDE;
+    border-radius: 50%;
+
+}
+
 /* レスポンシブ用の学習言語 */
 .Language_studied_responsive{
     display: block;
@@ -95,6 +132,95 @@
 
 .Contents_studied {
     display: none;
+}
+
+.contents_of_Language_studied span{
+    margin-left: 0px;
+    font-size: 8px;
+}
+
+.li_Js::before {
+    content: '';
+    /* margin-left: 8px; */
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #1754EF;
+    border-radius: 50%;
+    
+    
+}
+
+.li_CSS::before{
+    margin-left: 8px;
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #1754EF;
+    border-radius: 50%;
+   
+}
+
+.li_PHP::before{
+    margin-left: 8px;
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #20BDDE;
+    border-radius: 50%;
+}
+
+.li_HTML::before{
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #3CCEFE;
+    border-radius: 50%;
+}
+
+.li_Laravel::before{
+    margin-left: 8px;  
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color:#B29EF3;
+    border-radius: 50%; 
+}
+
+.li_SQL::before {
+    margin-left: 8px;
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color:#6D46EC;
+    border-radius: 50%;
+}
+
+.li_SHELL::before{
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #4A17EF;
+    border-radius: 50%;
+    
+
+}
+
+.li_others::before{
+    
+    content: '';
+    width:  8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #3105C0;
+    border-radius: 50%;
+    
 }
 
 .Date {
@@ -207,7 +333,7 @@
 
 /* 学習日 */
 
-.input_day_for_study {
+.calendar {
     height: 40px;
     width: 100%;
 }
