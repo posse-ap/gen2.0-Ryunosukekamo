@@ -32,6 +32,18 @@ document.getElementById('btn_close two').addEventListener("click", function () {
 
 });
 
+// $("#btn_close two").on("click", function () {
+//     var modal = $('.modal_loader');
+//     var done_recod_post = $('#done_recod_post');
+//     var btn_close_two = $('#btn_close two');
+    
+
+//         modal.fadeOut();
+//         done_recod_post.fadeOut();
+//         btn_close_two.fadeOut();
+    
+// });
+
 // レスポンシブ用のモーダルを閉じるバツボタン
 document.getElementById('btn_close_for_responsive').addEventListener("click",function(){
     document.getElementById('modal_for_responsive').style.display="none";
@@ -315,7 +327,7 @@ $("#Tweet").on("click", function () {
 
         setTimeout(function () {
             loader.fadeOut();
-            done_recod_post.fadeIn();
+            done_recod_post.toggle();
             btn_close_two.fadeIn();
         }, 3000);
     });
@@ -418,13 +430,20 @@ function drawChart() {
 
     var options = {
         pieHole: 0.5,
-        width: 280,
-        height: 300,
+        // width: 280,
+        // height: 300,
+        width: '100%',
+        height: '190',
+        chartArea: { width: '100%', height: '100%', top: 0 },
+
         pieSliceTextStyle: {
             color: 'white',
         },
         legend: 'none',
         colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#3CCEFE', '#B29EF3', '#6D46EC', '#4A17EF', '#3105C0'],
+
+    
+    
     };
 
 
@@ -450,8 +469,11 @@ function drawChart_two() {
 
     var options = {
         pieHole: 0.5,
-        width: 280,
-        height: 300,
+        // width: 280,
+        // height: 300,
+        width: '100%',
+        height: '190',
+        chartArea: { width: '100%', height: '100%', top: 0 },
         pieSliceTextStyle: {
             color: 'white',
         },
@@ -489,8 +511,12 @@ function drawChart_three() {
 
     var options = {
         pieHole: 0.5,
+        // width: '100%',
+        // // height: 200,
+
         width: '100%',
-        // height: 200,
+        height: '115',
+        chartArea: { width: '100%', height: '100%', top: 0 },
         pieSliceTextStyle: {
             color: 'white',
         },
@@ -521,8 +547,11 @@ function drawChart_four() {
 
     var options = {
         pieHole: 0.5,
+        // width: '100%',
+        // // height: 200,
         width: '100%',
-        // height: 200,
+        height: '115',
+        chartArea: { width: '100%', height: '100%', top: 0 },
         pieSliceTextStyle: {
             color: 'white',
         },

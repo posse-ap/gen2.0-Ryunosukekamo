@@ -245,7 +245,7 @@ header {
 /* ドーナツ型グラフの上下の位置、なぜかmargin-bottomが効かない */
 
 svg {
-    margin-top: -55px;
+    /* margin-top: -55px; */
 }
 
 .one, .two {
@@ -259,7 +259,7 @@ svg {
 }
 
 .contents_of_Language_studied {
-    margin-top: -69px;
+    margin-top: 45px;
 }
 
 .contents_of_Language_studied span {
@@ -362,7 +362,7 @@ svg {
 }
 
 .contents_studied {
-    margin-top: -69px;
+    margin-top: 10px;
 }
 
 .contents_studied li{
@@ -845,8 +845,9 @@ br {
 }
 
 .done_recod_post.fadeout {
-    z-index: -1;
+    display: none !important;
 }
+
 
 #green_check {
     color: #BEE360;
