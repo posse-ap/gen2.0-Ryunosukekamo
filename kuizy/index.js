@@ -32,6 +32,10 @@ let QuestionNames = [QuestionNames01, QuestionNames02, QuestionNames03, Question
 //ループとシャッフル
 
 let main = '';//mainにhtmlにある最初の問題の箇所を代入する
+//  空にする理由は。
+// （１）まずは、＋＝にしないとダメだから。変数に代入できるのは一つだけ。それは、let main = 'kamo','ryu';というように、クおテーションが二つついてはいけないという意味。
+// （２）＋＝にするためには、let main +=　とはできない。そのため、とりあえず先に「空」文字を入れる。 
+
 for (let i = 0; i < QuestionNames.length; i++) {
     
 //シャッフル
@@ -56,7 +60,8 @@ for (let i = 0; i < QuestionNames.length; i++) {
     
     //シャッフル関数の呼びだし(Choiceの具体的な内容は、２次元配列の中にあるもの)
     shuffle(Choices); 
-
+    
+    //なぜ＋で付け加えていくのか？ 下記のように、''で一々区切ることができない。それは、区切れ目が分からないことを意味するから、タブ同士学切れなくなる。例えば、divとh2が重なっている状態になる。
     main += '<div class="parent">'
         + '<h2 class="name">' + [i + 1] + '.この地名はなんて読む?</h2>'//変数iを使い、問題番号の作成
         + images[i]//２次元配列から写真を呼び出し
