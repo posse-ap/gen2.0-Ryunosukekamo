@@ -23,11 +23,11 @@ services:
   db:
     image: mysql:latest
     ports:
-      - 3306:3306
+      - 13306:3306
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/sql:/docker-entrypoint-initdb.d
-      - ./mysql/my.conf:/etc/mysql/conf.d
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
 
     environment:
       MYSQL_DATABASE: quizy
@@ -35,11 +35,11 @@ services:
       MYSQL_PASSWORD: Kamonista0616
       MYSQL_ROOT_PASSWORD: secret
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    ports:
-      - 8888:80
-    depends_on:
-      - db
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin:latest
+  #   ports:
+  #     - 8888:80
+  #   depends_on:
+  #     - db
 
    
