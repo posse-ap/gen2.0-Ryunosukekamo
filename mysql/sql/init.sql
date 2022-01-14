@@ -9,11 +9,15 @@
 -- image VARCHAR(225) NOT NULL
 -- );
 
-
-
+DROP SCHEMA IF EXISTS quizy;
+CREATE DATABASE quizy;
+USE quizy;
 DROP TABLE IF EXISTS big_questions;
 CREATE TABLE big_questions(
-id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-name VARCHAR(225) NOT NULL,
-
+id INT(50),
+name VARCHAR(225)
 );
+INSERT INTO big_questions(id,name)VALUES(1,'東京の難読地名クイズ');
+INSERT INTO big_questions(id,name)VALUES(2,'広島の難読地名クイズ');
+
+-- insert= データの追加、レコードの追加
