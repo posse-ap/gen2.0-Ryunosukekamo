@@ -29,12 +29,15 @@ services:
       - ./mysql/sql:/docker-entrypoint-initdb.d
       - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
       
-
+      
     environment:
       MYSQL_DATABASE: quizy
       MYSQL_USER: Ryunosuke
       MYSQL_PASSWORD: Kamonista0616
       MYSQL_ROOT_PASSWORD: secret
+    stdin_open: true
+    privileged: true
+      
 
   # phpmyadmin:
   #   image: phpmyadmin/phpmyadmin:latest
