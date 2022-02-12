@@ -21,33 +21,44 @@ include "db-connect.php";
 //     echo '<br>';
 //   }
 
-if($_GET['id']==1){
-    $table = "SELECT name FROM big_questions where id = 1";
-    $sql = $dbh->query($table);
-    // foreach文で配列の中身を一行ずつ出力
-  foreach ($sql as $row) {
+// if($_GET['id']==1){
+//     $table = "SELECT name FROM big_questions where id = 1";
+//     $sql = $dbh->query($table);
+//     // foreach文で配列の中身を一行ずつ出力
+//   foreach ($sql as $row) {
    
   
-      // データベースのフィールド名で出力
-      echo $row['name'];
+//       // データベースのフィールド名で出力
+//       echo $row['name'];
      
      
-    }
-}
-if($_GET['id'] == 2){
+//     }
+// }
+// if($_GET['id'] == 2){
 
-  $table = "SELECT name FROM big_questions where id = 2";
-  $sql = $dbh->query($table);
-  // foreach文で配列の中身を一行ずつ出力
-  foreach ($sql as $row) {
+//   $table = "SELECT name FROM big_questions where id = 2";
+//   $sql = $dbh->query($table);
+//   // foreach文で配列の中身を一行ずつ出力
+//   foreach ($sql as $row) {
  
-    // データベースのフィールド名で出力
-    echo $row['name'];
+//     // データベースのフィールド名で出力
+//     echo $row['name'];
    
    
-  };
+//   };
 
-  };
+//   };
 
-  
+// dbh-名前。データベースのユーザー名などが書かれているもの使う
+$sql = 'select name from big_questions where id = 1';
+$result = $dbh-> query($sql);
+foreach($result as $val) {
+echo $val['name'];
+}
+
+// $sql = 'select name from student';
+// $result = $dbh-> query($sql);
+// foreach($result as $val) {
+// echo $val['name'];
+// } 
   
