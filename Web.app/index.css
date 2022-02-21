@@ -431,10 +431,13 @@ svg {
     font-weight: bold;
 }
 
-.Date span {
-    color: #2C7CFF;
+.angle_brackets{
+    color: #0E70BC;
 }
 
+.angle_brackets span{
+    color: #000000;
+}
 /* ------------------------------------------------------------------- */
 
 /* モーダル */
