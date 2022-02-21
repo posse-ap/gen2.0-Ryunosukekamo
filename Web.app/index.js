@@ -64,7 +64,7 @@ document.getElementById('btn_close three').addEventListener("click", function ()
 
 
 // ------------------------------------------------------------------------------------------------------------------
-// overlayの表示
+// overlayとモーダルの表示
 btn_record_post.addEventListener("click", function () {
     let modal = document.getElementById('modal');
     let modal_overlay = document.getElementById('modal_overlay');
@@ -297,9 +297,9 @@ reponsive_study_others.addEventListener("click", function () {
 // ------------------------------------------------------------------------------
 // ツイートする際の処理
 
-let Tweet = document.getElementById('Tweet');
+// let Tweet = document.getElementById('Tweet');
 let icon_check_twelve = document.getElementById('icon_check_twelve');
-Tweet.addEventListener('click', function () {
+icon_check_twelve.addEventListener('click', function () {
 
     icon_check_twelve.classList.toggle('check');
 

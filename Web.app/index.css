@@ -482,10 +482,6 @@ svg {
     width: 374px;
 }
 
-/* 学習コンテンツの全体に対して
-.contents_study div {
-    margin-top: 10px;
-} */
 
 /* 学習言語の全体に対して */
 
@@ -579,10 +575,14 @@ br {
     margin-top: 20px;
 }
 
-.Tweet i {
+.modal_contents_right_side i {
     content: "\f058";
     color: #CCCCCC;
-    font-size: 26px;
+}
+
+.modal_contents_right_side i span{
+font: 16px Meiryo;
+color: #000000;
 }
 
 .Tweet i.check {
@@ -601,13 +601,11 @@ br {
     color: #FFFFFF;
     box-shadow: -4px 4px 4px 4px #ccf1ff;
     cursor: pointer;
-    width: 341px;
+    text-align: center;
+    width: 42%;
+    margin: 0px auto;
     margin-top: 15px;
-    margin-left: 279px;
-    padding-left: 126px;
-    padding-top: 12px;
-    padding-bottom: 10px;
-    padding-right: 11px;
+    padding: 12px;
 }
 
 .span_contents_stud {
@@ -661,6 +659,10 @@ br {
 
 /* クリックした時の色の変更 */
 
+/* checkだけでは、効かないようだ */
+.check {
+    color: #0E70BC;
+}
 .contents_study i.check {
     color: #0E70BC;
 }
