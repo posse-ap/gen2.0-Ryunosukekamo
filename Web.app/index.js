@@ -14,10 +14,9 @@ let calendar = document.getElementById('input_day_for_study');//学習日欄
 // バツボタンを押した時にモーダルを閉じる処理
 
 btn_close.addEventListener("click", function () {
-   let modal_overlay = document.getElementById('modal_overlay');
+    let modal_overlay = document.getElementById('modal_overlay');
     modal.style.display = "none";
     modal_overlay.style.display = "none";
-    modal_overlay.style.display="none";
 
 
 
@@ -25,40 +24,39 @@ btn_close.addEventListener("click", function () {
 // ローディング画面から離れる時のバツボタン
 document.getElementById('btn_close two').addEventListener("click", function () {
 
-    modal.style.display = "none";
+    // modal.style.display = "none";
     modal_overlay.style.display = "none";
     document.getElementById('modal_loader').style.display = "none";
-    document.getElementById('done_recod_post').classList.add("fadeout");
-
+    // document.getElementById('done_recod_post').style.display='none';
 });
 
 // $("#btn_close two").on("click", function () {
 //     var modal = $('.modal_loader');
 //     var done_recod_post = $('#done_recod_post');
 //     var btn_close_two = $('#btn_close two');
-    
+
 
 //         modal.fadeOut();
 //         done_recod_post.fadeOut();
 //         btn_close_two.fadeOut();
-    
+
 // });
 
 // レスポンシブ用のモーダルを閉じるバツボタン
-document.getElementById('btn_close_for_responsive').addEventListener("click",function(){
-    document.getElementById('modal_for_responsive').style.display="none";
-    document.getElementById('modal_overlay').style.display="none";
+document.getElementById('btn_close_for_responsive').addEventListener("click", function () {
+    document.getElementById('modal_for_responsive').style.display = "none";
+    document.getElementById('modal_overlay').style.display = "none";
 });
 
 
 // レスポンシブ用のロード画面から離れるとき
 
-document.getElementById('btn_close three').addEventListener("click", function () {
+document.getElementById('btn_close_three').addEventListener("click", function () {
 
-    modal.style.display = "none";
+    // modal.style.display = "none";
     modal_overlay.style.display = "none";
     document.getElementById('reponsive_modal_loader').style.display = "none";
-    document.getElementById('done_recod_post').classList.add("fadeout");
+    // document.getElementById('done_recod_post').classList.add("fadeout");
 
 });
 
@@ -79,25 +77,25 @@ btn_for_responsive.addEventListener("click", function () {
     let modal_for_responsive = document.getElementById('modal_for_responsive');
     let modal_overlay = document.getElementById('modal_overlay');
     modal_for_responsive.style.display = "block";
-    modal_overlay.style.display = "block";   
+    modal_overlay.style.display = "block";
 
 });
 
 
 // ---------------------------------------------------------------------------------------------------------------
 //ローディング画面の表示 
-modal_record_post.addEventListener("click", function () {
-    modal.style.display = "none";
-    modal_loader.style.display = "block";
-    // document.getElementById('modal_for_responsive').style.display="none";
+// modal_record_post.addEventListener("click", function () {
+//     modal.style.display = "none";
+//     modal_loader.style.display = "block";
+//     // document.getElementById('modal_for_responsive').style.display="none";
 
-});
+// });
 
 
 //モーダル用のローディング画面の表示
-document.getElementById('responsive_modal_record_post').addEventListener("click",function(){
-    document.getElementById('modal_for_responsive').style.display="none";
-    document.getElementById('reponsive_modal_loader').style.display="block";    
+document.getElementById('responsive_modal_record_post').addEventListener("click", function () {
+    document.getElementById('modal_for_responsive').style.display = "none";
+    document.getElementById('reponsive_modal_loader').style.display = "block";
 
 
 })
@@ -295,7 +293,7 @@ reponsive_study_others.addEventListener("click", function () {
 // })
 
 // ------------------------------------------------------------------------------
-// ツイートする際の処理
+// ツイートする際の前の✓の表示について
 
 // let Tweet = document.getElementById('Tweet');
 let icon_check_twelve = document.getElementById('icon_check_twelve');
@@ -317,33 +315,72 @@ Tweet_in_reponsive.addEventListener('click', function () {
 // ------------------------------------------------------------------------------------
 // 3秒後にtwitter画面にとび、入力ホームの情報をtwitterに共有
 
+// $("#Tweet").on("click", function () {
+
+//     $("#modal_record_post").on("click", function () {
+//         var loader = $('.loader_wrap');
+//         var done_recod_post = $('#done_recod_post');
+//         var btn_close_two = $('#btn_close two');
+//         var modal_loader = $('#modal_loader');
+
+//         setTimeout(function () {
+//             loader.fadeOut();
+//             done_recod_post.toggle();
+//             btn_close_two.fadeIn();
+//         }, 3000);
+
+//     });
+
+//     document.getElementById("modal_record_post").addEventListener('click', function (event) {
+//         event.preventDefault();
+//         var left = Math.round(window.screen.width / 2 - 275);
+//         var top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
+//         window.open(
+//             "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("twitter_text").value),
+//             null,
+//             "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
+//     });
+
+// });
 $("#Tweet").on("click", function () {
 
     $("#modal_record_post").on("click", function () {
+        var modal_loader = $('.modal_loader');
+        var modal = $('.modal');
+        var done_recod_post = $('.done_recod_post');
+
+        // モーダルの非表示とローダ時のモーダルの表示
+        modal.css('display', 'none');
+        modal_loader.css('display', 'block');
+
+        // くるくる回るやつ
         var loader = $('.loader_wrap');
-        var done_recod_post = $('#done_recod_post');
-        var btn_close_two = $('#btn_close two');
-        // var modal_loader = $('#modal_loader');
+        loader.toggle();
 
+        // 記録投稿完了
+        done_recod_post.css('display', 'none');
+
+        // modal_loaderというローダーのためのモーダルが出た時点でloderもdone_rec..も表示されているから、display noneで。
         setTimeout(function () {
-            loader.fadeOut();
+            loader.toggle();
             done_recod_post.toggle();
-            btn_close_two.fadeIn();
+            var left = Math.round(window.screen.width / 2 - 275);
+            var top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
+            window.open(
+                "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("twitter_text").value),
+                null,
+                "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
         }, 3000);
-    });
 
-    document.getElementById("modal_record_post").addEventListener('click', function (event) {
-        event.preventDefault();
-        var left = Math.round(window.screen.width / 2 - 275);
-        var top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
-        window.open(
-            "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("twitter_text").value),
-            null,
-            "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
     });
-
 });
 
+// 原理
+// CSSでloader_wrapと記録投稿と完了を非表示にしておく。→jsでボタンが押されたら、ローダーをtoggleで表示させる。→settimeoutの箇所でまた、toggleを使い表示されているローダーを非表示に。
+//settimeoutの箇所は、3秒後の処理をかくものである。つまり、ボタンをおしてから３秒後の処理のこと。換言すると、ボタンを押す＝ローダー回る、ローダーが回り始めてから３秒後を意味する。
+//→記録と投稿完了をtoggleで表示させる。また、twitterのやつもいれる。
+//重要！！！！ なぜ、settimeout前に、記録投稿完了をわざわざ非常時にするのか？ これは、２回目以降、１回目で表示させたものが3秒前に残ってしまっているから。時系列で話す。
+//最初ない→１回目の表示→モーダル消える＝非表示→２回目表示される！！→この時にtoggleを浸かってはいけない。安易に使うと、２回目以降の３秒前＝ロード画面中に表示されてしまう。だから、3秒前は直接.css('display','none')
 
 // ３秒後にtwitter画面にとび、入力ホームの情報をtwitterに共有（レスポンシブ用）
 
@@ -351,26 +388,27 @@ $("#Tweet_in_reponsive").on("click", function () {
 
     $("#responsive_modal_record_post").on("click", function () {
         var loader = $('.loader_wrap');
-        // var loader = $('.loader_wrap');
-        var done_recod_post = $('#done_recod_post');
-        var btn_close_three = $('btn_close three');
-        // var modal_loader = $('#modal_loader');
+        var done_recod_post_two = $('.done_recod_post_two');
+        var modal_for_responsive = $('.modal_for_responsive');
+        var responsive_modal_loader = $('.responsive_modal_loader');
+
+        modal_for_responsive.css('display', 'none');
+        // responsive_modal_loader.toggle();
+        responsive_modal_loader.css('display', 'block');
+        loader.toggle();
+
+        done_recod_post_two.css('display', 'none');
 
         setTimeout(function () {
-            loader.fadeOut();
-            done_recod_post.fadeIn();
-            btn_close_three.fadeIn();
+            loader.toggle();
+            done_recod_post_two.toggle();
+            var left = Math.round(window.screen.width / 2 - 275);
+            var top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
+            window.open(
+                "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("twitter_text").value),
+                null,
+                "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
         }, 3000);
-    });
-
-    document.getElementById("responsive_modal_record_post").addEventListener('click', function (event) {
-        event.preventDefault();
-        var left = Math.round(window.screen.width / 2 - 275);
-        var top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
-        window.open(
-            "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("twitter_text").value),
-            null,
-            "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
     });
 
 });
@@ -442,8 +480,8 @@ function drawChart() {
         legend: 'none',
         colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#3CCEFE', '#B29EF3', '#6D46EC', '#4A17EF', '#3105C0'],
 
-    
-    
+
+
     };
 
 
@@ -578,9 +616,9 @@ var myBarChart = new Chart(ctx, {
                 label: '訪問者数', //データ項目のラベル
                 data: [1, 3, 4, 6, 8], //グラフのデータ
                 backgroundColor: "#3ACCFD",
-                borderColor:"#3ACCFD",
-                borderWidth:1,
-                borderRadius:20,
+                borderColor: "#3ACCFD",
+                borderWidth: 1,
+                borderRadius: 20,
                 // borderSkipped:false,
             }
 
@@ -598,15 +636,15 @@ var myBarChart = new Chart(ctx, {
                 // gridLines: [display = false],
                 gridLines: {
                     display: false
-                  }
+                }
             }],
             yAxes: [{
 
                 // gridLines: [display = false],
                 gridLines: {
                     display: false
-                  },
-                
+                },
+
                 ticks: {
                     suggestedMax: 8, //最大値
                     suggestedMin: 0, //最小値

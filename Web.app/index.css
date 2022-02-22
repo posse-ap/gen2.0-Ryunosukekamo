@@ -98,26 +98,27 @@ header {
 
 .Today_actual_hour {
     /* margin-left: 13px; */
-    font-size: 26px;
+    font-size: 34px;
     font-weight: bold;
 }
 
 .Actual_Month {
     /* margin-left: -1px; */
     font-weight: bold;
-    font-size: 24px;
+    font-size: 34px;
 }
 
 .Actual_Today_hours {
     /* margin-left: -7px; */
     font-weight: bold;
-    font-size: 22px;
+    font-size: 34px;
 }
 
 .Today_hour {
     /* margin-left: 4px; */
     font-weight: 500;
     color: #BAD3FF;
+    font-size: 20px;
 }
 
 .Monthly_hour {
@@ -125,6 +126,7 @@ header {
     /* margin-top: 4px; */
     font-weight: 500;
     color: #BAD3FF;
+    font-size: 20px;
 }
 
 .Total_hours {
@@ -132,6 +134,7 @@ header {
     /* margin-top: 7px; */
     font-weight: 500;
     color: #BAD3FF;
+    font-size: 20px;
 }
 
 .Today {
@@ -429,6 +432,7 @@ svg {
 .Date {
     text-align: center;
     font-weight: bold;
+    margin-top: 30px;
 }
 
 .angle_brackets{
@@ -652,6 +656,10 @@ color: #000000;
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
+#btn_close_three{
+    display: none;
+}
+
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 /* チェックすると変化する */
@@ -713,37 +721,15 @@ color: #000000;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    */
 }
 
 .loader_wrap {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
-
-.responsive_modal_loader {
     display: none;
-    z-index: 2;
-    border-radius: 25px 25px 0 0;
-    width: 100%;
-    height: 121%;
-    margin-top: 150px;
-    position: fixed;
-    z-index: 2;
-    background-color: #FFFFFF;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
-
-
 
 /* ローディング from Single Element CSS Spinners*/
 
@@ -849,12 +835,22 @@ color: #000000;
     z-index: 2;
 }
 
-.done_recod_post.fadeout {
-    display: none !important;
+.done_recod_post_two{
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
 }
+/* #green_check {
+    color: #BEE360;
+    font-size: 56px;
+    margin-left: 18px;
+} */
 
-
-#green_check {
+.done_recod_post i{
     color: #BEE360;
     font-size: 56px;
     margin-left: 18px;

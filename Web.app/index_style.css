@@ -449,4 +449,30 @@ color: #000000;
     transform: translate(-50%, -50%);
 }
 
+#btn_close_three{
+    display: block;
 }
+
+.done_recod_post_two{
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
+}
+
+.done_recod_post_two i{
+    color: #BEE360;
+    font-size: 56px;
+    margin-left: 18px;
+}
+
+.awesome_two {
+    color: #BEE360;
+    font-size: 17px;
+}
+
+}
+
