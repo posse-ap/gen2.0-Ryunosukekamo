@@ -41,6 +41,13 @@ for (let i = 0; i < QuestionNames.length; i++) {
     let Choice2 = '<li id = "button2' + [i] + '"class="button_style2" onclick="Wrong(' + [i] + ',1)">' + [QuestionNames[i][1]] + '</li>';
     let Choice3 = '<li id = "button3' + [i] + '"class="buttton_style3" onclick="Wrong2(' + [i] + ',2)">' + [QuestionNames[i][2]] + '</li>';
     let Choices = [Choice1, Choice2, Choice3];
+
+    // Onclickに[i]を付ける理由
+    // onclickに違いをもたせるため。for分で0-9を生成。合計で数字が１０個できるということ。correct0,correct1,correct2,correct3,correct4....一つのonclickで10個できて、それX3で３０個。
+    //選択肢は、合計で30個あるので、これで一つ一つが違うonclickになった。
+    
+    //onckick[i]の後に、数字０，１，２を書く理由。正誤判定の時に必要。正解の処理や不正解の処理の箇所を見ると分かるけど、数字によって正解かせ不正解かを区別している。onclick Correctは 0で、これが正解。
+    //他の不正解は、onclick 1 or 2である。
     
 
     //シャッフル関数、Fisher-Yates Shuffleを使用
@@ -53,6 +60,7 @@ for (let i = 0; i < QuestionNames.length; i++) {
         return Choices;
 
     };
+    // returnなくてもいける、引数無くてもいける。ーーー分からん。
     
     //シャッフル関数の呼びだし(Choiceの具体的な内容は、２次元配列の中にあるもの)
     shuffle(Choices); 
