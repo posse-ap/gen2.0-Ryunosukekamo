@@ -15,21 +15,21 @@ USE quizy;
 DROP TABLE IF EXISTS big_questions;
 CREATE TABLE big_questions(
     id INT auto_increment,
-    name VARCHAR(225),
+    big_question_name VARCHAR(225),
     primary key(id)
 );
-INSERT INTO big_questions(name)VALUES('東京の難読地名クイズ');
-INSERT INTO big_questions(name)VALUES('広島の難読地名クイズ');
+INSERT INTO big_questions(big_question_name)VALUES('東京の難読地名クイズ');
+INSERT INTO big_questions(big_question_name)VALUES('広島の難読地名クイズ');
 
 DROP TABLE IF EXISTS Choices;
 CREATE TABLE Choices(
     id INT auto_increment,
     question_id INT,
     name VARCHAR(225),
-    vaild INT,
+    valid INT,
     primary key(id)
 );
-INSERT INTO Choices(question_id,name,vaild)VALUES
+INSERT INTO Choices(question_id,name,valid)VALUES
 (1,'たかなわ',1),
 (1,'たかわ',0),
 (1,'こうわ',0),
@@ -49,6 +49,22 @@ CREATE TABLE questions(
 
 );
 INSERT INTO questions(big_question_id,image)VALUES
-(1,'kamo'),
-(1,'ryu'),
-(2,'nosuke');
+(1,'takanawa.png'),
+(1,'kameido.png'),
+(2,'mukainada.png');
+
+create table mix as (select 
+Choices.id, 
+Choices.question_id, 
+Choices.name, 
+Choices.valid, 
+questions.big_question_id, 
+questions.image, 
+big_questions.big_question_name 
+from  
+(Choices 
+left outer join questions
+ on Choices.question_id = questions.id)
+ left outer join big_questions 
+ on questions.big_question_id = big_questions.id);
+
