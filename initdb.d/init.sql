@@ -20,7 +20,6 @@ CREATE TABLE big_questions(
 );
 INSERT INTO big_questions(name)VALUES('東京の難読地名クイズ');
 INSERT INTO big_questions(name)VALUES('広島の難読地名クイズ');
--- INSERT INTO big_questions(name)VALUES('鹿児島の難読地名クイズ');
 
 DROP TABLE IF EXISTS Choices;
 CREATE TABLE Choices(
@@ -41,21 +40,15 @@ INSERT INTO Choices(question_id,name,vaild)VALUES
 (3,'むきひら',0),
 (3,'むかいなだ',1);
 
--- -- insert= データの追加、レコードの追加
--- DROP DATABASE IF EXISTS test;
--- CREATE DATABASE test;
+DROP TABLE IF EXISTS questions;
+CREATE TABLE questions(
+    id INT auto_increment,
+    big_question_id INT,
+    image VARCHAR(225),
+    primary key(id)
 
-
-
-
--- DROP SCHEMA IF EXISTS quizy;
--- CREATE DATABASE quizy;
--- USE quizy;
--- DROP TABLE IF EXISTS questions;
--- CREATE TABLE questions(
--- id INT(50),
--- name VARCHAR(225)
--- );
--- INSERT INTO questions(id,big_question_id,image)VALUES(1,takanawa.png);
--- INSERT INTO questions(id,big_question_id,image)VALUES(2,kameido.png);
--- INSERT INTO questions(id,big_question_id,image)VALUES(3,1,mukainada.png);
+);
+INSERT INTO questions(big_question_id,image)VALUES
+(1,'kamo'),
+(1,'ryu'),
+(2,'nosuke');
