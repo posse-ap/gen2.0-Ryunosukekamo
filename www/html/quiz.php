@@ -41,10 +41,12 @@ foreach ($data2 as $val) {
     array_push($choices, $val['name']);
 };
 
+// シャッフル用の配列を作成
 $shuffle_array = [0,1,2];
 
 
 for ($i = 1; $i < count($questions) + 1; $i++) { 
+    // シャッフル関数を発火
     shuffle($shuffle_array);?>
 
     <section class="parent">
