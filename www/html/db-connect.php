@@ -1,4 +1,5 @@
 <?php
+// このdb-connct.phpでは、
 // データベースに接続するために必要なデータソースを変数に格納
   // mysql:host=ホスト名;dbname=データベース名;charset=文字エンコード
 $dsn = 'mysql:host=db;dbname=quizy;charset=utf8;';
