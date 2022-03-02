@@ -1,13 +1,11 @@
 <link rel="stylesheet" href="index.css">
 <?php
 include "db-connect.php";
-
-// <?php
 // phpとdatabaseを繋げてる！
 
-//'id'は、urlのidのことで、$GETに?もある。 
+//'id'は、urlのidのこと。idの値を取得。→１か２のこと。
 $id = $_GET['id'];
-
+// big_questionsにnameなんてない。
 $result0 = $dbh->prepare("SELECT name from big_questions where id = ?");
 $result1 = $dbh->prepare("SELECT image from questions where big_question_id = ?");
 $result2 = $dbh->prepare("SELECT name from mix where big_question_id = ?");
@@ -16,25 +14,30 @@ $result4 = $dbh->prepare("SELECT name from mix where valid=1 AND big_question_id
 for ($i = 0; $i < 5; $i++) {
     // $id ===  ?
     // execute→?のところにidを入れる
-    //queryでも大丈夫だが、今回はオプションが多く、(if文などを使えば）セキュリティー面でも役に立つprepareを活用。
+    //executeは、実行する際に用いられる。queryは、勝手に実行されるからいらない。
     ${"result" . $i}->execute([$id]);
     // fetchAllで配列のかたまりをとってくる。多次元配列ではない。
     ${"data" . $i} = ${"result" . $i}->fetchAll();
 };
 
+//fetchAllの配列はどうなっているのか？
+// print_r('<pre>');
+// print_r($data1);
+// print_r('</pre>');
+// echo $data1[0][0];
+// echo $data1[1][0];
 
-// echo $data4[2][0];
-
-// dbh-名前。データベースのユーザー名などが書かれているもの使う
-// fetchAll→
-
-// questionsていう空の配列を作成。多次元配列の準備
+// questionsていう空の配列を作成。
 $questions = array();
 foreach ($data1 as $val) {
     // questionsという配列に全てのimage（mysqlのテーブルから）を追加している.
-    // 
     array_push($questions, $val['image']);
 };
+
+//data1とquestionsの配列を比較→正直どちらも数字あるからわざわざquestions配列いらなかったかも。
+// print_r('<pre>');
+// print_r($questions);
+// print_r('</pre>');
 
 $choices = array();
 foreach ($data2 as $val) {

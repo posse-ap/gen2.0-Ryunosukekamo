@@ -38,6 +38,7 @@ services:
     stdin_open: true
     privileged: true
       
+  #depends_onより、dbからnginxの順にコンテナが構築される。
 
   # phpmyadmin:
   #   image: phpmyadmin/phpmyadmin:latest
