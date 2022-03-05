@@ -45,7 +45,7 @@ foreach ($data2 as $val) {
 };
 
 // print_r('<pre>');
-// print_r($choices);
+// print_r($data4);
 // print_r('</pre>');
 
 // シャッフル用の配列を作成
@@ -92,8 +92,9 @@ for ($i = 1; $i < count($questions) + 1; $i++) {
 <?php }; ?>
 
 <script>
+    // +1してない理由は、$J=0から始めてるから。ここでは、問題分ループさせてその数字で上にあるliのidを生成させている。
     <?php for ($j = 0; $j < count($questions); $j++) { ?>
-
+        // -0の後の0の方を作ってる。jsの法を作っている。
         <?php for ($i = 0; $i < 3; $i++) {?>
             document.getElementById("<?php echo $j . '-' . $i; ?>").addEventListener('click', function() {
                 if ('<?php echo $data4[$j]['name']?>' == document.getElementById("<?php echo $j . '-' . $i; ?>").innerHTML){
