@@ -10,7 +10,8 @@ CREATE TABLE time(
 );
 INSERT INTO time(date,month,year,hours)VALUES
 (1,1,1,1),
-(1,1,1,100),
+(1,1,1,5),
+(28,1,1,6),
 (2,2,2,2),
 (2,2,2,200),
 (3,3,3,3);

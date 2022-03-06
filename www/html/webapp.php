@@ -4,17 +4,24 @@ include "db-connect.php";
 
 <?php
 
-$time0=$dbh->prepare("SELECT date from time where date=1 month=1 AND year =1");
-$time1=$dbh->prepare("SELECT date from time where month=1 AND year =1");
-// for($i=0; $i<2; $i++){
-// 	${"stmt". $i}->execute();
-// 	${"data".$i}=${"stmt". $i}->fetchAll();
+// $time0=$dbh->prepare("SELECT sum(hours) from time where date=1 and month=1 and year=1");
+$time0=$dbh->prepare("SELECT date from time where date=1 and month=1 and year=1");
+$time1=$dbh->prepare("SELECT sum(hours) from time where month=1 and year=1");
+$time2=$dbh->prepare("SELECT sum(hours) from time");
+$time3=$dbh->prepare("SELECT hours from time where date=28 and month=1 and year=1");
+// $time4=$dbh->prepare("SELECT date from time where date=1 and month=1 and year=1");
+// $time3=$dbh->prepare("SELECT sum(hours) from time where month=1 and year=1");
+for($i=0; $i<4; $i++){
+	${"time". $i}->execute();
+	${"data".$i}=${"time". $i}->fetchAll();
 
-// }
+}
 
-// print_r('<pre>');
-// print_r($data1);
-// print_r('</pre>');
+print_r('<pre>');
+print_r($data3);
+print_r('</pre>');
+
+
 
 ?>
 
@@ -336,15 +343,15 @@ $time1=$dbh->prepare("SELECT date from time where month=1 AND year =1");
 				<ul>
 
 					<li id="Today" class="Today"> <span class="today">Today</span>
-						<div><span class="Today_actual_hour">3</span> <span class="Today_hour">hour</span></div>
+						<div><span class="Today_actual_hour"><?php echo $data0[0][0];?></span> <span class="Today_hour">hour</span></div>
 					</li>
 
 					<li id="Month" class="Month"><span class="month">Month</span>
-						<div><span class="Actual_Month">120</span> <span class="Monthly_hour">hour</span></div>
+						<div><span class="Actual_Month"><?php echo $data1[0][0]?></span> <span class="Monthly_hour">hour</span></div>
 					</li>
 
 					<li id="Total" class="Month"><span class="total">Total</span>
-						<div><span class="Actual_Today_hours">1348</span> <span class="Total_hours">hour</span>
+						<div><span class="Actual_Today_hours"><?php echo $data2[0][0];?></span> <span class="Total_hours">hour</span>
 						</div>
 					</li>
 
@@ -355,7 +362,7 @@ $time1=$dbh->prepare("SELECT date from time where month=1 AND year =1");
 
 			<!-- <div> -->
 			<div id="Histo_gram" class="Histo_gram">
-				<canvas id="myBarChart"></canvas>
+				<canvas id="myBarChart_for_php"></canvas>
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 
 			</div>
@@ -497,3 +504,77 @@ $time1=$dbh->prepare("SELECT date from time where month=1 AND year =1");
 </body>
 
 </html>
+
+<!-- ---------------------------------------------------------------------
+chart.ja -->
+<script>
+	var ctx = document.getElementById("myBarChart_for_php");
+var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        //凡例のラベル
+        labels: ['2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22', '24', '28', '30'],
+        datasets: [
+            {
+                label: '訪問者数', //データ項目のラベル
+                data: [
+					'<?php echo $data0[0][0]?>',
+					3, 
+					4, 
+					5, 
+					6, 
+					7, 
+					8, 
+					8, 
+					8, 
+					7, 
+					6, 
+					4,
+					'<?php echo $data3[0][0]?>',
+					0,
+
+				], //グラフのデータ
+                backgroundColor: "#3ACCFD",
+                borderColor: "#3ACCFD",
+                borderWidth: 1,
+                borderRadius: 20,
+                // borderSkipped:false,
+            }
+
+        ]
+    },
+    options: {
+        legend: { display: false, },
+        title: {
+            display: true,
+            //グラフタイトル
+            // text: 'Aサイト分析'
+        },
+        scales: {
+            xAxes: [{
+                // gridLines: [display = false],
+                gridLines: {
+                    display: false
+                }
+            }],
+            yAxes: [{
+
+                // gridLines: [display = false],
+                gridLines: {
+                    display: false
+                },
+
+                ticks: {
+                    suggestedMax: 8, //最大値
+                    suggestedMin: 0, //最小値
+                    stepSize: 2, //縦ラベルの数値単位
+                    userCallback: function (tick) {
+                        return tick.toString() + 'h';
+                    }
+
+                }
+            }]
+        },
+    }
+});
+</script>
