@@ -26,14 +26,13 @@ services:
       - 13306:3306
     volumes:
       - ./mysql/data:/var/lib/mysql
-      - ./initdb.d:/docker-entrypoint-initdb.d
+      - ./initdb.d/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
       
       
     environment:
-      MYSQL_DATABASE: quizy
-      MYSQL_USER: Ryunosuke
-      MYSQL_PASSWORD: Kamonista0616
+      MYSQL_DATABASE: webapp
+      MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: secret
     stdin_open: true
     privileged: true
