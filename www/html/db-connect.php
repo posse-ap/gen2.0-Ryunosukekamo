@@ -5,7 +5,7 @@
 $dsn = 'mysql:host=db;dbname=webapp;charset=utf8;';
  
   // データベースのユーザー名
-$user = 'root';
+$user = 'Kamo';
  
   // データベースのパスワード
 $password = 'secret';

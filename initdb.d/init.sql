@@ -1,21 +1,20 @@
 DROP DATABASE IF EXISTS webapp;
 CREATE DATABASE webapp;
 USE webapp;
-DROP TABLE IF EXISTS language_study; 
-CREATE TABLE language_study(
-    id_language INT auto_increment,
-    language VARCHAR(225),
-    time_language INT(),
-    primary key(id) 
+DROP TABLE IF EXISTS time; 
+CREATE TABLE time(
+    date INT,
+    month INT,
+    year INT,
+    hours INT
 );
+INSERT INTO time(date,month,year,hours)VALUES
+(1,1,1,1),
+(1,1,1,100),
+(2,2,2,2),
+(2,2,2,200),
+(3,3,3,3);
 
-DROP TABLE IF EXISTS contents_study; 
-CREATE TABLE _study(
-    id_contents INT auto_increment,
-    language VARCHAR(225),
-    time_contents INT(),
-    primary key(id) 
-);
 
 
 

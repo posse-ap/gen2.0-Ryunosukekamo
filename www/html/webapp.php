@@ -2,6 +2,22 @@
 include "db-connect.php";
 ?>
 
+<?php
+
+$time0=$dbh->prepare("SELECT date from time where date=1 month=1 AND year =1");
+$time1=$dbh->prepare("SELECT date from time where month=1 AND year =1");
+// for($i=0; $i<2; $i++){
+// 	${"stmt". $i}->execute();
+// 	${"data".$i}=${"stmt". $i}->fetchAll();
+
+// }
+
+// print_r('<pre>');
+// print_r($data1);
+// print_r('</pre>');
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
