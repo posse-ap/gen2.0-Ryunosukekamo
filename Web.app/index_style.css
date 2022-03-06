@@ -1,0 +1,475 @@
+@media screen and (max-width:376px) {
+    /* ------------------------------------------------------------- */
+    /* header */
+    header {
+        display: block;
+        width: 100%;
+        height: 8%;
+    }
+    .Logo {
+        margin-left: 10px;
+    }
+    .Logo img {
+        height: 23px;
+    }
+
+    .Logo p{
+        font-size: 14px;
+    }
+    /* first-viewのheaderの中にある記録・投稿ボタンをなくす */
+    .record_post {
+        display: none;
+    }
+    /* --------------------------------------------------------- */
+    /* Content （全体）*/
+    .Content {
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+        /* height: 94%; */
+    }
+    /* .Content {
+        display: none;
+    }
+    .Content_for_responsive{
+        display: block;
+        margin-top: 20px;
+        width: 100%;
+    } */
+    /* 棒グラフまで *（上半分）*/
+    .Split_left {
+        width: 98%;
+        margin: 0 auto;
+        margin-bottom: 16px;
+    }
+    .Time ul {
+        padding: 0;
+        margin-left: 20px;
+        margin-right: 20px;
+        height: auto;
+    }
+
+    .Time li{
+        height: 77%;
+    }
+
+    .Month{
+        margin-left: 16px;
+    }
+    .Histo_gram {
+        margin-top: 16px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    #myBarChart {
+        width: 100%;
+    }
+    /* --------------------------------------------------------------- */
+    /* ドーナツ型のグラフ（下半分） */
+    /* 左右にmarginつけるとなんか大きくなる。見れば分かる 幅広げたらいけた */
+    /* margin-rightは一応つけておくだけ、ふつうはmargin 0 autoだから、margin-left動かしたら、rightも児童で動く */
+
+.Study {
+    width: 90%;
+    margin: 0 auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: auto;
+}
+
+/* レスポンシブ用の学習コンテンツ */
+.Contents_studied_responsive{
+    display: block;
+    margin-right:8px; 
+    border: solid 1px #FFFFFF;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 7px #dddddd;
+    width: 50%;
+    /* height: 70%; */
+}
+
+.contents_of_Language_studied {
+    margin-top: 15px;
+}
+
+.contents_studied{
+    margin-top: 40px;
+}
+
+.Contents_studied_responsive p span{
+
+    font-size: 12px;
+    font-weight: bold;
+
+}
+
+.contents_studied span{
+    font-size: 8px;
+    margin-left: 3px;
+}
+
+.d::before{
+    
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #0F71BD;
+    border-radius: 50%;
+
+}
+
+.n::before{
+    
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #0F71BD;
+    border-radius: 50%;
+
+}
+
+.p::before{
+    
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #20BDDE;
+    border-radius: 50%;
+
+}
+
+/* レスポンシブ用の学習言語 */
+.Language_studied_responsive{
+    display: block;
+    margin-left: 8px; 
+    border: solid 1px #FFFFFF;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 7px #dddddd;
+    width: 50%;
+}
+
+.Language_studied_responsive p span {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.Language_studied {
+    display: none;
+}
+
+.Contents_studied {
+    display: none;
+}
+
+.contents_of_Language_studied span{
+    margin-left: 3px;
+    font-size: 8px;
+}
+
+.li_Js::before {
+    content: '';
+    /* margin-left: 8px; */
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #1754EF;
+    border-radius: 50%;
+    
+    
+}
+
+.li_CSS::before{
+    margin-left: 8px;
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #1754EF;
+    border-radius: 50%;
+   
+}
+
+.li_PHP::before{
+    margin-left: 8px;
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #20BDDE;
+    border-radius: 50%;
+}
+
+.li_HTML::before{
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #3CCEFE;
+    border-radius: 50%;
+}
+
+.li_Laravel::before{
+    margin-left: 8px;  
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color:#B29EF3;
+    border-radius: 50%; 
+}
+
+.li_SQL::before {
+    margin-left: 8px;
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color:#6D46EC;
+    border-radius: 50%;
+}
+
+.li_SHELL::before{
+    content: '';
+    width: 8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #4A17EF;
+    border-radius: 50%;
+}
+
+.li_others::before{
+    
+    content: '';
+    width:  8px;
+    height: 8px;
+    display:inline-block;
+    background-color: #3105C0;
+    border-radius: 50%;
+    
+}
+
+.Date {
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;
+    margin: 7px auto 0px auto;
+}
+
+.doughnut_chart_three{
+    margin-top: -30px;
+}
+
+.doughnut_chart_three rect{
+    display: none;
+
+}
+.doughnut_chart_four rect{
+    display: none;
+}
+
+.doughnut_chart_three svg{
+    margin-top: 22px;
+
+}
+
+.doughnut_chart_four svg{
+    margin-top: -10px;
+
+
+}
+
+/* --------------------------------------------------------------------- */
+
+/* 新しい記録・投稿ボタン（下部にあるもの） */
+
+.btn_for_responsive {
+    display: block;
+    background: linear-gradient(to right, #0F72BD 20%, #3BCDFE);
+    padding-left: initial;
+    padding-right: initial;
+    border-radius: 100px;
+    color: #FFFFFF;
+    box-shadow: 2px 4px 4px 4px #ccf1ff;
+    cursor: pointer;
+    margin: 0 auto;
+    width: 70%;
+    text-align: center;
+    line-height: 45px;
+    height: 45px;
+}
+
+/* ------------------------------------------------------------------------------- */
+
+/* モーダル */
+
+.modal_for_responsive {
+    display: none;
+    z-index: 2;
+    border-radius: 25px 25px 0 0;
+    width: 100%;
+    height: 93%;
+    margin-top: 34px;
+    background-color: #FFFFFF;
+    font-size: 11px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 綺麗に20pxづつなる 90%だとmargin-rightの20pxがつく。 */
+
+.modal_content {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 55px;
+}
+
+.contents_study {
+    margin-top: 12px;
+}
+
+/* 同じclassを使っているため、事故防止のためにidにつけた。idはclassより優先的に読み取られる。 */
+
+#btn_close_for_respnsive {
+    display: block;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background-color: #F5F5F8;
+    float: right;
+    margin-right: 25px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.modal_above {
+    width: 100%;
+}
+
+/* 学習日 */
+
+.calendar {
+    height: 40px;
+    width: 100%;
+}
+
+/* 学習時間 */
+
+.input_study_time {
+    width: 100%;
+    margin-top: 4px;
+}
+
+/* twiter用コメント */
+
+.twitter input {
+    width: 100%;
+    height: 82px;
+}
+/* レスポンシブ時のモーダルのボタン */
+.responsive_modal_record_post {
+    background: linear-gradient(to right, #0F72BD 20%, #3BCDFE);
+    border-radius: 100px;
+    color: #FFFFFF;
+    box-shadow: 0px 2px 4px 4px #ccf1ff;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 6px;
+    text-align: center;
+    padding: 12px;
+    font-size: 15px;
+}
+
+
+.modal_below {
+    margin-top: 20px;
+}
+
+div#twitter.twitter{
+    margin-top: 13px;
+}
+
+.modal_below i {
+    content: "\f058";
+    color: #CCCCCC;
+}
+/* チェックボックスの大きさを変更onlytwitterにシェアする時のやつだけ */
+#reponsive_icon_check_twelve.fa-check-circle:before {
+    content: "\f058";
+    font-size: 20px;
+}
+
+.modal_below i span{
+font: 11px Meiryo;
+color: #000000;
+}
+
+.Tweet_in_reponsive {
+    /* margin-top: 10px; */
+}
+
+/* ツイートのチェックボタンを押す前の処理 */
+.Tweet_in_reponsive i {
+    color: #CCCCCC;
+    font-size: 8mm;
+}
+
+
+/* ツイートのチェックボタンを押した後の処理 */
+.Tweet_in_reponsive i.check {
+    color: #0E70BC;
+}
+
+.responsive_modal_loader {
+    display: none;
+    z-index: 2;
+    border-radius: 25px 25px 0 0;
+    width: 100%;
+    height: 121%;
+    margin-top: 150px;
+    position: fixed;
+    z-index: 2;
+    background-color: #FFFFFF;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#btn_close_three{
+    display: block;
+}
+
+.done_recod_post_two{
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
+}
+
+.done_recod_post_two i{
+    color: #BEE360;
+    font-size: 56px;
+    margin-left: 18px;
+}
+
+.awesome_two {
+    color: #BEE360;
+    font-size: 17px;
+}
+
+}
