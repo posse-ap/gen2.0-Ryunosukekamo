@@ -44,9 +44,9 @@ foreach ($data2 as $val) {
     array_push($choices, $val['name']);
 };
 
-// print_r('<pre>');
-// print_r($data4);
-// print_r('</pre>');
+print_r('<pre>');
+print_r($data3);
+print_r('</pre>');
 
 // シャッフル用の配列を作成
 $shuffle_array = [0,1,2];
