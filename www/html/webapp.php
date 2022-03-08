@@ -4,21 +4,26 @@ include "db-connect.php";
 
 <?php
 
-// $time0=$dbh->prepare("SELECT sum(hours) from time where date=1 and month=1 and year=1");
-$time0=$dbh->prepare("SELECT date from time where date=1 and month=1 and year=1");
+$time0=$dbh->prepare("SELECT sum(hours) from time where date=1 and month=1 and year=1");
 $time1=$dbh->prepare("SELECT sum(hours) from time where month=1 and year=1");
 $time2=$dbh->prepare("SELECT sum(hours) from time");
 $time3=$dbh->prepare("SELECT hours from time where date=28 and month=1 and year=1");
-// $time4=$dbh->prepare("SELECT date from time where date=1 and month=1 and year=1");
-// $time3=$dbh->prepare("SELECT sum(hours) from time where month=1 and year=1");
+$sum1 = $dbh->prepare("SELECT sum(HTML),sum(JavaScript),sum(CSS),sum(PHP),sum(ooo),sum(Laravel),sum(SHELL),sum(others) from time_language");
 for($i=0; $i<4; $i++){
 	${"time". $i}->execute();
 	${"data".$i}=${"time". $i}->fetchAll();
 
 }
 
+for($i=1; $i<2; $i++){
+	${"sum" .$i}->execute();
+	${"each_total_language"}=${"sum" .$i}->fetch();
+}
+
+
+
 print_r('<pre>');
-print_r($data3);
+print_r($each_total_language);
 print_r('</pre>');
 
 
@@ -377,7 +382,7 @@ print_r('</pre>');
 
 				<p>学習言語</p>
 
-				<div id="doughnut_chart_one" class="doughnut_chart_one"></div>
+				<div id="doughnut_chart_PHP" class="doughnut_chart_one"></div>
 				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 				<!-- liの文字はもともとspanで囲われてる -->
@@ -518,7 +523,7 @@ var myBarChart = new Chart(ctx, {
             {
                 label: '訪問者数', //データ項目のラベル
                 data: [
-					'<?php echo $data0[0][0]?>',
+					<?php echo $data0[0][0]?>,
 					3, 
 					4, 
 					5, 
@@ -530,7 +535,7 @@ var myBarChart = new Chart(ctx, {
 					7, 
 					6, 
 					4,
-					'<?php echo $data3[0][0]?>',
+					<?php echo $data3[0][0]?>,
 					0,
 
 				], //グラフのデータ
@@ -577,4 +582,52 @@ var myBarChart = new Chart(ctx, {
         },
     }
 });
+
+
+google.charts.load('current', { 'packages': ['corechart'] });
+google.charts.setOnLoadCallback(drawChart_PHP);
+
+function drawChart_PHP() {
+
+    var data = google.visualization.arrayToDataTable([
+        ['Effort', 'Amount given'],
+        ['HTML', <?php echo $each_total_language[0]?>],
+        ['JavaScript', <?php echo $each_total_language[1]?>],
+        ['CSS', <?php echo $each_total_language[2]?>],
+        ['PHP', <?php echo $each_total_language[3]?>],
+        ['SQL', <?php echo $each_total_language[4]?>],
+        ['Laravel', <?php echo $each_total_language[5]?>],
+        ['SHELL', <?php echo $each_total_language[6]?>],
+        ['情報システム基礎知識 （その他）', <?php echo $each_total_language[7]?>],
+
+
+
+    ]);
+
+    var options = {
+        pieHole: 0.5,
+        // width: 280,
+        // height: 300,
+        width: '100%',
+        height: '190',
+        chartArea: { width: '100%', height: '100%', top: 0 },
+
+        pieSliceTextStyle: {
+            color: 'white',
+        },
+        legend: 'none',
+        colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#3CCEFE', '#B29EF3', '#6D46EC', '#4A17EF', '#3105C0'],
+
+
+
+    };
+
+
+    var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_PHP'));
+    chart.draw(data, options);
+}
+
+// $sum_all[0];
+
+
 </script>

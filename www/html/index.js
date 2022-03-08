@@ -455,7 +455,7 @@ function drawChart() {
         ['Effort', 'Amount given'],
         ['JavaScript', 50.6],
         ['HTML', 10],
-        ['SHEL', 10],
+        ['SHELL', 10],
         ['情報システム基礎知識 （その他）', 10],
         ['CSS', 10],
         ['Laravel', 10],
