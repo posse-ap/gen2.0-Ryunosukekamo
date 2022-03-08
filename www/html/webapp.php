@@ -8,23 +8,29 @@ $time0=$dbh->prepare("SELECT sum(hours) from time where date=1 and month=1 and y
 $time1=$dbh->prepare("SELECT sum(hours) from time where month=1 and year=1");
 $time2=$dbh->prepare("SELECT sum(hours) from time");
 $time3=$dbh->prepare("SELECT hours from time where date=28 and month=1 and year=1");
-$sum1 = $dbh->prepare("SELECT sum(HTML),sum(JavaScript),sum(CSS),sum(PHP),sum(ooo),sum(Laravel),sum(SHELL),sum(others) from time_language");
 for($i=0; $i<4; $i++){
 	${"time". $i}->execute();
 	${"data".$i}=${"time". $i}->fetchAll();
 
 }
-
-for($i=1; $i<2; $i++){
-	${"sum" .$i}->execute();
-	${"each_total_language"}=${"sum" .$i}->fetch();
+$sum1 = $dbh->prepare("SELECT sum(HTML),sum(JavaScript),sum(CSS),sum(PHP),sum(ooo),sum(Laravel),sum(SHELL),sum(others) from All_data");
+$sum2 = $dbh->prepare("SELECT sum(N_yobi),sum(dotinstall),sum(POSSE) from All_data");
+for($i=1; $i<3; $i++){
+	if($i==1){
+		${"sum" .$i}->execute();
+		${"each_total_language"}=${"sum" .$i}->fetch();
+	}else{
+		${"sum" .$i}->execute();
+		${"each_total_content"}=${"sum" .$i}->fetch();
+	};
+	
 }
 
 
 
-print_r('<pre>');
-print_r($each_total_language);
-print_r('</pre>');
+// print_r('<pre>');
+// print_r($each_total_content);
+// print_r('</pre>');
 
 
 
@@ -382,7 +388,7 @@ print_r('</pre>');
 
 				<p>学習言語</p>
 
-				<div id="doughnut_chart_PHP" class="doughnut_chart_one"></div>
+				<div id="doughnut_chart_PHP_language" class="doughnut_chart_one"></div>
 				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 				<!-- liの文字はもともとspanで囲われてる -->
@@ -416,7 +422,7 @@ print_r('</pre>');
 			<div id="Contents_studied" class="Contents_studied">
 				<p>学習コンテンツ</p>
 
-				<div id="doughnut_chart_two" class="doughnut_chart_two"></div>
+				<div id="doughnut_chart_contents" class="doughnut_chart_two"></div>
 				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 				<div id="contents_studied" class="contents_studied">
@@ -585,9 +591,9 @@ var myBarChart = new Chart(ctx, {
 
 
 google.charts.load('current', { 'packages': ['corechart'] });
-google.charts.setOnLoadCallback(drawChart_PHP);
+google.charts.setOnLoadCallback(drawChart_PHP_language);
 
-function drawChart_PHP() {
+function drawChart_PHP_language() {
 
     var data = google.visualization.arrayToDataTable([
         ['Effort', 'Amount given'],
@@ -606,8 +612,7 @@ function drawChart_PHP() {
 
     var options = {
         pieHole: 0.5,
-        // width: 280,
-        // height: 300,
+        // ここのwidthとheightで上手く大きさを調整しているー＞意外と重要
         width: '100%',
         height: '190',
         chartArea: { width: '100%', height: '100%', top: 0 },
@@ -623,11 +628,42 @@ function drawChart_PHP() {
     };
 
 
-    var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_PHP'));
+    var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_PHP_language'));
     chart.draw(data, options);
 }
 
-// $sum_all[0];
+google.charts.load('current', { 'packages': ['corechart'] });
+google.charts.setOnLoadCallback(drawChart_PHP_contents);
+
+function drawChart_PHP_contents() {
+
+    var data = google.visualization.arrayToDataTable([
+        ['Effort', 'Amount given'],
+        ['N予備', 4],
+        ['ドットインストール',6],
+        ['Posse 課題', 6],
+		
+    ]);
+
+	// echo $each_total_content[0]
+
+    var options = {
+        pieHole: 0.5,
+        width: '100%',
+        height: '190',
+        chartArea: { width: '100%', height: '100%', top: 0 },
+        pieSliceTextStyle: {
+            color: 'white',
+        },
+        legend: 'none',
+        colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#f3b49f', '#f6c7b6']  //　色設定
+
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_contents'));
+    chart.draw(data, options);
+}
+
 
 
 </script>

@@ -21,8 +21,8 @@ INSERT INTO time(date,month,year,hours)VALUES
 (3,3,3,10),
 (4,4,4,30);
 
-DROP TABLE IF EXISTS Language; 
-CREATE TABLE Language(
+DROP TABLE IF EXISTS language; 
+CREATE TABLE language(
     id INT auto_increment,
     HTML INT NULL,
     JavaScript INT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE Language(
     primary key(id)
 
 );
-INSERT INTO Language(HTML,JavaScript,CSS,PHP,ooo,Laravel,SHELL,others)VALUES
+INSERT INTO language(HTML,JavaScript,CSS,PHP,ooo,Laravel,SHELL,others)VALUES
 (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
 (NULL,2,NULL,NULL,NULL,NULL,NULL,NULL),
 (NULL,NULL,3,NULL,NULL,NULL,NULL,NULL),
@@ -47,8 +47,26 @@ INSERT INTO Language(HTML,JavaScript,CSS,PHP,ooo,Laravel,SHELL,others)VALUES
 
 -- select * from time inner join language on time.id = language.id;
 
-DROP TABLE IF EXISTS time_Language; 
-CREATE TABLE time_Language(
+DROP TABLE IF EXISTS contents;
+CREATE TABLE contents(
+    N INT NULL,
+    dotinstall INT NULL,
+    POSSE INT NULL
+
+);
+
+INSERT INTO contents(N,dotinstall,POSSE)VALUES
+(1,NULL,NULL),
+(NULL,2,NULL),
+(NULL,6,NULL),
+(NULL,NULL,2),
+(2,NULL,NULL),
+(4,NULL,NULL),
+(NULL,3,NULL),
+(NULL,NULL,5);
+
+DROP TABLE IF EXISTS All_data; 
+CREATE TABLE All_data(
     id INT auto_increment,
     date INT,
     month INT,
@@ -63,15 +81,18 @@ CREATE TABLE time_Language(
     Laravel INT NULL,
     SHELL INT NULL,
     others INT NULL,
+    N_yobi INT NULL,
+    dotinstall INT NULL,
+    POSSE INT NULL,
     primary key(id)
 
 );
-INSERT INTO time_Language(date,month,year,hours,HTML,JavaScript,CSS,PHP,ooo,Laravel,SHELL,others)VALUES
-(1,1,1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1,1,1,5,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL),
-(28,1,1,6,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL),
-(2,2,2,2,NULL,NULL,NULL,4,NULL,NULL,NULL,NULL),
-(2,2,2,63,NULL,NULL,NULL,NULL,5,NULL,NULL,NULL),
-(3,3,3,3,NULL,NULL,NULL,NULL,NULL,6,NULL,NULL),
-(3,3,3,10,NULL,NULL,NULL,NULL,NULL,NULL,7,NULL),
-(4,4,4,30,NULL,NULL,NULL,NULL,NULL,NULL,NULL,8);
+INSERT INTO All_data(date,month,year,hours,HTML,JavaScript,CSS,PHP,ooo,Laravel,SHELL,others,N_yobi,dotinstall,POSSE)VALUES
+(1,1,1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL),
+(1,1,1,5,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2,NULL),
+(28,1,1,6,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,6,NULL),
+(2,2,2,2,NULL,NULL,NULL,4,NULL,NULL,NULL,NULL,NULL,NULL,2),
+(2,2,2,63,NULL,NULL,NULL,NULL,5,NULL,NULL,NULL,2,NULL,NULL),
+(3,3,3,3,NULL,NULL,NULL,NULL,NULL,6,NULL,NULL,4,NULL,NULL),
+(3,3,3,10,NULL,NULL,NULL,NULL,NULL,NULL,7,NULL,NULL,3,NULL),
+(4,4,4,30,NULL,NULL,NULL,NULL,NULL,NULL,NULL,8,NULL,NULL,5);
