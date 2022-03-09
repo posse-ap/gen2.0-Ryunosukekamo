@@ -1,6 +1,8 @@
+# docker composeのバージョン
 version: '3'
 services:
   #コンテナ名 nginx, php, db, phpmyadmin
+  # 見た目表示くん。
   nginx:
     image: nginx:latest
     ports:
@@ -12,7 +14,7 @@ services:
     #このnginxがphpのコンテナと繋がっているということを、示している。
     depends_on:
       - php
-
+  
   php:
     build: ./php
     volumes:

@@ -17,25 +17,43 @@ $sum1 = $dbh->prepare("SELECT sum(HTML),sum(JavaScript),sum(CSS),sum(PHP),sum(oo
 $sum2 = $dbh->prepare("SELECT sum(N_yobi),sum(dotinstall),sum(POSSE) from All_data");
 for($i=1; $i<3; $i++){
 	if($i==1){
+		// 各学習言語の合計値
 		${"sum" .$i}->execute();
-		${"each_total_language"}=${"sum" .$i}->fetch();
+		// ${"each_total_language"}=${"sum" .$i}->fetch(PDO::FETCH_NUM);
+		${"each_total_language"}=${"sum" .$i}->fetch(PDO::FETCH_NUM);
 	}else{
+		// 各学習コンテンツ時間の合計値
 		${"sum" .$i}->execute();
 		${"each_total_content"}=${"sum" .$i}->fetch();
 	};
 	
-}
+};
 
+//[各言語、各言語の勉強時間]という配列を言語分用意し、多次元配列を作成。
+//各言語とその勉強時間が一致、紐づけられている必要があるため
+//多次元配列で出来た、連想配列でできなかった理由：文字列も数字、どちらもkeyになりえたということ。→どちらも、indexになりえる。HTML→$langaue_array[0][0]
+// [0][0]でないとできなのか？→多次元配列の上から順に比較するから？
+$languages_array =[
+	['HTML',$each_total_language[0]],
+	['Javascript',$each_total_language[1]],
+	['CSS',$each_total_language[2]],
+	['PHP',$each_total_language[3]],
+	['SQL',$each_total_language[4]],
+	['Laravel',$each_total_language[5]],
+	['SHELL',$each_total_language[6]],
+	['情報システム基礎知識 （その他）',$each_total_language[7]],
+];
 
-
+array_multisort(array_column($languages_array, $languages_array[0][1]),SORT_DESC, $languages_array);
 // print_r('<pre>');
-// print_r($each_total_content);
+// print_r($languages_array);
 // print_r('</pre>');
 
-
-
+// print_r('<pre>');
+// print_r($languages_array[0][1]);
+// print_r('</pre>');
+	
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -439,7 +457,7 @@ for($i=1; $i<3; $i++){
 			<div id="Contents_studied_responsive" class="Contents_studied_responsive">
 				<p><span>学習コンテンツ</span></p>
 
-				<div id="doughnut_chart_three" class="doughnut_chart_three"></div>
+				<div id="doughnut_chart_PHP_contents_responsive" class="doughnut_chart_three"></div>
 				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 				<div id="contents_studied" class="contents_studied">
@@ -455,7 +473,7 @@ for($i=1; $i<3; $i++){
 
 				<p><span>学習言語</span></p>
 
-				<div id="doughnut_chart_four" class="doughnut_chart_four"></div>
+				<div id="doughnut_chart_PHP_language_responsive" class="doughnut_chart_four"></div>
 				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 				<!-- liの文字はもともとspanで囲われてる -->
@@ -542,7 +560,7 @@ var myBarChart = new Chart(ctx, {
 					6, 
 					4,
 					<?php echo $data3[0][0]?>,
-					0,
+					2,
 
 				], //グラフのデータ
                 backgroundColor: "#3ACCFD",
@@ -592,23 +610,19 @@ var myBarChart = new Chart(ctx, {
 
 google.charts.load('current', { 'packages': ['corechart'] });
 google.charts.setOnLoadCallback(drawChart_PHP_language);
-
 function drawChart_PHP_language() {
-
+	// 値と題が一致していることが前提→連想配列で数値と題を一致させる。
     var data = google.visualization.arrayToDataTable([
         ['Effort', 'Amount given'],
-        ['HTML', <?php echo $each_total_language[0]?>],
-        ['JavaScript', <?php echo $each_total_language[1]?>],
-        ['CSS', <?php echo $each_total_language[2]?>],
-        ['PHP', <?php echo $each_total_language[3]?>],
-        ['SQL', <?php echo $each_total_language[4]?>],
-        ['Laravel', <?php echo $each_total_language[5]?>],
-        ['SHELL', <?php echo $each_total_language[6]?>],
-        ['情報システム基礎知識 （その他）', <?php echo $each_total_language[7]?>],
-
-
-
-    ]);
+        ['<?php echo $languages_array[0][0]?>', <?php echo $languages_array[0][1]?>],
+        ['<?php echo $languages_array[1][0]?>', <?php echo $languages_array[1][1]?>],
+        ['<?php echo $languages_array[2][0]?>', <?php echo $languages_array[2][1]?>],
+        ['<?php echo $languages_array[3][0]?>', <?php echo $languages_array[3][1]?>],
+        ['<?php echo $languages_array[4][0]?>', <?php echo $languages_array[4][1]?>],
+        ['<?php echo $languages_array[5][0]?>', <?php echo $languages_array[5][1]?>],
+        ['<?php echo $languages_array[6][0]?>', <?php echo $languages_array[6][1]?>],
+        ['<?php echo $languages_array[7][0]?>', <?php echo $languages_array[7][1]?>],
+]);
 
     var options = {
         pieHole: 0.5,
@@ -661,6 +675,83 @@ function drawChart_PHP_contents() {
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_contents'));
+    chart.draw(data, options);
+
+}
+
+// レスポンシブ用
+google.charts.load('current', { 'packages': ['corechart'] });
+google.charts.setOnLoadCallback(drawChart_PHP_language_responsive);
+
+function drawChart_PHP_language_responsive() {
+
+    var data = google.visualization.arrayToDataTable([
+        ['Effort', 'Amount given'],
+		['<?php echo $languages_array[0][0]?>', <?php echo $languages_array[0][1]?>],
+        ['<?php echo $languages_array[1][0]?>', <?php echo $languages_array[1][1]?>],
+        ['<?php echo $languages_array[2][0]?>', <?php echo $languages_array[2][1]?>],
+        ['<?php echo $languages_array[3][0]?>', <?php echo $languages_array[3][1]?>],
+        ['<?php echo $languages_array[4][0]?>', <?php echo $languages_array[4][1]?>],
+        ['<?php echo $languages_array[5][0]?>', <?php echo $languages_array[5][1]?>],
+        ['<?php echo $languages_array[6][0]?>', <?php echo $languages_array[6][1]?>],
+        ['<?php echo $languages_array[7][0]?>', <?php echo $languages_array[7][1]?>],
+
+
+
+    ]);
+
+    var options = {
+        pieHole: 0.5,
+        // width: '100%',
+        // // height: 200,
+
+        width: '100%',
+        height: '115',
+        chartArea: { width: '100%', height: '100%', top: 0 },
+        pieSliceTextStyle: {
+            color: 'white',
+        },
+        legend: 'none',
+        colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#3CCEFE', '#B29EF3', '#6D46EC', '#4A17EF', '#3105C0'],
+    };
+
+
+    var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_PHP_language_responsive'));
+    chart.draw(data, options);
+}
+
+
+// function名＝drawChart...を変える必要がある。
+
+google.charts.load('current', { 'packages': ['corechart'] });
+google.charts.setOnLoadCallback(drawChart_PHP_contents_responsive);
+
+function drawChart_PHP_contents_responsive() {
+
+    var data = google.visualization.arrayToDataTable([
+        ['Effort', 'Amount given'],
+        ['ドットインストール', 10],
+        ['N予備', 10],
+        ['Posse 課題', 10],
+
+    ]);
+
+    var options = {
+        pieHole: 0.5,
+        // width: '100%',
+        // // height: 200,
+        width: '100%',
+        height: '115',
+        chartArea: { width: '100%', height: '100%', top: 0 },
+        pieSliceTextStyle: {
+            color: 'white',
+        },
+        legend: 'none',
+        colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#f3b49f', '#f6c7b6']  //　色設定
+
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_PHP_contents_responsive'));
     chart.draw(data, options);
 }
 
