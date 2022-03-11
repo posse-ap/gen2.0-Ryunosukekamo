@@ -19,40 +19,44 @@ for($i=1; $i<3; $i++){
 	if($i==1){
 		// 各学習言語の合計値
 		${"sum" .$i}->execute();
-		// ${"each_total_language"}=${"sum" .$i}->fetch(PDO::FETCH_NUM);
 		${"each_total_language"}=${"sum" .$i}->fetch(PDO::FETCH_NUM);
 	}else{
 		// 各学習コンテンツ時間の合計値
 		${"sum" .$i}->execute();
-		${"each_total_content"}=${"sum" .$i}->fetch();
+		${"each_total_content"}=${"sum" .$i}->fetch(PDO::FETCH_NUM);
 	};
 	
 };
 
-//[各言語、各言語の勉強時間]という配列を言語分用意し、多次元配列を作成。
-//各言語とその勉強時間が一致、紐づけられている必要があるため
-//多次元配列で出来た、連想配列でできなかった理由：文字列も数字、どちらもkeyになりえたということ。→どちらも、indexになりえる。HTML→$langaue_array[0][0]
-// [0][0]でないとできなのか？→多次元配列の上から順に比較するから？
-$languages_array =[
-	['HTML',$each_total_language[0]],
-	['Javascript',$each_total_language[1]],
-	['CSS',$each_total_language[2]],
-	['PHP',$each_total_language[3]],
-	['SQL',$each_total_language[4]],
-	['Laravel',$each_total_language[5]],
-	['SHELL',$each_total_language[6]],
-	['情報システム基礎知識 （その他）',$each_total_language[7]],
+//各言語とその勉強時間が一致、紐づけられている必要がある＝だから、同じ配列の中にそれらを入れている。
+// 連想配列だと、HTML=>6の場合、6を取得するのにkeyであるHTMLを使わず負えない。それだと、google.chartと相性が悪い。
+// なぜなら、google chartは、上から順に表示されていく→大きい順にしたい時、数字が降順でないといけない。だから、配列のインデックスや数字のkeyを使いたい。つまり、HTMLだと取得できるけど、HTMLが常に大きいという訳ではないから（合計値という変化する値）keyは数字でないとけない。
+// 特殊な点：数字が[0]で、言語[1]=後、でないと、rsortが上手く効かない。
+// 最初は三つの配列を作ろうとしていた。(1)fetch 数字only (2)連想配列（紐づけ）→大きい順にソート → (3)多次元配列を作成、array(0),array(1),という順に連想配列のデータを入れ、呼び出す。
+$languages_array=array(
+	[0=>$each_total_language[0],1=>'HTML'],
+	[0=>$each_total_language[1],1=>'Javascript'],
+	[0=>$each_total_language[2],1=>'CSS'],
+	[0=>$each_total_language[3],1=>'PHP'],
+	[0=>$each_total_language[4],1=>'SQL'],
+	[0=>$each_total_language[5],1=>'Laravel'],
+	[0=>$each_total_language[6],1=>'SHELL'],
+	[0=>$each_total_language[7],1=>'others'],
+	// 0=>みたいに書かなくてよかった。結局先頭が、0で次が１になるから。
+);
+
+//学習言語の合計値を降順に。（配列のindexはそのまま） 
+rsort($languages_array);
+
+// 各学習コンテンツの合計値を連想配列の多次元配列
+$content_array=[
+	[$each_total_content[0],'N_yobi'],
+	[$each_total_content[1],'dotinstall'],
+	[$each_total_content[2],'POSSE'],
 ];
 
-array_multisort(array_column($languages_array, $languages_array[0][1]),SORT_DESC, $languages_array);
-// print_r('<pre>');
-// print_r($languages_array);
-// print_r('</pre>');
-
-// print_r('<pre>');
-// print_r($languages_array[0][1]);
-// print_r('</pre>');
-	
+// 学習コンテンツの合計値を降順に。
+rsort($content_array);
 ?>
 
 <!DOCTYPE html>
@@ -614,15 +618,18 @@ function drawChart_PHP_language() {
 	// 値と題が一致していることが前提→連想配列で数値と題を一致させる。
     var data = google.visualization.arrayToDataTable([
         ['Effort', 'Amount given'],
-        ['<?php echo $languages_array[0][0]?>', <?php echo $languages_array[0][1]?>],
-        ['<?php echo $languages_array[1][0]?>', <?php echo $languages_array[1][1]?>],
-        ['<?php echo $languages_array[2][0]?>', <?php echo $languages_array[2][1]?>],
-        ['<?php echo $languages_array[3][0]?>', <?php echo $languages_array[3][1]?>],
-        ['<?php echo $languages_array[4][0]?>', <?php echo $languages_array[4][1]?>],
-        ['<?php echo $languages_array[5][0]?>', <?php echo $languages_array[5][1]?>],
-        ['<?php echo $languages_array[6][0]?>', <?php echo $languages_array[6][1]?>],
-        ['<?php echo $languages_array[7][0]?>', <?php echo $languages_array[7][1]?>],
-]);
+        ['<?php echo $languages_array[0][1]?>', <?php echo $languages_array[0][0]?>],
+        ['<?php echo $languages_array[1][1]?>', <?php echo $languages_array[1][0]?>],
+        ['<?php echo $languages_array[2][1]?>', <?php echo $languages_array[2][0]?>],
+        ['<?php echo $languages_array[3][1]?>', <?php echo $languages_array[3][0]?>],
+        ['<?php echo $languages_array[4][1]?>', <?php echo $languages_array[4][0]?>],
+        ['<?php echo $languages_array[5][1]?>', <?php echo $languages_array[5][0]?>],
+        ['<?php echo $languages_array[6][1]?>', <?php echo $languages_array[6][0]?>],
+        ['<?php echo $languages_array[7][1]?>', <?php echo $languages_array[7][0]?>],
+        
+	]);
+
+
 
     var options = {
         pieHole: 0.5,
@@ -653,9 +660,9 @@ function drawChart_PHP_contents() {
 
     var data = google.visualization.arrayToDataTable([
         ['Effort', 'Amount given'],
-        ['N予備', 4],
-        ['ドットインストール',6],
-        ['Posse 課題', 6],
+        ['<?php echo $content_array[0][1]?>', <?php echo $content_array[0][0]?>],
+        ['<?php echo $content_array[1][1]?>', <?php echo $content_array[1][0]?>],
+        ['<?php echo $content_array[2][1]?>', <?php echo $content_array[2][0]?>],
 		
     ]);
 
@@ -687,16 +694,14 @@ function drawChart_PHP_language_responsive() {
 
     var data = google.visualization.arrayToDataTable([
         ['Effort', 'Amount given'],
-		['<?php echo $languages_array[0][0]?>', <?php echo $languages_array[0][1]?>],
-        ['<?php echo $languages_array[1][0]?>', <?php echo $languages_array[1][1]?>],
-        ['<?php echo $languages_array[2][0]?>', <?php echo $languages_array[2][1]?>],
-        ['<?php echo $languages_array[3][0]?>', <?php echo $languages_array[3][1]?>],
-        ['<?php echo $languages_array[4][0]?>', <?php echo $languages_array[4][1]?>],
-        ['<?php echo $languages_array[5][0]?>', <?php echo $languages_array[5][1]?>],
-        ['<?php echo $languages_array[6][0]?>', <?php echo $languages_array[6][1]?>],
-        ['<?php echo $languages_array[7][0]?>', <?php echo $languages_array[7][1]?>],
-
-
+		['<?php echo $languages_array[0][1]?>', <?php echo $languages_array[0][0]?>],
+        ['<?php echo $languages_array[1][1]?>', <?php echo $languages_array[1][0]?>],
+        ['<?php echo $languages_array[2][1]?>', <?php echo $languages_array[2][0]?>],
+        ['<?php echo $languages_array[3][1]?>', <?php echo $languages_array[3][0]?>],
+        ['<?php echo $languages_array[4][1]?>', <?php echo $languages_array[4][0]?>],
+        ['<?php echo $languages_array[5][1]?>', <?php echo $languages_array[5][0]?>],
+        ['<?php echo $languages_array[6][1]?>', <?php echo $languages_array[6][0]?>],
+        ['<?php echo $languages_array[7][1]?>', <?php echo $languages_array[7][0]?>],
 
     ]);
 
@@ -730,10 +735,9 @@ function drawChart_PHP_contents_responsive() {
 
     var data = google.visualization.arrayToDataTable([
         ['Effort', 'Amount given'],
-        ['ドットインストール', 10],
-        ['N予備', 10],
-        ['Posse 課題', 10],
-
+		['<?php echo $content_array[0][1]?>', <?php echo $content_array[0][0]?>],
+        ['<?php echo $content_array[1][1]?>', <?php echo $content_array[1][0]?>],
+        ['<?php echo $content_array[2][1]?>', <?php echo $content_array[2][0]?>],
     ]);
 
     var options = {
