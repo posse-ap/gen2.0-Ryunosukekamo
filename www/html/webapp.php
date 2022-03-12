@@ -549,8 +549,8 @@ rsort($content_array);
 <script>
 
 	<?php
-	//★アクセスした日（今日）を年、月、日で表示
-	$today = date('Y年/n月/d日');
+	//★アクセスした日（今日）を年、月、日で表示/月を03,04と表示。
+	$today = date('Y年/0n月/d日');
 	$today = json_encode($today);
 	?> 
 	let today = JSON.parse('<?php echo $today; ?>');
@@ -568,19 +568,29 @@ rsort($content_array);
 				// input type=dateのvalueは00-00-00だから、- を /にかえる。let date_change_dataだと上手くいかないからＡ、異なる変数を使用。ｌ
 				let A = date_change_data.split('-').join('/');
 				document.getElementById('year_month_date').innerHTML=A;
+				// ★PHPにデータを渡す
+				fetch('webapp.php',{
+					method:'POST',
+					headers:{'Content-Type': 'application/json'},
+					body: JSON.stringify(A),
+				})
+				.then(response  => response.json())
+				.then(res =>{
+					console.log(res);
+				});
+				<?php 
+				$rows=file_get_contents('webapp.php');
+				$f =json_decode($rows);
+				$res=$f;
+				echo json_encode($res);				
+				?>
+
+				
 			}
-			<?php 
-			$G = $dbh->prepare('SELECT sum(hours) from time where date=')
-			?>
+			
 		}if (element == document.getElementById('grater_than')) {
 				// 上記と同じく
-				document.getElementById('date_change').type="date";
-				document.getElementById('date_change').onchange=function(){
-				let date_change_data = document.getElementById('date_change').value;
-				let A = date_change_data.split('-').join('/');
-				document.getElementById('year_month_date').innerHTML=A;				
 			
-			}
 		}
 	}
 </script>
