@@ -171,7 +171,7 @@
     font-size: 8px;
 }
 
-.li_Js::before {
+.li_Javascript::before {
     content: '';
     /* margin-left: 8px; */
     width: 8px;
@@ -184,7 +184,7 @@
 }
 
 .li_CSS::before{
-    margin-left: 8px;
+    /* margin-left: 8px; */
     content: '';
     width: 8px;
     height: 8px;
@@ -195,7 +195,7 @@
 }
 
 .li_PHP::before{
-    margin-left: 8px;
+    /* margin-left: 8px; */
     content: '';
     width: 8px;
     height: 8px;
@@ -214,7 +214,7 @@
 }
 
 .li_Laravel::before{
-    margin-left: 8px;  
+    /* margin-left: 8px;   */
     content: '';
     width: 8px;
     height: 8px;
@@ -224,7 +224,7 @@
 }
 
 .li_SQL::before {
-    margin-left: 8px;
+    /* margin-left: 8px; */
     content: '';
     width: 8px;
     height: 8px;
@@ -243,7 +243,6 @@
 }
 
 .li_others::before{
-    
     content: '';
     width:  8px;
     height: 8px;

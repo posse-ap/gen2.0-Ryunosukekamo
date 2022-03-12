@@ -281,9 +281,9 @@ svg {
 }
 
 
-.li_Js::before {
+.li_Javascript::before {
     content: '';
-    /* margin-left: 8px; */
+    margin-left: 5px;
     width: 12px;
     height: 12px;
     display:inline-block;
@@ -293,7 +293,7 @@ svg {
 }
 
 .li_CSS::before{
-    margin-left: 8px;
+    margin-left: 5px;
     content: '';
     width: 12px;
     height: 12px;
@@ -304,7 +304,7 @@ svg {
 }
 
 .li_PHP::before{
-    margin-left: 8px;
+    margin-left: 5px;
     content: '';
     width: 12px;
     height: 12px;
@@ -314,6 +314,7 @@ svg {
 }
 
 .li_HTML::before{
+    margin-left: 5px;
     content: '';
     width: 12px;
     height: 12px;
@@ -323,7 +324,7 @@ svg {
 }
 
 .li_Laravel::before{
-    margin-left: 8px;  
+    margin-left: 5px;  
     content: '';
     width: 12px;
     height: 12px;
@@ -333,7 +334,7 @@ svg {
 }
 
 .li_SQL::before {
-    margin-left: 8px;
+    margin-left: 5px;
     content: '';
     width: 12px;
     height: 12px;
@@ -343,6 +344,7 @@ svg {
 }
 
 .li_SHELL::before{
+    margin-left: 5px;
     content: '';
     width: 12px;
     height: 12px;
@@ -354,7 +356,7 @@ svg {
 }
 
 .li_others::before{
-    
+    margin-left: 5px;
     content: '';
     width: 12px;
     height: 12px;

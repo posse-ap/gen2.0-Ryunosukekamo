@@ -4,28 +4,26 @@ include "db-connect.php";
 
 <?php
 
-$time0=$dbh->prepare("SELECT sum(hours) from time where date=1 and month=1 and year=1");
-$time1=$dbh->prepare("SELECT sum(hours) from time where month=1 and year=1");
-$time2=$dbh->prepare("SELECT sum(hours) from time");
-$time3=$dbh->prepare("SELECT hours from time where date=28 and month=1 and year=1");
-for($i=0; $i<4; $i++){
-	${"time". $i}->execute();
-	${"data".$i}=${"time". $i}->fetchAll();
-
+$time0 = $dbh->prepare("SELECT sum(hours) from time where date=1 and month=1 and year=1");
+$time1 = $dbh->prepare("SELECT sum(hours) from time where month=1 and year=1");
+$time2 = $dbh->prepare("SELECT sum(hours) from time");
+$time3 = $dbh->prepare("SELECT hours from time where date=28 and month=1 and year=1");
+for ($i = 0; $i < 4; $i++) {
+	${"time" . $i}->execute();
+	${"data" . $i} = ${"time" . $i}->fetchAll();
 }
 $sum1 = $dbh->prepare("SELECT sum(HTML),sum(JavaScript),sum(CSS),sum(PHP),sum(ooo),sum(Laravel),sum(SHELL),sum(others) from All_data");
 $sum2 = $dbh->prepare("SELECT sum(N_yobi),sum(dotinstall),sum(POSSE) from All_data");
-for($i=1; $i<3; $i++){
-	if($i==1){
+for ($i = 1; $i < 3; $i++) {
+	if ($i == 1) {
 		// 各学習言語の合計値
-		${"sum" .$i}->execute();
-		${"each_total_language"}=${"sum" .$i}->fetch(PDO::FETCH_NUM);
-	}else{
+		${"sum" . $i}->execute();
+		${"each_total_language"} = ${"sum" . $i}->fetch(PDO::FETCH_NUM);
+	} else {
 		// 各学習コンテンツ時間の合計値
-		${"sum" .$i}->execute();
-		${"each_total_content"}=${"sum" .$i}->fetch(PDO::FETCH_NUM);
+		${"sum" . $i}->execute();
+		${"each_total_content"} = ${"sum" . $i}->fetch(PDO::FETCH_NUM);
 	};
-	
 };
 
 //各言語とその勉強時間が一致、紐づけられている必要がある＝だから、同じ配列の中にそれらを入れている。
@@ -33,15 +31,15 @@ for($i=1; $i<3; $i++){
 // なぜなら、google chartは、上から順に表示されていく→大きい順にしたい時、数字が降順でないといけない。だから、配列のインデックスや数字のkeyを使いたい。つまり、HTMLだと取得できるけど、HTMLが常に大きいという訳ではないから（合計値という変化する値）keyは数字でないとけない。
 // 特殊な点：数字が[0]で、言語[1]=後、でないと、rsortが上手く効かない。
 // 最初は三つの配列を作ろうとしていた。(1)fetch 数字only (2)連想配列（紐づけ）→大きい順にソート → (3)多次元配列を作成、array(0),array(1),という順に連想配列のデータを入れ、呼び出す。
-$languages_array=array(
-	[0=>$each_total_language[0],1=>'HTML'],
-	[0=>$each_total_language[1],1=>'Javascript'],
-	[0=>$each_total_language[2],1=>'CSS'],
-	[0=>$each_total_language[3],1=>'PHP'],
-	[0=>$each_total_language[4],1=>'SQL'],
-	[0=>$each_total_language[5],1=>'Laravel'],
-	[0=>$each_total_language[6],1=>'SHELL'],
-	[0=>$each_total_language[7],1=>'others'],
+$languages_array = array(
+	[0 => $each_total_language[0], 1 => 'HTML', 2 => '#3CCEFE'],
+	[0 => $each_total_language[1], 1 => 'Javascript', 2 => '#1754EF'],
+	[0 => $each_total_language[2], 1 => 'CSS', 2 => '#1754EF'],
+	[0 => $each_total_language[3], 1 => 'PHP', 2 => '#20BDDE'],
+	[0 => $each_total_language[4], 1 => 'SQL', 2 => '#6D46EC'],
+	[0 => $each_total_language[5], 1 => 'Laravel', 2 => '#B29EF3'],
+	[0 => $each_total_language[6], 1 => 'SHELL', 2 => '#4A17EF'],
+	[0 => $each_total_language[7], 1 => 'others', 2 => '#3105C0'],
 	// 0=>みたいに書かなくてよかった。結局先頭が、0で次が１になるから。
 );
 
@@ -49,15 +47,20 @@ $languages_array=array(
 rsort($languages_array);
 
 // 各学習コンテンツの合計値を連想配列の多次元配列
-$content_array=[
-	[$each_total_content[0],'N_yobi'],
-	[$each_total_content[1],'dotinstall'],
-	[$each_total_content[2],'POSSE'],
+// 円グラフのN予備の疑似要素のcssを当てるにはアルファベットが必要なためnを追加した。また、インデックスがづれるため、ほかも追加。
+$content_array = [
+	[$each_total_content[0], 'N予備', 'n'],
+	[$each_total_content[1], 'dotinstall', 'd'],
+	[$each_total_content[2], 'POSSE', 'p'],
 ];
 
 // 学習コンテンツの合計値を降順に。
 rsort($content_array);
+
+// $date=date('Y年-m月d日',strtotime('now'));
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -67,8 +70,7 @@ rsort($content_array);
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="index.css">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 	<link rel="stylesheet" href="index_style.css">
@@ -126,15 +128,13 @@ rsort($content_array);
 						<span id="study_n" class="study_n"><i id="icon_check_one" class="fas fa-check-circle"></i>
 							N予備校</span>
 
-						<span id="study_d" class="study_d"><i id="icon_check_two"
-								class="fas fa-check-circle"></i>ドットインストール</span>
+						<span id="study_d" class="study_d"><i id="icon_check_two" class="fas fa-check-circle"></i>ドットインストール</span>
 						<br>
 
-					    <span id="study_p" class="study_p"><i id="icon_check_three"
-									class="fas fa-check-circle"></i>POSSE課題</span>
+						<span id="study_p" class="study_p"><i id="icon_check_three" class="fas fa-check-circle"></i>POSSE課題</span>
 					</div>
 
-					
+
 
 				</div>
 
@@ -148,8 +148,7 @@ rsort($content_array);
 						<span id="study_Laravel"><i id="icon_check_eight" class="fas fa-check-circle"></i>Laravel</span>
 						<span id="study_SQL"><i id="icon_check_nine" class="fas fa-check-circle"></i>SQL</span>
 						<span id="study_SHELL"><i id="icon_check_ten" class="fas fa-check-circle"></i>SHELL</span><br>
-						<span id="study_others"><i id="icon_check_eleven"
-								class="fas fa-check-circle"></i>情報処理システム基礎知識（その他）</span><br>
+						<span id="study_others"><i id="icon_check_eleven" class="fas fa-check-circle"></i>情報処理システム基礎知識（その他）</span><br>
 
 					</div>
 
@@ -208,11 +207,9 @@ rsort($content_array);
 						<span id="reponsive_study_n" class="reponsive_study_n"><i id="responsive_icon_check_one" class="fas fa-check-circle"></i>
 							N予備校</span>
 
-						<span id="reponsive_study_d" class="responsive_study_d"><i id="reponsive_icon_check_two"
-								class="fas fa-check-circle"></i>ドットインストール</span><br>
+						<span id="reponsive_study_d" class="responsive_study_d"><i id="reponsive_icon_check_two" class="fas fa-check-circle"></i>ドットインストール</span><br>
 
-						<span id="reponsive_study_p" class="reponsive_study_p"><i id="reponsive_icon_check_three"
-								class="fas fa-check-circle"></i>POSSE課題</span>
+						<span id="reponsive_study_p" class="reponsive_study_p"><i id="reponsive_icon_check_three" class="fas fa-check-circle"></i>POSSE課題</span>
 
 					</div>
 
@@ -228,8 +225,7 @@ rsort($content_array);
 						<span id="reponsive_study_Laravel"><i id="reponsive_icon_check_eight" class="fas fa-check-circle"></i>Laravel</span>
 						<span id="reponsive_study_SQL"><i id="reponsive_icon_check_nine" class="fas fa-check-circle"></i>SQL</span>
 						<span id="reponsive_study_SHELL"><i id="reponsive_icon_check_ten" class="fas fa-check-circle"></i>SHELL</span><br>
-						<span id="reponsive_study_others"><i id="reponsive_icon_check_eleven"
-								class="fas fa-check-circle"></i>情報処理システム基礎知識（その他）</span><br>
+						<span id="reponsive_study_others"><i id="reponsive_icon_check_eleven" class="fas fa-check-circle"></i>情報処理システム基礎知識（その他）</span><br>
 
 					</div>
 
@@ -261,7 +257,7 @@ rsort($content_array);
 
 		</div>
 
-		
+
 
 	</div>
 
@@ -278,17 +274,17 @@ rsort($content_array);
 
 	<!-- カレンダー作成 -->
 	<!-- <div id="calendar" class="calendar"> -->
-		<!-- xxxx年xx月を表示 -->
-		<!-- <span id="header"></span> -->
+	<!-- xxxx年xx月を表示 -->
+	<!-- <span id="header"></span> -->
 
-		<!-- ボタンクリックで月移動 -->
-		<!-- <div id="next-prev-button">
+	<!-- ボタンクリックで月移動 -->
+	<!-- <div id="next-prev-button">
 			<span id="prev" onclick="prev()"></span>
 			<span id="next" onclick="next()"></span>
 		</div> -->
 
-		<!-- カレンダー -->
-		<!-- <div id="calendar_contents"></div> -->
+	<!-- カレンダー -->
+	<!-- <div id="calendar_contents"></div> -->
 	</div>
 
 	<!-- カレンダー ここまで -->
@@ -301,7 +297,7 @@ rsort($content_array);
 		<div id="loader_wrap" class="loader_wrap">
 			<div class="loader">Loading...</div>
 		</div>
-		
+
 		<div id="done_recod_post" class="done_recod_post">
 			<span class="awesome">AWESOME!</span><br>
 			<i id="green_check" class="fas fa-check-circle"></i><br>
@@ -329,11 +325,11 @@ rsort($content_array);
 
 
 	<!-- モダール用のロード画面　ここまで -->
-	
+
 
 	<!-- 記録・投稿完了画面 -->
 
-<!-- 
+	<!-- 
 	<div id="done_recod_post" class="done_recod_post">
 		<span class="awesome">AWESOME!</span><br>
 		<i id="green_check" class="fas fa-check-circle"></i><br>
@@ -376,15 +372,15 @@ rsort($content_array);
 				<ul>
 
 					<li id="Today" class="Today"> <span class="today">Today</span>
-						<div><span class="Today_actual_hour"><?php echo $data0[0][0];?></span> <span class="Today_hour">hour</span></div>
+						<div><span class="Today_actual_hour"><?php echo $data0[0][0]; ?></span> <span class="Today_hour">hour</span></div>
 					</li>
 
 					<li id="Month" class="Month"><span class="month">Month</span>
-						<div><span class="Actual_Month"><?php echo $data1[0][0]?></span> <span class="Monthly_hour">hour</span></div>
+						<div><span class="Actual_Month"><?php echo $data1[0][0] ?></span> <span class="Monthly_hour">hour</span></div>
 					</li>
 
 					<li id="Total" class="Month"><span class="total">Total</span>
-						<div><span class="Actual_Today_hours"><?php echo $data2[0][0];?></span> <span class="Total_hours">hour</span>
+						<div><span class="Actual_Today_hours"><?php echo $data2[0][0]; ?></span> <span class="Total_hours">hour</span>
 						</div>
 					</li>
 
@@ -417,21 +413,21 @@ rsort($content_array);
 				<div class="contents_of_Language_studied">
 
 					<ul class="one">
-						<li class="li_Js"><span>JavaScript<span></li>
-						<li class="li_CSS"> <span>CSS</span></li>
-						<li class="li_PHP"><span>PHP</span></li>
+						<li class="li_<?php echo $languages_array[0][1] ?>"><span><?php echo $languages_array[0][1] ?><span></li>
+						<li class="li_<?php echo $languages_array[1][1] ?>"><span><?php echo $languages_array[1][1] ?></span></li>
+						<li class="li_<?php echo $languages_array[2][1] ?>"><span><?php echo $languages_array[2][1] ?></span></li>
 
 					</ul>
 
 					<ul class="two">
-						<li class="li_HTML"><span>HTML</span></li>
-						<li class="li_Laravel"><span>Laravel</span></li>
-						<li class="li_SQL"><span>SQL</span></li>
+						<li class="li_<?php echo $languages_array[3][1] ?>"><span><?php echo $languages_array[3][1] ?></span></li>
+						<li class="li_<?php echo $languages_array[4][1] ?>"><span><?php echo $languages_array[4][1] ?></span></li>
+						<li class="li_<?php echo $languages_array[5][1] ?>"><span><?php echo $languages_array[5][1] ?></span></li>
 					</ul>
 
 					<ul class="three">
-						<li class="li_SHELL"><span>SHELL</span></li>
-						<li class="li_others"><span>情報システム基礎知識（その他）</span></li>
+						<li class="li_<?php echo $languages_array[6][1] ?>"><span><?php echo $languages_array[6][1] ?></span></li>
+						<li class="li_<?php echo $languages_array[7][1] ?>"><span><?php echo $languages_array[7][1] ?></span></li>
 					</ul>
 
 				</div>
@@ -449,15 +445,15 @@ rsort($content_array);
 
 				<div id="contents_studied" class="contents_studied">
 					<ul>
-						<li class="d"><span>ドットインストール</span></li>
-						<li class="n"> <span>N予備校</span></li>
-						<li class="p"><span>POSSE課題</span></li>
+						<li class="<?php echo $content_array[0][2] ?>"><span><?php echo $content_array[0][1] ?></span></li>
+						<li class="<?php echo $content_array[1][2] ?>"><span><?php echo $content_array[1][1] ?></span></li>
+						<li class="<?php echo $content_array[2][2] ?>"><span><?php echo $content_array[2][1] ?></span></li>
 					</ul>
 				</div>
 			</div>
 
-            <!-- レスポンシブ用 -->
-			
+			<!-- レスポンシブ用 -->
+
 			<div id="Contents_studied_responsive" class="Contents_studied_responsive">
 				<p><span>学習コンテンツ</span></p>
 
@@ -466,9 +462,9 @@ rsort($content_array);
 
 				<div id="contents_studied" class="contents_studied">
 					<ul>
-						<li class="d"><span>ドットインストール</span></li>
-						<li class="n"><span>N予備校</span></li>
-						<li class="p"><span>課題</span></li>
+						<li class="<?php echo $content_array[0][2] ?>"><span><?php echo $content_array[0][1] ?></span></li>
+						<li class="<?php echo $content_array[1][2] ?>"><span><?php echo $content_array[1][1] ?></span></li>
+						<li class="<?php echo $content_array[2][2] ?>"><span><?php echo $content_array[2][1] ?></span></li>
 					</ul>
 				</div>
 			</div>
@@ -484,21 +480,21 @@ rsort($content_array);
 				<div class="contents_of_Language_studied">
 
 					<ul class="one">
-						<li class="li_Js"><span>JavaScript<span></li>
-						<li class="li_CSS"><span>CSS</span></li>
-						<li class="li_PHP"><span>PHP</span></li>
+						<li class="li_<?php echo $languages_array[0][1] ?>"><span><?php echo $languages_array[0][1] ?><span></li>
+						<li class="li_<?php echo $languages_array[1][1] ?>"><span><?php echo $languages_array[1][1] ?></span></li>
+						<li class="li_<?php echo $languages_array[2][1] ?>"><span><?php echo $languages_array[2][1] ?></span></li>
 
 					</ul>
 
 					<ul class="two">
-						<li class="li_HTML"><span>HTML</span></li>
-						<li class="li_Laravel"><span>Laravel</span></li>
-						<li class="li_SQL"><span>SQL</span></li>
+						<li class="li_<?php echo $languages_array[3][1] ?>"><span><?php echo $languages_array[3][1] ?></span></li>
+						<li class="li_<?php echo $languages_array[4][1] ?>"><span><?php echo $languages_array[4][1] ?></span></li>
+						<li class="li_<?php echo $languages_array[5][1] ?>"><span><?php echo $languages_array[5][1] ?></span></li>
 					</ul>
 
 					<ul class="three">
-						<li class="li_SHELL"><span>SHELL</span></li>
-						<li class="li_others"><span>情報システム基礎知識（その他）</span></li>
+						<li class="li_<?php echo $languages_array[6][1] ?>"><span><?php echo $languages_array[6][1] ?></span></li>
+						<li class="li_<?php echo $languages_array[7][1] ?>"><span><?php echo $languages_array[7][1] ?></span></li>
 					</ul>
 
 				</div>
@@ -523,7 +519,16 @@ rsort($content_array);
 	<!-- </div> -->
 	<!-- divを使うとその行全てがdivになる。 -->
 	<!-- <p class="Date"><span>＜　2020年 10月　＞</span></p> -->
-	<div class="Date"><span class="angle_brackets">＜<span>2020年 10月</span>＞</span></div>
+	<div class="Date">
+		<span id="grater_than" class="angle_brackets" onclick="btn(this)">＜　</span>
+
+		<span id="year_month_date"></span>
+
+		<span id="less_than" class="angle_brackets" onclick="btn(this)">　＞</span>
+
+
+	</div>
+
 
 	<div id="btn_for_responsive" class="btn_for_responsive">
 		<p>記録・投稿</p>
@@ -537,228 +542,284 @@ rsort($content_array);
 </body>
 
 </html>
+<!-- ----------------------------------------------------------------------------- -->
+<!--  円グラフの下の・（ドット）の色指定 -->
+<script>
+	<?php
+	$today = date('Y年/n月/d日');
+	$today = json_encode($today);
+	?>
+	// 
+	let today = JSON.parse('<?php echo $today; ?>');
+	document.getElementById('year_month_date').innerHTML = today;
+
+	let A = 0;
+
+	function btn(element) {
+		if (element == document.getElementById('less_than')) {
+
+			// post?データを一時的に保存できる...
+
+			//クリックされた分/count.consoleを使う
+			// let A = '';
+			// let B = console.count(A);
+
+			//クリックされた分でfor文。$date.$iとかにし、date1,date2で式を増やす。
+
+
+
+		}
+		if (element == document.getElementById('grater_than')) {
+			console.log('4');
+		}
+
+	}
+</script>
 
 <!-- ---------------------------------------------------------------------
 chart.ja -->
 <script>
 	var ctx = document.getElementById("myBarChart_for_php");
-var myBarChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        //凡例のラベル
-        labels: ['2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22', '24', '28', '30'],
-        datasets: [
-            {
-                label: '訪問者数', //データ項目のラベル
-                data: [
-					<?php echo $data0[0][0]?>,
-					3, 
-					4, 
-					5, 
-					6, 
-					7, 
-					8, 
-					8, 
-					8, 
-					7, 
-					6, 
-					4,
-					<?php echo $data3[0][0]?>,
-					2,
+	var myBarChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			//凡例のラベル
+			labels: ['2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22', '24', '28', '30'],
+			datasets: [{
+					label: '訪問者数', //データ項目のラベル
+					data: [
+						<?php echo $data0[0][0] ?>,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						8,
+						8,
+						7,
+						6,
+						4,
+						<?php echo $data3[0][0] ?>,
+						2,
 
-				], //グラフのデータ
-                backgroundColor: "#3ACCFD",
-                borderColor: "#3ACCFD",
-                borderWidth: 1,
-                borderRadius: 20,
-                // borderSkipped:false,
-            }
+					], //グラフのデータ
+					backgroundColor: "#3ACCFD",
+					borderColor: "#3ACCFD",
+					borderWidth: 1,
+					borderRadius: 20,
+					// borderSkipped:false,
+				}
 
-        ]
-    },
-    options: {
-        legend: { display: false, },
-        title: {
-            display: true,
-            //グラフタイトル
-            // text: 'Aサイト分析'
-        },
-        scales: {
-            xAxes: [{
-                // gridLines: [display = false],
-                gridLines: {
-                    display: false
-                }
-            }],
-            yAxes: [{
+			]
+		},
+		options: {
+			legend: {
+				display: false,
+			},
+			title: {
+				display: true,
+				//グラフタイトル
+				// text: 'Aサイト分析'
+			},
+			scales: {
+				xAxes: [{
+					// gridLines: [display = false],
+					gridLines: {
+						display: false
+					}
+				}],
+				yAxes: [{
 
-                // gridLines: [display = false],
-                gridLines: {
-                    display: false
-                },
+					// gridLines: [display = false],
+					gridLines: {
+						display: false
+					},
 
-                ticks: {
-                    suggestedMax: 8, //最大値
-                    suggestedMin: 0, //最小値
-                    stepSize: 2, //縦ラベルの数値単位
-                    userCallback: function (tick) {
-                        return tick.toString() + 'h';
-                    }
+					ticks: {
+						suggestedMax: 8, //最大値
+						suggestedMin: 0, //最小値
+						stepSize: 2, //縦ラベルの数値単位
+						userCallback: function(tick) {
+							return tick.toString() + 'h';
+						}
 
-                }
-            }]
-        },
-    }
-});
-
-
-google.charts.load('current', { 'packages': ['corechart'] });
-google.charts.setOnLoadCallback(drawChart_PHP_language);
-function drawChart_PHP_language() {
-	// 値と題が一致していることが前提→連想配列で数値と題を一致させる。
-    var data = google.visualization.arrayToDataTable([
-        ['Effort', 'Amount given'],
-        ['<?php echo $languages_array[0][1]?>', <?php echo $languages_array[0][0]?>],
-        ['<?php echo $languages_array[1][1]?>', <?php echo $languages_array[1][0]?>],
-        ['<?php echo $languages_array[2][1]?>', <?php echo $languages_array[2][0]?>],
-        ['<?php echo $languages_array[3][1]?>', <?php echo $languages_array[3][0]?>],
-        ['<?php echo $languages_array[4][1]?>', <?php echo $languages_array[4][0]?>],
-        ['<?php echo $languages_array[5][1]?>', <?php echo $languages_array[5][0]?>],
-        ['<?php echo $languages_array[6][1]?>', <?php echo $languages_array[6][0]?>],
-        ['<?php echo $languages_array[7][1]?>', <?php echo $languages_array[7][0]?>],
-        
-	]);
+					}
+				}]
+			},
+		}
+	});
 
 
+	google.charts.load('current', {
+		'packages': ['corechart']
+	});
+	google.charts.setOnLoadCallback(drawChart_PHP_language);
 
-    var options = {
-        pieHole: 0.5,
-        // ここのwidthとheightで上手く大きさを調整しているー＞意外と重要
-        width: '100%',
-        height: '190',
-        chartArea: { width: '100%', height: '100%', top: 0 },
+	function drawChart_PHP_language() {
+		// 値と題が一致していることが前提→連想配列で数値と題を一致させる。
+		var data = google.visualization.arrayToDataTable([
+			['Effort', 'Amount given'],
+			['<?php echo $languages_array[0][1] ?>', <?php echo $languages_array[0][0] ?>],
+			['<?php echo $languages_array[1][1] ?>', <?php echo $languages_array[1][0] ?>],
+			['<?php echo $languages_array[2][1] ?>', <?php echo $languages_array[2][0] ?>],
+			['<?php echo $languages_array[3][1] ?>', <?php echo $languages_array[3][0] ?>],
+			['<?php echo $languages_array[4][1] ?>', <?php echo $languages_array[4][0] ?>],
+			['<?php echo $languages_array[5][1] ?>', <?php echo $languages_array[5][0] ?>],
+			['<?php echo $languages_array[6][1] ?>', <?php echo $languages_array[6][0] ?>],
+			['<?php echo $languages_array[7][1] ?>', <?php echo $languages_array[7][0] ?>],
 
-        pieSliceTextStyle: {
-            color: 'white',
-        },
-        legend: 'none',
-        colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#3CCEFE', '#B29EF3', '#6D46EC', '#4A17EF', '#3105C0'],
+		]);
 
 
 
-    };
+		var options = {
+			pieHole: 0.5,
+			// ここのwidthとheightで上手く大きさを調整しているー＞意外と重要
+			width: '100%',
+			height: '190',
+			chartArea: {
+				width: '100%',
+				height: '100%',
+				top: 0
+			},
 
-
-    var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_PHP_language'));
-    chart.draw(data, options);
-}
-
-google.charts.load('current', { 'packages': ['corechart'] });
-google.charts.setOnLoadCallback(drawChart_PHP_contents);
-
-function drawChart_PHP_contents() {
-
-    var data = google.visualization.arrayToDataTable([
-        ['Effort', 'Amount given'],
-        ['<?php echo $content_array[0][1]?>', <?php echo $content_array[0][0]?>],
-        ['<?php echo $content_array[1][1]?>', <?php echo $content_array[1][0]?>],
-        ['<?php echo $content_array[2][1]?>', <?php echo $content_array[2][0]?>],
-		
-    ]);
-
-	// echo $each_total_content[0]
-
-    var options = {
-        pieHole: 0.5,
-        width: '100%',
-        height: '190',
-        chartArea: { width: '100%', height: '100%', top: 0 },
-        pieSliceTextStyle: {
-            color: 'white',
-        },
-        legend: 'none',
-        colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#f3b49f', '#f6c7b6']  //　色設定
-
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_contents'));
-    chart.draw(data, options);
-
-}
-
-// レスポンシブ用
-google.charts.load('current', { 'packages': ['corechart'] });
-google.charts.setOnLoadCallback(drawChart_PHP_language_responsive);
-
-function drawChart_PHP_language_responsive() {
-
-    var data = google.visualization.arrayToDataTable([
-        ['Effort', 'Amount given'],
-		['<?php echo $languages_array[0][1]?>', <?php echo $languages_array[0][0]?>],
-        ['<?php echo $languages_array[1][1]?>', <?php echo $languages_array[1][0]?>],
-        ['<?php echo $languages_array[2][1]?>', <?php echo $languages_array[2][0]?>],
-        ['<?php echo $languages_array[3][1]?>', <?php echo $languages_array[3][0]?>],
-        ['<?php echo $languages_array[4][1]?>', <?php echo $languages_array[4][0]?>],
-        ['<?php echo $languages_array[5][1]?>', <?php echo $languages_array[5][0]?>],
-        ['<?php echo $languages_array[6][1]?>', <?php echo $languages_array[6][0]?>],
-        ['<?php echo $languages_array[7][1]?>', <?php echo $languages_array[7][0]?>],
-
-    ]);
-
-    var options = {
-        pieHole: 0.5,
-        // width: '100%',
-        // // height: 200,
-
-        width: '100%',
-        height: '115',
-        chartArea: { width: '100%', height: '100%', top: 0 },
-        pieSliceTextStyle: {
-            color: 'white',
-        },
-        legend: 'none',
-        colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#3CCEFE', '#B29EF3', '#6D46EC', '#4A17EF', '#3105C0'],
-    };
-
-
-    var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_PHP_language_responsive'));
-    chart.draw(data, options);
-}
-
-
-// function名＝drawChart...を変える必要がある。
-
-google.charts.load('current', { 'packages': ['corechart'] });
-google.charts.setOnLoadCallback(drawChart_PHP_contents_responsive);
-
-function drawChart_PHP_contents_responsive() {
-
-    var data = google.visualization.arrayToDataTable([
-        ['Effort', 'Amount given'],
-		['<?php echo $content_array[0][1]?>', <?php echo $content_array[0][0]?>],
-        ['<?php echo $content_array[1][1]?>', <?php echo $content_array[1][0]?>],
-        ['<?php echo $content_array[2][1]?>', <?php echo $content_array[2][0]?>],
-    ]);
-
-    var options = {
-        pieHole: 0.5,
-        // width: '100%',
-        // // height: 200,
-        width: '100%',
-        height: '115',
-        chartArea: { width: '100%', height: '100%', top: 0 },
-        pieSliceTextStyle: {
-            color: 'white',
-        },
-        legend: 'none',
-        colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#f3b49f', '#f6c7b6']  //　色設定
-
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_PHP_contents_responsive'));
-    chart.draw(data, options);
-}
+			pieSliceTextStyle: {
+				color: 'white',
+			},
+			legend: 'none',
+			colors: ['<?php echo $languages_array[0][2] ?>', '<?php echo $languages_array[1][2] ?>', '<?php echo $languages_array[2][2] ?>', '<?php echo $languages_array[3][2] ?>', '<?php echo $languages_array[4][2] ?>', '<?php echo $languages_array[5][2] ?>', '<?php echo $languages_array[6][2] ?>', '<?php echo $languages_array[7][2] ?>'],
 
 
 
+		};
+
+
+		var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_PHP_language'));
+		chart.draw(data, options);
+	}
+
+	google.charts.load('current', {
+		'packages': ['corechart']
+	});
+	google.charts.setOnLoadCallback(drawChart_PHP_contents);
+
+	function drawChart_PHP_contents() {
+
+		var data = google.visualization.arrayToDataTable([
+			['Effort', 'Amount given'],
+			['<?php echo $content_array[0][1] ?>', <?php echo $content_array[0][0] ?>],
+			['<?php echo $content_array[1][1] ?>', <?php echo $content_array[1][0] ?>],
+			['<?php echo $content_array[2][1] ?>', <?php echo $content_array[2][0] ?>],
+
+		]);
+
+		// echo $each_total_content[0]
+
+		var options = {
+			pieHole: 0.5,
+			width: '100%',
+			height: '190',
+			chartArea: {
+				width: '100%',
+				height: '100%',
+				top: 0
+			},
+			pieSliceTextStyle: {
+				color: 'white',
+			},
+			legend: 'none',
+			colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#f3b49f', '#f6c7b6'] //　色設定
+
+		};
+
+		var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_contents'));
+		chart.draw(data, options);
+
+	}
+
+	// レスポンシブ用
+	google.charts.load('current', {
+		'packages': ['corechart']
+	});
+	google.charts.setOnLoadCallback(drawChart_PHP_language_responsive);
+
+	function drawChart_PHP_language_responsive() {
+
+		var data = google.visualization.arrayToDataTable([
+			['Effort', 'Amount given'],
+			['<?php echo $languages_array[0][1] ?>', <?php echo $languages_array[0][0] ?>],
+			['<?php echo $languages_array[1][1] ?>', <?php echo $languages_array[1][0] ?>],
+			['<?php echo $languages_array[2][1] ?>', <?php echo $languages_array[2][0] ?>],
+			['<?php echo $languages_array[3][1] ?>', <?php echo $languages_array[3][0] ?>],
+			['<?php echo $languages_array[4][1] ?>', <?php echo $languages_array[4][0] ?>],
+			['<?php echo $languages_array[5][1] ?>', <?php echo $languages_array[5][0] ?>],
+			['<?php echo $languages_array[6][1] ?>', <?php echo $languages_array[6][0] ?>],
+			['<?php echo $languages_array[7][1] ?>', <?php echo $languages_array[7][0] ?>],
+
+		]);
+
+		var options = {
+			pieHole: 0.5,
+			// width: '100%',
+			// // height: 200,
+
+			width: '100%',
+			height: '115',
+			chartArea: {
+				width: '100%',
+				height: '100%',
+				top: 0
+			},
+			pieSliceTextStyle: {
+				color: 'white',
+			},
+			legend: 'none',
+			colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#3CCEFE', '#B29EF3', '#6D46EC', '#4A17EF', '#3105C0'],
+		};
+
+
+		var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_PHP_language_responsive'));
+		chart.draw(data, options);
+	}
+
+
+	// function名＝drawChart...を変える必要がある。
+
+	google.charts.load('current', {
+		'packages': ['corechart']
+	});
+	google.charts.setOnLoadCallback(drawChart_PHP_contents_responsive);
+
+	function drawChart_PHP_contents_responsive() {
+
+		var data = google.visualization.arrayToDataTable([
+			['Effort', 'Amount given'],
+			['<?php echo $content_array[0][1] ?>', <?php echo $content_array[0][0] ?>],
+			['<?php echo $content_array[1][1] ?>', <?php echo $content_array[1][0] ?>],
+			['<?php echo $content_array[2][1] ?>', <?php echo $content_array[2][0] ?>],
+		]);
+
+		var options = {
+			pieHole: 0.5,
+			// width: '100%',
+			// // height: 200,
+			width: '100%',
+			height: '115',
+			chartArea: {
+				width: '100%',
+				height: '100%',
+				top: 0
+			},
+			pieSliceTextStyle: {
+				color: 'white',
+			},
+			legend: 'none',
+			colors: ['#0345EC', '#0F71BD', '#1CBCDE', '#f3b49f', '#f6c7b6'] //　色設定
+
+		};
+
+		var chart = new google.visualization.PieChart(document.getElementById('doughnut_chart_PHP_contents_responsive'));
+		chart.draw(data, options);
+	}
 </script>
