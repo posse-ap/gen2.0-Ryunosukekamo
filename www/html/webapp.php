@@ -529,6 +529,8 @@ rsort($content_array);
 
 	</div>
 
+	<input type="hidden" id="date_change" class="date_change">
+
 
 	<div id="btn_for_responsive" class="btn_for_responsive">
 		<p>記録・投稿</p>
@@ -545,39 +547,46 @@ rsort($content_array);
 <!-- ----------------------------------------------------------------------------- -->
 <!--  円グラフの下の・（ドット）の色指定 -->
 <script>
+
 	<?php
+	//★アクセスした日（今日）を年、月、日で表示
 	$today = date('Y年/n月/d日');
 	$today = json_encode($today);
-	?>
-	// 
+	?> 
 	let today = JSON.parse('<?php echo $today; ?>');
 	document.getElementById('year_month_date').innerHTML = today;
-
-	let A = 0;
-
+	
+	//★上の日付を変える処理。
+	// onclick(this)を使いたかった故、わざわざif文を使って分岐させた。
 	function btn(element) {
 		if (element == document.getElementById('less_than')) {
-
-			// post?データを一時的に保存できる...
-
-			//クリックされた分/count.consoleを使う
-			// let A = '';
-			// let B = console.count(A);
-
-			//クリックされた分でfor文。$date.$iとかにし、date1,date2で式を増やす。
-
-
-
+			// type hiddenからdateに
+			document.getElementById('date_change').type="date";
+			// input dateは最初はvalueが０だから、onchangeでセレクトされた時のvalueを取得
+			document.getElementById('date_change').onchange=function(){
+				let date_change_data = document.getElementById('date_change').value;
+				// input type=dateのvalueは00-00-00だから、- を /にかえる。let date_change_dataだと上手くいかないからＡ、異なる変数を使用。ｌ
+				let A = date_change_data.split('-').join('/');
+				document.getElementById('year_month_date').innerHTML=A;
+			}
+			<?php 
+			$G = $dbh->prepare('SELECT sum(hours) from time where date=')
+			?>
+		}if (element == document.getElementById('grater_than')) {
+				// 上記と同じく
+				document.getElementById('date_change').type="date";
+				document.getElementById('date_change').onchange=function(){
+				let date_change_data = document.getElementById('date_change').value;
+				let A = date_change_data.split('-').join('/');
+				document.getElementById('year_month_date').innerHTML=A;				
+			
+			}
 		}
-		if (element == document.getElementById('grater_than')) {
-			console.log('4');
-		}
-
 	}
 </script>
 
 <!-- ---------------------------------------------------------------------
-chart.ja -->
+// chart.ja -->
 <script>
 	var ctx = document.getElementById("myBarChart_for_php");
 	var myBarChart = new Chart(ctx, {
