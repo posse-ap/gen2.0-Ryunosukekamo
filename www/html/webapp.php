@@ -67,28 +67,43 @@ rsort($content_array);
 // $_POSTは、htmlより前になきゃならない。そのため、ここで定義。
 // input type=dateのvalueにはoo-oo-ooとハイフンがあるため、ハイフンの箇所で分け配列にする。
 
-$today = date('Y/0n/d');
-$today = json_encode($today);
-$B = explode("-",$_POST['comment']);
-if($B){
-	
-	//各変数に配列のデータを代入 
+
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+	echo 'A';
+	$B = explode("-",$_POST['comment']);
+	$today = date('Y/0n/d');
+	$today = json_encode($today);
+	// 各変数に配列のデータを代入 
 	$year=(int)$B[0];
 	$month=(int)$B[1];
 	$date=$B[2];
-	// ★日付変更後の処理//先の配列を / で文字列に。
+	$R=[$year,$month,$date];
 	$R=implode("/",$B);
-	// print_r($R);
+	print_r($R);
+	$R=json_encode($R);
+	$C=$dbh->prepare("SELECT sum(hours) from All_data where year = $year and month = $month and date =$date ");
+	$C->execute();
+	$C=$C->fetch();
+}
+// リセットした後、２回目からの今日の日付の表示（$_post定義されてるのに送られてないよ、今日のデータ）
+else{
+	echo 'B';
+	$today = date('Y/0n/d');
+	$year=date('Y');
+	$month=date('0n');
+	$date=date('d');
+	$R=[$year,$month,$date];
+	// ★日付変更後の処理//先の配列を / で文字列に。
+	$R=implode("/",$R);
+	print_r($R);
 	$R=json_encode($R);
 	
 	// 先の変数を使いデータをテーブルからもってくる。
 	$C=$dbh->prepare("SELECT sum(hours) from All_data where year = $year and month = $month and date =$date ");
 	$C->execute();
 	$C=$C->fetch();
-}
-// リセットした後、２回目からの今日の日付の表示（$_post定義されてるのに送られてないよ、今日のデータ）
-if(!$B){
-	echo 'A';
+	$today = json_encode($today);
+	echo $today;
 }
 ?>
 
@@ -562,9 +577,9 @@ if(!$B){
 	</div>
 	
 	<form id="date_change_form" action="webapp.php" method="POST">
-	<input type="hidden" name="comment" id="date_change" class="date_change">
-	<input type="hidden" id="submit"  value="送信">
-	<input type="hidden" id="reset" value="リセット">
+	<input type="date" hidden name="comment" id="date_change" class="date_change">
+	<input type="submit" hidden id="submit"  value="送信">
+	<input type="reset" hidden id="reset" value="リセット">
 	</form>
 
 
@@ -592,9 +607,10 @@ if(!$B){
 	function btn(element) {
 		if (element == document.getElementById('less_than')) {
 			// type hiddenからdateに
-			document.getElementById('date_change').type="date";	
-			document.getElementById('submit').type="submit";	
-			document.getElementById('reset').type="reset";
+			document.getElementById('date_change').removeAttribute('hidden');	
+			document.getElementById('submit').removeAttribute("hidden");	
+			document.getElementById('reset').removeAttribute("hidden");
+
 
 		}if (element == document.getElementById('grater_than')) {
 			// 上記と同じく
@@ -621,6 +637,8 @@ if(!$B){
 		window.location.href = 'http://localhost:8080/webapp.php';
 		
 	}
+
+	console.log(today);
 
 </script>
 
