@@ -1,5 +1,6 @@
 <?php
 include "db-connect.php";
+// echo phpinfo();
 ?>
 
 <?php
@@ -57,9 +58,40 @@ $content_array = [
 // 学習コンテンツの合計値を降順に。
 rsort($content_array);
 
-// $date=date('Y年-m月d日',strtotime('now'));
+// ★日付の変更
+	// 日付の変更においての問題点：今日以外の日付はtype=dateで取得し、postで送り、（jsに直して）表示させている
+		// 一方、今日に関してはPHPのdate()関数で今日の日付をもってきて、表示させている。だから、今日の日付だけ、データ（日付）を送るという作業がない。そのため、初期画面とリセットした時にデータが送られてないよと怒られる。
+		// だから、本当はしなくてもいいんだけど。date関数で今日の日付を取ってきて、「POST」で送るということをしている。
 
+// ★送信データ（日付）を受け取り、mysqlテーブルからデータを取り出す
+// $_POSTは、htmlより前になきゃならない。そのため、ここで定義。
+// input type=dateのvalueにはoo-oo-ooとハイフンがあるため、ハイフンの箇所で分け配列にする。
+
+$today = date('Y/0n/d');
+$today = json_encode($today);
+$B = explode("-",$_POST['comment']);
+if($B){
+	
+	//各変数に配列のデータを代入 
+	$year=(int)$B[0];
+	$month=(int)$B[1];
+	$date=$B[2];
+	// ★日付変更後の処理//先の配列を / で文字列に。
+	$R=implode("/",$B);
+	// print_r($R);
+	$R=json_encode($R);
+	
+	// 先の変数を使いデータをテーブルからもってくる。
+	$C=$dbh->prepare("SELECT sum(hours) from All_data where year = $year and month = $month and date =$date ");
+	$C->execute();
+	$C=$C->fetch();
+}
+// リセットした後、２回目からの今日の日付の表示（$_post定義されてるのに送られてないよ、今日のデータ）
+if(!$B){
+	echo 'A';
+}
 ?>
+
 
 
 <!DOCTYPE html>
@@ -372,7 +404,7 @@ rsort($content_array);
 				<ul>
 
 					<li id="Today" class="Today"> <span class="today">Today</span>
-						<div><span class="Today_actual_hour"><?php echo $data0[0][0]; ?></span> <span class="Today_hour">hour</span></div>
+						<div><span class="Today_actual_hour"><?php echo $C[0] ?></span> <span class="Today_hour">hour</span></div>
 					</li>
 
 					<li id="Month" class="Month"><span class="month">Month</span>
@@ -528,8 +560,13 @@ rsort($content_array);
 
 
 	</div>
+	
+	<form id="date_change_form" action="webapp.php" method="POST">
+	<input type="hidden" name="comment" id="date_change" class="date_change">
+	<input type="hidden" id="submit"  value="送信">
+	<input type="hidden" id="reset" value="リセット">
+	</form>
 
-	<input type="hidden" id="date_change" class="date_change">
 
 
 	<div id="btn_for_responsive" class="btn_for_responsive">
@@ -547,52 +584,44 @@ rsort($content_array);
 <!-- ----------------------------------------------------------------------------- -->
 <!--  円グラフの下の・（ドット）の色指定 -->
 <script>
-
-	<?php
-	//★アクセスした日（今日）を年、月、日で表示/月を03,04と表示。
-	$today = date('Y年/0n月/d日');
-	$today = json_encode($today);
-	?> 
 	let today = JSON.parse('<?php echo $today; ?>');
-	document.getElementById('year_month_date').innerHTML = today;
+	document.getElementById('year_month_date').innerHTML=today;
 	
 	//★上の日付を変える処理。
 	// onclick(this)を使いたかった故、わざわざif文を使って分岐させた。
 	function btn(element) {
 		if (element == document.getElementById('less_than')) {
 			// type hiddenからdateに
-			document.getElementById('date_change').type="date";
-			// input dateは最初はvalueが０だから、onchangeでセレクトされた時のvalueを取得
-			document.getElementById('date_change').onchange=function(){
-				let date_change_data = document.getElementById('date_change').value;
-				// input type=dateのvalueは00-00-00だから、- を /にかえる。let date_change_dataだと上手くいかないからＡ、異なる変数を使用。ｌ
-				let A = date_change_data.split('-').join('/');
-				document.getElementById('year_month_date').innerHTML=A;
-				// ★PHPにデータを渡す
-				fetch('webapp.php',{
-					method:'POST',
-					headers:{'Content-Type': 'application/json'},
-					body: JSON.stringify(A),
-				})
-				.then(response  => response.json())
-				.then(res =>{
-					console.log(res);
-				});
-				<?php 
-				$rows=file_get_contents('webapp.php');
-				$f =json_decode($rows);
-				$res=$f;
-				echo json_encode($res);				
-				?>
+			document.getElementById('date_change').type="date";	
+			document.getElementById('submit').type="submit";	
+			document.getElementById('reset').type="reset";
 
-				
-			}
-			
 		}if (element == document.getElementById('grater_than')) {
-				// 上記と同じく
+			// 上記と同じく
 			
 		}
 	}
+	// ★日付の変更後の、日付の表示（続き）
+	// Rという変数をjdで使えるようにする
+	let R =JSON.parse('<?php echo $R ?>');
+	// Rという変数がある時＝データを送信した時＝nice idea!!
+	if(R){
+		document.getElementById('reset').type="reset";
+		document.getElementById('year_month_date').innerHTML=R;
+
+	}
+	// リセットした時、日付が送られていないから、日付が表示されない。これを解決する際の処理
+	// 意図的にデータがないから、nullでなくundefinedで。undefinedはflaseを返すから、 !（falseを返す）でもいける。
+	if(R===undefined || !R){
+		document.getElementById('year_month_date').innerHTML = today;
+	}
+
+	// 送信情報を初期化,消去//リロードボタンじゃだめ。リンクをもう一度押すとできる。
+	document.getElementById('reset').onclick=function(){
+		window.location.href = 'http://localhost:8080/webapp.php';
+		
+	}
+
 </script>
 
 <!-- ---------------------------------------------------------------------
