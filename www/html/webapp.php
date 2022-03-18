@@ -58,21 +58,23 @@ $content_array = [
 // 学習コンテンツの合計値を降順に。
 rsort($content_array);
 
-// ★日付の変更
+// ★日付の変更で大切なこと。
 	// 日付の変更においての問題点：今日以外の日付はtype=dateで取得し、postで送り、（jsに直して）表示させている
 		// 一方、今日に関してはPHPのdate()関数で今日の日付をもってきて、表示させている。だから、今日の日付だけ、データ（日付）を送るという作業がない。そのため、初期画面とリセットした時にデータが送られてないよと怒られる。
-		// だから、本当はしなくてもいいんだけど。date関数で今日の日付を取ってきて、「POST」で送るということをしている。
-
+		// だから、elseで初期画面とリセット時の今日日の日付を設定した。日付変更後は、既にrequest_method==post状態にある。だから、
 // ★送信データ（日付）を受け取り、mysqlテーブルからデータを取り出す
 // $_POSTは、htmlより前になきゃならない。そのため、ここで定義。
-// input type=dateのvalueにはoo-oo-ooとハイフンがあるため、ハイフンの箇所で分け配列にする。
 
-
+// ★日付の変更
+// POSTかGETなのかを判別及び、$_post['formタグのname属性名']と違い具体的なデータがあるかどうかでなく、データがあるかどうかを判断している。
 if($_SERVER["REQUEST_METHOD"]=="POST"){
-	echo 'A';
-	$B = explode("-",$_POST['comment']);
+	// 今日の日付の表示
 	$today = date('Y/0n/d');
 	$today = json_encode($today);
+
+	// カレンダーで変更した日付のデータを - で区切って配列にする。
+	$B = explode("-",$_POST['comment']);
+	print_r($B);
 	// 各変数に配列のデータを代入 
 	$year=(int)$B[0];
 	$month=(int)$B[1];
@@ -85,25 +87,29 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	$C->execute();
 	$C=$C->fetch();
 }
-// リセットした後、２回目からの今日の日付の表示（$_post定義されてるのに送られてないよ、今日のデータ）
+// 初期画面、リセットした後、２回目からの今日の日付の表示
 else{
-	echo 'B';
+	// 今日の日付をdate()関数でもってくる。
 	$today = date('Y/0n/d');
+	// 適切な変数に代入
 	$year=date('Y');
 	$month=date('0n');
 	$date=date('d');
+	// 一つの変数に格納
 	$R=[$year,$month,$date];
-	// ★日付変更後の処理//先の配列を / で文字列に。
+	// 配列の要素を連結し、oo/oo/oo/という文字列に変化
 	$R=implode("/",$R);
 	print_r($R);
+	// JSで使えるようにする。
 	$R=json_encode($R);
+	print_r($R);
 	
 	// 先の変数を使いデータをテーブルからもってくる。
 	$C=$dbh->prepare("SELECT sum(hours) from All_data where year = $year and month = $month and date =$date ");
 	$C->execute();
 	$C=$C->fetch();
 	$today = json_encode($today);
-	echo $today;
+	// echo $today;
 }
 ?>
 
@@ -620,6 +626,7 @@ else{
 	// ★日付の変更後の、日付の表示（続き）
 	// Rという変数をjdで使えるようにする
 	let R =JSON.parse('<?php echo $R ?>');
+	console.log(R);
 	// Rという変数がある時＝データを送信した時＝nice idea!!
 	if(R){
 		document.getElementById('reset').type="reset";
@@ -628,9 +635,9 @@ else{
 	}
 	// リセットした時、日付が送られていないから、日付が表示されない。これを解決する際の処理
 	// 意図的にデータがないから、nullでなくundefinedで。undefinedはflaseを返すから、 !（falseを返す）でもいける。
-	if(R===undefined || !R){
-		document.getElementById('year_month_date').innerHTML = today;
-	}
+	// if(R===undefined || !R){
+	// 	document.getElementById('year_month_date').innerHTML = today;
+	// }
 
 	// 送信情報を初期化,消去//リロードボタンじゃだめ。リンクをもう一度押すとできる。
 	document.getElementById('reset').onclick=function(){
@@ -638,7 +645,6 @@ else{
 		
 	}
 
-	console.log(today);
 
 </script>
 
