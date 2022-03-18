@@ -605,21 +605,31 @@ color: #000000;
 /* widthで右側を広げ、paddingで文字を右に動かした 　たぶん、他にちゃんとしたやり方があるはず。*/
 
 .modal_record_post {
-    background: linear-gradient(to right, #0F72BD 20%, #3BCDFE);
-    border-radius: 100px;
-    color: #FFFFFF;
-    box-shadow: -4px 4px 4px 4px #ccf1ff;
-    cursor: pointer;
     text-align: center;
-    width: 42%;
-    margin: 0px auto;
-    margin-top: 15px;
-    padding: 12px;
+    margin-top: 25px;
 }
 
-.span_contents_stud {
-    margin-top: 15px;
+.modal_submit{
+    text-align: center;
+    background: linear-gradient(to right, #0F72BD 20%, #3BCDFE);
+    box-shadow: -4px 4px 4px 4px #ccf1ff;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 100px;
+    width: 43%;
+    height: 9%;
+    font-size: 15px;
+    cursor: pointer;
 }
+
+/* .modal_submit{
+    text-align: center;
+
+} */
+
+/* .span_contents_stud {
+    margin-top: 15px;
+} */
 
 /* ---------------------------------------------------------------------------------------------------------------------- */
 

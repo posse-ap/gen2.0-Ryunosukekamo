@@ -378,16 +378,22 @@
 }
 /* レスポンシブ時のモーダルのボタン */
 .responsive_modal_record_post {
-    background: linear-gradient(to right, #0F72BD 20%, #3BCDFE);
-    border-radius: 100px;
-    color: #FFFFFF;
-    box-shadow: 0px 2px 4px 4px #ccf1ff;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 6px;
+    display: block;
     text-align: center;
-    padding: 12px;
+    margin-top: 20px;
+}
+
+.modal_submit_responsive{
+    text-align: center;
+    background: linear-gradient(to right, #0F72BD 20%, #3BCDFE);
+    box-shadow: -4px 4px 4px 4px #ccf1ff;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 100px;
+    width: 99%;
+    height: 45px;
     font-size: 15px;
+    cursor: pointer;
 }
 
 

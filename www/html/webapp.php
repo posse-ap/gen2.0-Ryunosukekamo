@@ -228,10 +228,13 @@ else{
 
 		</div>
 
-		<div id="modal_record_post" class="modal_record_post">
+		<!-- <div id="modal_record_post" class="modal_record_post">
 			<span>記録・投稿</span>
-		</div>
-
+		</div> -->
+		<form action="POST" id="modal_record_post" class="modal_record_post">
+			<input type="submit" class="modal_submit" value="記録・投稿">
+		</form>
+			
 	</div> <!-- モーダルここまで -->
 
 
@@ -303,9 +306,9 @@ else{
 
 			</div>
 
-			<div id="responsive_modal_record_post" class="responsive_modal_record_post">
-				<span>記録・投稿</span>
-			</div>
+			<form action="POST" id="responsive_modal_record_post" class="responsive_modal_record_post">
+				<input type="submit" class="modal_submit_responsive" value="記録・投稿">
+			</form>
 
 
 		</div>
