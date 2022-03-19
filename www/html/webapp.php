@@ -74,14 +74,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 	// カレンダーで変更した日付のデータを - で区切って配列にする。
 	$B = explode("-",$_POST['comment']);
-	print_r($B);
 	// 各変数に配列のデータを代入 
 	$year=(int)$B[0];
 	$month=(int)$B[1];
 	$date=$B[2];
 	$R=[$year,$month,$date];
 	$R=implode("/",$B);
-	print_r($R);
 	$R=json_encode($R);
 	$C=$dbh->prepare("SELECT sum(hours) from All_data where year = $year and month = $month and date =$date ");
 	$C->execute();
@@ -99,11 +97,9 @@ else{
 	$R=[$year,$month,$date];
 	// 配列の要素を連結し、oo/oo/oo/という文字列に変化
 	$R=implode("/",$R);
-	print_r($R);
+	// print_r($R);
 	// JSで使えるようにする。
-	$R=json_encode($R);
-	print_r($R);
-	
+	$R=json_encode($R);	
 	// 先の変数を使いデータをテーブルからもってくる。
 	$C=$dbh->prepare("SELECT sum(hours) from All_data where year = $year and month = $month and date =$date ");
 	$C->execute();
@@ -111,6 +107,98 @@ else{
 	$today = json_encode($today);
 	// echo $today;
 }
+
+// データを受け取る処理//上記でPOSTを浸かってるためここで、使うと上の日付のデータがないと怒られる。だから、get
+// ちなみに、今回はelse1を使わないから（データがない時のパターン）、iseet name属性で指定。
+// データをtableに送る上で絶対になくちゃならないのは（最低条件）、日付とその日の勉強時間。N予備に何時間とかいらない。
+// しかし、モーダルの構造上、合計時間をいれて勝手に振り分けてくれない。各項目の時間を入れる時は一回づつ。
+if(isset($_GET['calendar'],$_GET['study_time'])){
+	// 日付を - で分けて配列にする
+	$V=explode('-',$_GET['calendar']);
+	print_r($V);
+	// HTMLだったら
+	if(isset($_GET['HTML'])){
+		$HTML=$_GET['HTML'];
+		$HTML=$_GET['study_time'];
+		$X=$dbh->prepare("INSERT into All_data (date,month,year,HTML)VALUES(:date,:month,:year,:HTML)");
+		$X->bindValue(':year',$V[0]);
+		$X->bindValue(':month',$V[1]);
+		$X->bindValue(':date',$V[2]);
+		$X->bindValue(':HTML',$HTML);
+		$X->execute();
+		
+	}if(isset($_GET['JavaScript'])){
+		$JavaScript=$_GET['JavaScript'];
+		$JavaScript=$_GET['study_time'];
+		$X=$dbh->prepare("INSERT into All_data (date,month,year,JavaScript)VALUES(:date,:month,:year,:JavaScript)");
+		$X->bindValue(':year',$V[0]);
+		$X->bindValue(':month',$V[1]);
+		$X->bindValue(':date',$V[2]);
+		$X->bindValue(':JavaScript',$JavaScript);
+		$X->execute();
+	}
+
+	// 各勉強時間
+	// HTMLに勉強時間を代入
+	// HTMlの時間をtableに追加
+	
+	
+
+
+	// if(isset($_GET['JavaScript'])){
+	// 	$HTML=$_GET['JavaScript'];
+	// 	// HTMLに勉強時間を代入
+	// 	$HTML=$_GET['study_time'];
+	// 	// HTMlの時間をtableに追加
+	// 	$Insert_HTML=$dbh->prepare("INSERT into All_data (JavaScript)VALUES(:JavaScript)");
+	// 	$Insert_HTML->bindValue(":JavaScript",$JavaScript);
+	// }
+	// if(isset($_GET['PHP'])){
+	// 	$HTML=$_GET['PHP'];
+	// 	// HTMLに勉強時間を代入
+	// 	$HTML=$_GET['study_time'];
+	// 	// HTMlの時間をtableに追加
+	// 	$Insert_HTML=$dbh->prepare("INSERT into All_data (PHP)VALUES(:PHP)");
+	// 	$Insert_HTML->bindValue(":PHP",$PHP);
+	// }
+	// if(isset($_GET['Laravel'])){
+	// 	$HTML=$_GET['Laravel'];
+	// 	// HTMLに勉強時間を代入
+	// 	$HTML=$_GET['study_time'];
+	// 	// HTMlの時間をtableに追加
+	// 	$Insert_HTML=$dbh->prepare("INSERT into All_data (Laravel)VALUES(:Laravel)");
+	// 	$Insert_HTML->bindValue(":Laravel",$Laravel);
+	// }
+	// if(isset($_GET['ooo'])){
+	// 	$HTML=$_GET['ooo'];
+	// 	// HTMLに勉強時間を代入
+	// 	$HTML=$_GET['study_time'];
+	// 	// HTMlの時間をtableに追加
+	// 	$Insert_HTML=$dbh->prepare("INSERT into All_data (ooo)VALUES(:ooo)");
+	// 	$Insert_HTML->bindValue(":ooo",$ooo);
+	// }
+	// if(isset($_GET['SHELL'])){
+	// 	$HTML=$_GET['SHELL'];
+	// 	// HTMLに勉強時間を代入
+	// 	$HTML=$_GET['study_time'];
+	// 	// HTMlの時間をtableに追加
+	// 	$Insert_HTML=$dbh->prepare("INSERT into All_data (SHELL)VALUES(:SHELL)");
+	// 	$Insert_HTML->bindValue(":SHELL",$SHELL);
+	// }
+	// if(isset($_GET['others'])){
+	// 	$HTML=$_GET['others'];
+	// 	// HTMLに勉強時間を代入
+	// 	$HTML=$_GET['study_time'];
+	// 	// HTMlの時間をtableに追加
+	// 	$Insert_HTML=$dbh->prepare("INSERT into All_data (others)VALUES(:others)");
+	// 	$Insert_HTML->bindValue(":others",$others);
+	// }
+
+}
+
+
+
+
 ?>
 
 
@@ -162,7 +250,7 @@ else{
 		<!-- バツボタン -->
 		<span id="btn_close" class="btn_close"></span>
 
-		<div id="modal_content" class="modal_content">
+		<form action="webapp.php" method="GET" id="modal_content" class="modal_content">
 
 
 			<div id="modal_contents_left_side" class="modal_contents_left_side">
@@ -171,20 +259,26 @@ else{
 
 				<div id="day_for_study" class="day_for_study">
 					<span>学習日</span>
-					<input type="date" id="calendar" class="calendar">
+					<input type="date" id="calendar" class="calendar" name="calendar">
 				</div>
 
 
 				<div id="contents_study" class="contents_study">
 					<span>学習コンテンツ（複数選択可）</span>
 					<div>
-						<span id="study_n" class="study_n"><i id="icon_check_one" class="fas fa-check-circle"></i>
-							N予備校</span>
+						<!-- <span id="study_n" class="study_n"><i id="icon_check_one" class="fas fa-check-circle"></i>N予備校</span>
 
 						<span id="study_d" class="study_d"><i id="icon_check_two" class="fas fa-check-circle"></i>ドットインストール</span>
 						<br>
 
-						<span id="study_p" class="study_p"><i id="icon_check_three" class="fas fa-check-circle"></i>POSSE課題</span>
+						<span id="study_p" class="study_p"><i id="icon_check_three" class="fas fa-check-circle"></i>POSSE課題</span> -->
+
+						<input type="checkbox" id="study_n" class="study_n" name="N_yobi">N予備校</input>
+
+						<input type="checkbox" id="study_d" class="study_d" name="dotinstall">ドットインストール</input>
+						<br>
+
+						<input type="checkbox" id="study_p" class="study_p" name="POSSE">POSSE課題</input>
 					</div>
 
 
@@ -194,14 +288,22 @@ else{
 				<div id="languages_study" class="languages_study">
 					<span>学習言語（複数選択可）</span>
 					<div>
-						<span id="study_HTML"><i id="icon_check_four" class="fas fa-check-circle"></i>HTML</span>
+						<!-- <span id="study_HTML"><i id="icon_check_four" class="fas fa-check-circle"></i>HTML</span>
 						<span id="study_CSS"><i id="icon_check_five" class="fas fa-check-circle"></i>CSS</span>
 						<span id="study_Js"><i id="icon_check_six" class="fas fa-check-circle"></i>JavaScript</span><br>
 						<span id="study_PHP"><i id="icon_check_seven" class="fas fa-check-circle"></i>PHP</span>
 						<span id="study_Laravel"><i id="icon_check_eight" class="fas fa-check-circle"></i>Laravel</span>
 						<span id="study_SQL"><i id="icon_check_nine" class="fas fa-check-circle"></i>SQL</span>
 						<span id="study_SHELL"><i id="icon_check_ten" class="fas fa-check-circle"></i>SHELL</span><br>
-						<span id="study_others"><i id="icon_check_eleven" class="fas fa-check-circle"></i>情報処理システム基礎知識（その他）</span><br>
+						<span id="study_others"><i id="icon_check_eleven" class="fas fa-check-circle"></i>情報処理システム基礎知識（その他）</span><br> -->
+						<input type="checkbox" id="study_HTML" name="HTML">HTML</input>
+						<input type="checkbox" id="study_CSS" name="CSS">CSS</input>
+						<input type="checkbox" id="study_Js" name="JavaScript">JavaScript</input><br>
+						<input type="checkbox" id="study_PHP" name="PHP">PHP</input>
+						<input type="checkbox" id="study_Laravel" name="Laravel">Laravel</input>
+						<input type="checkbox" id="study_SQL" name="ooo">SQL</input>
+						<input type="checkbox" id="study_SHELL" name="SHELL">SHELL</input><br>
+						<input type="checkbox" id="study_others" name="others">情報処理システム基礎知識（その他）</input><br>
 
 					</div>
 
@@ -212,7 +314,7 @@ else{
 			<div id="modal_contents_right_side" class="modal_contents_right_side">
 				<div id="study_time" class="study_time">
 					<span>学習時間</span>
-					<input type="text" class="input_study_time">
+					<input type="text" class="input_study_time" name="study_time">
 
 				</div>
 
@@ -224,16 +326,18 @@ else{
 				<!-- <p id="Tweet" class="Tweet"><i id='icon_check_twelve' class="fas fa-check-circle"></i>Twitterにシェアする</p> -->
 				<div id="Tweet" class="Tweet"><i id='icon_check_twelve' class="fas fa-check-circle"><span>Twitterにシェアする</span></i></div>
 			</div>
+			<div id="modal_record_post" class="modal_record_post">
+				<input type="submit" class="modal_submit" value="記録・投稿" name="modal_name">
 
+			</div>
 
-		</div>
+		</form>
 
 		<!-- <div id="modal_record_post" class="modal_record_post">
 			<span>記録・投稿</span>
 		</div> -->
-		<form action="POST" id="modal_record_post" class="modal_record_post">
-			<input type="submit" class="modal_submit" value="記録・投稿">
-		</form>
+		<!-- <form action="POST" id="modal_record_post" class="modal_record_post"> -->
+		<!-- </form> -->
 			
 	</div> <!-- モーダルここまで -->
 
@@ -609,7 +713,7 @@ else{
 <!--  円グラフの下の・（ドット）の色指定 -->
 <script>
 	let today = JSON.parse('<?php echo $today; ?>');
-	document.getElementById('year_month_date').innerHTML=today;
+	// document.getElementById('year_month_date').innerHTML=today;
 	
 	//★上の日付を変える処理。
 	// onclick(this)を使いたかった故、わざわざif文を使って分岐させた。
@@ -630,12 +734,13 @@ else{
 	// Rという変数をjdで使えるようにする
 	let R =JSON.parse('<?php echo $R ?>');
 	console.log(R);
-	// Rという変数がある時＝データを送信した時＝nice idea!!
-	if(R){
-		document.getElementById('reset').type="reset";
-		document.getElementById('year_month_date').innerHTML=R;
+	console.log('OK');
 
-	}
+	// Rという変数がある時＝データを送信した時＝nice idea!!
+	document.getElementById('reset').type="reset";
+	document.getElementById('year_month_date').innerHTML=R;
+
+	
 	// リセットした時、日付が送られていないから、日付が表示されない。これを解決する際の処理
 	// 意図的にデータがないから、nullでなくundefinedで。undefinedはflaseを返すから、 !（falseを返す）でもいける。
 	// if(R===undefined || !R){
