@@ -114,12 +114,11 @@ else{
 // データをtableに送る上で絶対になくちゃならないのは（最低条件）、日付とその日の勉強時間。N予備に何時間とかいらない。
 // しかし、モーダルの構造上、合計時間をいれて勝手に振り分けてくれない。各項目の時間を入れる時は一回づつ。
 if(isset($_GET['calendar'],$_GET['study_time'])){
-	for($language_data=1;$language_data<3;$language_data++){
+	for($language_data=1;$language_data<9;$language_data++){
 
-		for($content_data=1;$content_data<3;$content_data++){
+		for($content_data=1;$content_data<4;$content_data++){
 	
-			if(isset($_GET[$language_data],$_GET[$content_data])){
-				if($language_data&&$content_data){
+			if(isset($_GET[$content_data],$_GET[$language_data])){
 					// 日付を - で分けて配列にする
 					$V=explode('-',$_GET['calendar']);
 					// 今日の勉強時間の合計
@@ -132,9 +131,32 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 						case 2:
 							$language_data='JavaScript';
 							break;
-						case 3:
 							
-					}
+						case 3:
+							$language_data='CSS';
+							break;
+							
+						case 4:
+							$language_data='PHP';
+							break;
+							
+						case 5:
+							$language_data='ooo';
+							break;
+							
+						case 6:
+							$language_data='Laravel';
+							break;
+							
+						case 7:
+							$language_data='SHELL';
+							break;
+							
+						case 8:
+							$language_data='others';
+							break;
+							
+					};
 					switch($content_data){
 						case 1:
 							$content_data='N_yobi';
@@ -142,8 +164,13 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 						case 2:
 							$content_data='dotinstall';
 							break;
+							
+						case 3:
+							$content_data='POSSE';
+							break;
+							
 
-					}
+					};
 					$X=$dbh->prepare("INSERT into All_data (date,month,year,hours,$language_data,$content_data)VALUES(:date,:month,:year,:hours,:$language_data,:$content_data)");
 					$X->bindValue(':year',$V[0]);
 					$X->bindValue(':month',$V[1]);
@@ -152,12 +179,12 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 					$X->bindValue(':'. $language_data,$today_data);
 					$X->bindValue(':'. $content_data,$today_data);
 					$X->execute();					
-				}
 				
-			}
+				
+			};
 			
-		}
-	}
+		};
+	};
 
 }
 
@@ -232,10 +259,8 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 					<span>学習コンテンツ（複数選択可）</span>
 					<div>
 						<!-- <span id="study_n" class="study_n"><i id="icon_check_one" class="fas fa-check-circle"></i>N予備校</span>
-
 						<span id="study_d" class="study_d"><i id="icon_check_two" class="fas fa-check-circle"></i>ドットインストール</span>
 						<br>
-
 						<span id="study_p" class="study_p"><i id="icon_check_three" class="fas fa-check-circle"></i>POSSE課題</span> -->
 
 						<input type="checkbox" id="study_n" class="study_n" name="1">N予備校</input>
