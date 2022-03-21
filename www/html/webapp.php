@@ -81,6 +81,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	$R=[$year,$month,$date];
 	$R=implode("/",$B);
 	$R=json_encode($R);
+	// その日の合計時間の表示
 	$C=$dbh->prepare("SELECT sum(hours) from All_data where year = $year and month = $month and date =$date ");
 	$C->execute();
 	$C=$C->fetch();
@@ -100,7 +101,7 @@ else{
 	// print_r($R);
 	// JSで使えるようにする。
 	$R=json_encode($R);	
-	// 先の変数を使いデータをテーブルからもってくる。
+	// 今日の合計時間
 	$C=$dbh->prepare("SELECT sum(hours) from All_data where year = $year and month = $month and date =$date ");
 	$C->execute();
 	$C=$C->fetch();
@@ -113,86 +114,50 @@ else{
 // データをtableに送る上で絶対になくちゃならないのは（最低条件）、日付とその日の勉強時間。N予備に何時間とかいらない。
 // しかし、モーダルの構造上、合計時間をいれて勝手に振り分けてくれない。各項目の時間を入れる時は一回づつ。
 if(isset($_GET['calendar'],$_GET['study_time'])){
-	// 日付を - で分けて配列にする
-	$V=explode('-',$_GET['calendar']);
-	print_r($V);
-	// HTMLだったら
-	if(isset($_GET['HTML'])){
-		$HTML=$_GET['HTML'];
-		$HTML=$_GET['study_time'];
-		$X=$dbh->prepare("INSERT into All_data (date,month,year,HTML)VALUES(:date,:month,:year,:HTML)");
-		$X->bindValue(':year',$V[0]);
-		$X->bindValue(':month',$V[1]);
-		$X->bindValue(':date',$V[2]);
-		$X->bindValue(':HTML',$HTML);
-		$X->execute();
-		
-	}if(isset($_GET['JavaScript'])){
-		$JavaScript=$_GET['JavaScript'];
-		$JavaScript=$_GET['study_time'];
-		$X=$dbh->prepare("INSERT into All_data (date,month,year,JavaScript)VALUES(:date,:month,:year,:JavaScript)");
-		$X->bindValue(':year',$V[0]);
-		$X->bindValue(':month',$V[1]);
-		$X->bindValue(':date',$V[2]);
-		$X->bindValue(':JavaScript',$JavaScript);
-		$X->execute();
+	for($language_data=1;$language_data<3;$language_data++){
+
+		for($content_data=1;$content_data<3;$content_data++){
+	
+			if(isset($_GET[$language_data],$_GET[$content_data])){
+				if($language_data&&$content_data){
+					// 日付を - で分けて配列にする
+					$V=explode('-',$_GET['calendar']);
+					// 今日の勉強時間の合計
+					$today_data=$_GET['study_time'];
+					
+					switch($language_data){
+						case 1:
+							$language_data='HTML';
+							break;
+						case 2:
+							$language_data='JavaScript';
+							break;
+						case 3:
+							
+					}
+					switch($content_data){
+						case 1:
+							$content_data='N_yobi';
+							break;
+						case 2:
+							$content_data='dotinstall';
+							break;
+
+					}
+					$X=$dbh->prepare("INSERT into All_data (date,month,year,hours,$language_data,$content_data)VALUES(:date,:month,:year,:hours,:$language_data,:$content_data)");
+					$X->bindValue(':year',$V[0]);
+					$X->bindValue(':month',$V[1]);
+					$X->bindValue(':date',$V[2]);
+					$X->bindValue(':hours',$today_data);
+					$X->bindValue(':'. $language_data,$today_data);
+					$X->bindValue(':'. $content_data,$today_data);
+					$X->execute();					
+				}
+				
+			}
+			
+		}
 	}
-
-	// 各勉強時間
-	// HTMLに勉強時間を代入
-	// HTMlの時間をtableに追加
-	
-	
-
-
-	// if(isset($_GET['JavaScript'])){
-	// 	$HTML=$_GET['JavaScript'];
-	// 	// HTMLに勉強時間を代入
-	// 	$HTML=$_GET['study_time'];
-	// 	// HTMlの時間をtableに追加
-	// 	$Insert_HTML=$dbh->prepare("INSERT into All_data (JavaScript)VALUES(:JavaScript)");
-	// 	$Insert_HTML->bindValue(":JavaScript",$JavaScript);
-	// }
-	// if(isset($_GET['PHP'])){
-	// 	$HTML=$_GET['PHP'];
-	// 	// HTMLに勉強時間を代入
-	// 	$HTML=$_GET['study_time'];
-	// 	// HTMlの時間をtableに追加
-	// 	$Insert_HTML=$dbh->prepare("INSERT into All_data (PHP)VALUES(:PHP)");
-	// 	$Insert_HTML->bindValue(":PHP",$PHP);
-	// }
-	// if(isset($_GET['Laravel'])){
-	// 	$HTML=$_GET['Laravel'];
-	// 	// HTMLに勉強時間を代入
-	// 	$HTML=$_GET['study_time'];
-	// 	// HTMlの時間をtableに追加
-	// 	$Insert_HTML=$dbh->prepare("INSERT into All_data (Laravel)VALUES(:Laravel)");
-	// 	$Insert_HTML->bindValue(":Laravel",$Laravel);
-	// }
-	// if(isset($_GET['ooo'])){
-	// 	$HTML=$_GET['ooo'];
-	// 	// HTMLに勉強時間を代入
-	// 	$HTML=$_GET['study_time'];
-	// 	// HTMlの時間をtableに追加
-	// 	$Insert_HTML=$dbh->prepare("INSERT into All_data (ooo)VALUES(:ooo)");
-	// 	$Insert_HTML->bindValue(":ooo",$ooo);
-	// }
-	// if(isset($_GET['SHELL'])){
-	// 	$HTML=$_GET['SHELL'];
-	// 	// HTMLに勉強時間を代入
-	// 	$HTML=$_GET['study_time'];
-	// 	// HTMlの時間をtableに追加
-	// 	$Insert_HTML=$dbh->prepare("INSERT into All_data (SHELL)VALUES(:SHELL)");
-	// 	$Insert_HTML->bindValue(":SHELL",$SHELL);
-	// }
-	// if(isset($_GET['others'])){
-	// 	$HTML=$_GET['others'];
-	// 	// HTMLに勉強時間を代入
-	// 	$HTML=$_GET['study_time'];
-	// 	// HTMlの時間をtableに追加
-	// 	$Insert_HTML=$dbh->prepare("INSERT into All_data (others)VALUES(:others)");
-	// 	$Insert_HTML->bindValue(":others",$others);
-	// }
 
 }
 
@@ -273,12 +238,12 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 
 						<span id="study_p" class="study_p"><i id="icon_check_three" class="fas fa-check-circle"></i>POSSE課題</span> -->
 
-						<input type="checkbox" id="study_n" class="study_n" name="N_yobi">N予備校</input>
+						<input type="checkbox" id="study_n" class="study_n" name="1">N予備校</input>
 
-						<input type="checkbox" id="study_d" class="study_d" name="dotinstall">ドットインストール</input>
+						<input type="checkbox" id="study_d" class="study_d" name="2">ドットインストール</input>
 						<br>
 
-						<input type="checkbox" id="study_p" class="study_p" name="POSSE">POSSE課題</input>
+						<input type="checkbox" id="study_p" class="study_p" name="3">POSSE課題</input>
 					</div>
 
 
@@ -296,14 +261,14 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 						<span id="study_SQL"><i id="icon_check_nine" class="fas fa-check-circle"></i>SQL</span>
 						<span id="study_SHELL"><i id="icon_check_ten" class="fas fa-check-circle"></i>SHELL</span><br>
 						<span id="study_others"><i id="icon_check_eleven" class="fas fa-check-circle"></i>情報処理システム基礎知識（その他）</span><br> -->
-						<input type="checkbox" id="study_HTML" name="HTML">HTML</input>
-						<input type="checkbox" id="study_CSS" name="CSS">CSS</input>
-						<input type="checkbox" id="study_Js" name="JavaScript">JavaScript</input><br>
-						<input type="checkbox" id="study_PHP" name="PHP">PHP</input>
-						<input type="checkbox" id="study_Laravel" name="Laravel">Laravel</input>
-						<input type="checkbox" id="study_SQL" name="ooo">SQL</input>
-						<input type="checkbox" id="study_SHELL" name="SHELL">SHELL</input><br>
-						<input type="checkbox" id="study_others" name="others">情報処理システム基礎知識（その他）</input><br>
+						<input type="checkbox" id="study_HTML" name="1">HTML</input>
+						<input type="checkbox" id="study_Js" name="2">JavaScript</input><br>
+						<input type="checkbox" id="study_CSS" name="3">CSS</input>
+						<input type="checkbox" id="study_PHP" name="4">PHP</input>
+						<input type="checkbox" id="study_Laravel" name="5">Laravel</input>
+						<input type="checkbox" id="study_SQL" name="6">SQL</input>
+						<input type="checkbox" id="study_SHELL" name="7">SHELL</input><br>
+						<input type="checkbox" id="study_others" name="8">情報処理システム基礎知識（その他）</input><br>
 
 					</div>
 
