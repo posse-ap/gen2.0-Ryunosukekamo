@@ -114,81 +114,75 @@ else{
 // データをtableに送る上で絶対になくちゃならないのは（最低条件）、日付とその日の勉強時間。N予備に何時間とかいらない。
 // しかし、モーダルの構造上、合計時間をいれて勝手に振り分けてくれない。各項目の時間を入れる時は一回づつ。
 if(isset($_GET['calendar'],$_GET['study_time'])){
-	for($language_data=1;$language_data<9;$language_data++){
+	// 日付を - で分けて配列にする
+	$V=explode('-',$_GET['calendar']);
+	// 今日の勉強時間の合計
+	$today_data=$_GET['study_time'];
+	// print_r($V[1]);
 
-		for($content_data=1;$content_data<4;$content_data++){
-	
-			if(isset($_GET[$content_data],$_GET[$language_data])){
-					// 日付を - で分けて配列にする
-					$V=explode('-',$_GET['calendar']);
-					// 今日の勉強時間の合計
-					$today_data=$_GET['study_time'];
-					
-					switch($language_data){
-						case 1:
-							$language_data='HTML';
-							break;
-						case 2:
-							$language_data='JavaScript';
-							break;
-							
-						case 3:
-							$language_data='CSS';
-							break;
-							
-						case 4:
-							$language_data='PHP';
-							break;
-							
-						case 5:
-							$language_data='ooo';
-							break;
-							
-						case 6:
-							$language_data='Laravel';
-							break;
-							
-						case 7:
-							$language_data='SHELL';
-							break;
-							
-						case 8:
-							$language_data='others';
-							break;
-							
-					};
-					switch($content_data){
-						case 1:
-							$content_data='N_yobi';
-							break;
-						case 2:
-							$content_data='dotinstall';
-							break;
-							
-						case 3:
-							$content_data='POSSE';
-							break;
-							
+	for($content_data=1;$content_data<4;$content_data++){
+		if(isset($_GET[$content_data])){
+			switch($content_data){
+				case 1:
+					$Z='N_yobi';
+					break;
+				case 2:
+					$Z='dotinstall';
+					break;
+				case 3:
+					$Z='POSSE';
+					break;
+			}
 
-					};
-					$X=$dbh->prepare("INSERT into All_data (date,month,year,hours,$language_data,$content_data)VALUES(:date,:month,:year,:hours,:$language_data,:$content_data)");
-					$X->bindValue(':year',$V[0]);
-					$X->bindValue(':month',$V[1]);
-					$X->bindValue(':date',$V[2]);
-					$X->bindValue(':hours',$today_data);
-					$X->bindValue(':'. $language_data,$today_data);
-					$X->bindValue(':'. $content_data,$today_data);
-					$X->execute();					
-				
-				
-			};
-			
 		};
 	};
+	// 4-12したのも、1からだと、content_dataとlanguage_dataが共に１の時の違いが分からないから。
+	for($langage_data=4;$langage_data<12;$langage_data++){
+		if(isset($_GET[$langage_data])){
+			switch($langage_data){
+				case 4:
+					$X='HTML';
+					break;
+				case 5:
+					$X='JavaScript';
+					break;
+				case 6:
+					$X='CSS';
+					break;
+				case 7:
+					$X='PHP';
+					break;
+				case 8:
+					$X='Laravel';
+					break;
+				case 9:
+					$X='ooo';
+					break;
+				case 10:
+					$X='SHELL';
+					break;
+				case 11:
+					$X='others';
+					break;
+			}
 
+		};
+
+	};
+
+	
+	$Y=$dbh->prepare("INSERT into All_data (date,month,year,hours,$X,$Z)VALUES(:date,:month,:year,:hours,:$X,:$Z)");
+	$Y->bindValue(':year',$V[0]);	
+	$Y->bindValue(':month',$V[1]);	
+	$Y->bindValue(':date',$V[2]);
+	$Y->bindValue(':hours',$today_data);
+	$Y->bindValue(':'.$X,$today_data);	
+	$Y->bindValue(':'.$Z,$today_data);
+	$Y->execute();
+	// print_r($V[2]);
+	// echo $Z;
+	// echo $X;
 }
-
-
 
 
 ?>
@@ -286,14 +280,14 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 						<span id="study_SQL"><i id="icon_check_nine" class="fas fa-check-circle"></i>SQL</span>
 						<span id="study_SHELL"><i id="icon_check_ten" class="fas fa-check-circle"></i>SHELL</span><br>
 						<span id="study_others"><i id="icon_check_eleven" class="fas fa-check-circle"></i>情報処理システム基礎知識（その他）</span><br> -->
-						<input type="checkbox" id="study_HTML" name="1">HTML</input>
-						<input type="checkbox" id="study_Js" name="2">JavaScript</input><br>
-						<input type="checkbox" id="study_CSS" name="3">CSS</input>
-						<input type="checkbox" id="study_PHP" name="4">PHP</input>
-						<input type="checkbox" id="study_Laravel" name="5">Laravel</input>
-						<input type="checkbox" id="study_SQL" name="6">SQL</input>
-						<input type="checkbox" id="study_SHELL" name="7">SHELL</input><br>
-						<input type="checkbox" id="study_others" name="8">情報処理システム基礎知識（その他）</input><br>
+						<input type="checkbox" id="study_HTML" name="4">HTML</input>
+						<input type="checkbox" id="study_Js" name="5">JavaScript</input><br>
+						<input type="checkbox" id="study_CSS" name="6">CSS</input>
+						<input type="checkbox" id="study_PHP" name="7">PHP</input>
+						<input type="checkbox" id="study_Laravel" name="8">Laravel</input>
+						<input type="checkbox" id="study_SQL" name="9">SQL</input>
+						<input type="checkbox" id="study_SHELL" name="10">SHELL</input><br>
+						<input type="checkbox" id="study_others" name="11">情報処理システム基礎知識（その他）</input><br>
 
 					</div>
 
