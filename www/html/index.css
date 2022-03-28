@@ -607,6 +607,7 @@ color: #000000;
 .modal_record_post {
     text-align: center;
     margin-top: 25px;
+    height: 15%;
 }
 
 .modal_submit{
@@ -617,19 +618,10 @@ color: #000000;
     border: none;
     border-radius: 100px;
     width: 43%;
-    height: 9%;
+    height: 60%;
     font-size: 15px;
     cursor: pointer;
 }
-
-/* .modal_submit{
-    text-align: center;
-
-} */
-
-/* .span_contents_stud {
-    margin-top: 15px;
-} */
 
 /* ---------------------------------------------------------------------------------------------------------------------- */
 

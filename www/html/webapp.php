@@ -79,12 +79,18 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	$month=(int)$B[1];
 	$date=$B[2];
 	$R=[$year,$month,$date];
+	// print_r($R);
 	$R=implode("/",$B);
 	$R=json_encode($R);
 	// その日の合計時間の表示
 	$C=$dbh->prepare("SELECT sum(hours) from All_data where year = $year and month = $month and date =$date ");
 	$C->execute();
 	$C=$C->fetch();
+	// print_r($C);
+	$month_total=$dbh->prepare("SELECT sum(hours) from All_data where year=$year and month = $month and date<=$date");
+	$month_total->execute();
+	$month_total=$month_total->fetch();
+	// print_r($month_total);
 }
 // 初期画面、リセットした後、２回目からの今日の日付の表示
 else{
@@ -107,6 +113,10 @@ else{
 	$C=$C->fetch();
 	$today = json_encode($today);
 	// echo $today;
+	$month_total=$dbh->prepare("SELECT sum(hours) from All_data where year=$year and month = $month and date<=$date");
+	$month_total->execute();
+	$month_total=$month_total->fetch();
+	// print_r($month_total);
 }
 
 // データを受け取る処理//上記でPOSTを浸かってるためここで、使うと上の日付のデータがないと怒られる。だから、get
@@ -231,12 +241,12 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 
 	<!-- モーダル -->
 
-	<div id="modal" class="modal">
+	<form id="modal" action="webapp.php" method="GET"class="modal">
 
 		<!-- バツボタン -->
 		<span id="btn_close" class="btn_close"></span>
 
-		<form action="webapp.php" method="GET" id="modal_content" class="modal_content">
+		<div id="modal_content" class="modal_content">
 
 
 			<div id="modal_contents_left_side" class="modal_contents_left_side">
@@ -310,20 +320,20 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 				<!-- <p id="Tweet" class="Tweet"><i id='icon_check_twelve' class="fas fa-check-circle"></i>Twitterにシェアする</p> -->
 				<div id="Tweet" class="Tweet"><i id='icon_check_twelve' class="fas fa-check-circle"><span>Twitterにシェアする</span></i></div>
 			</div>
-			<div id="modal_record_post" class="modal_record_post">
-				<input type="submit" class="modal_submit" value="記録・投稿" name="modal_name">
+			
+		</div>
+		
+		<div id="modal_record_post" class="modal_record_post">
+			<input type="submit" class="modal_submit" value="記録・投稿" name="modal_name">
 
-			</div>
-
-		</form>
-
+		</div>
 		<!-- <div id="modal_record_post" class="modal_record_post">
 			<span>記録・投稿</span>
 		</div> -->
 		<!-- <form action="POST" id="modal_record_post" class="modal_record_post"> -->
 		<!-- </form> -->
 			
-	</div> <!-- モーダルここまで -->
+	</form> <!-- モーダルここまで -->
 
 
 	<!-- レスポンシブ用のモーダル  -->
@@ -520,7 +530,7 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 					</li>
 
 					<li id="Month" class="Month"><span class="month">Month</span>
-						<div><span class="Actual_Month"><?php echo $data1[0][0] ?></span> <span class="Monthly_hour">hour</span></div>
+						<div><span class="Actual_Month"><?php echo $month_total[0] ?></span> <span class="Monthly_hour">hour</span></div>
 					</li>
 
 					<li id="Total" class="Month"><span class="total">Total</span>
@@ -676,7 +686,7 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 	<form id="date_change_form" action="webapp.php" method="POST">
 	<input type="date" hidden name="comment" id="date_change" class="date_change">
 	<input type="submit" hidden id="submit"  value="送信">
-	<input type="reset" hidden id="reset" value="リセット">
+	<input type="reset" hidden id="reset" value="戻る・リセット">
 	</form>
 
 
