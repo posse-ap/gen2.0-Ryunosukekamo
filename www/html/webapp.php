@@ -1,5 +1,6 @@
 <?php
 include "db-connect.php";
+// include "login.php";
 // echo phpinfo();
 ?>
 
@@ -124,6 +125,7 @@ else{
 // データをtableに送る上で絶対になくちゃならないのは（最低条件）、日付とその日の勉強時間。N予備に何時間とかいらない。
 // しかし、モーダルの構造上、合計時間をいれて勝手に振り分けてくれない。各項目の時間を入れる時は一回づつ。
 if(isset($_GET['calendar'],$_GET['study_time'])){
+	echo $_GET['calendar'];
 	// 日付を - で分けて配列にする
 	$V=explode('-',$_GET['calendar']);
 	// 今日の勉強時間の合計

@@ -96,3 +96,13 @@ INSERT INTO All_data(date,month,year,hours,HTML,JavaScript,CSS,PHP,ooo,Laravel,S
 (3,3,3,3,NULL,NULL,NULL,NULL,NULL,45,NULL,NULL,3,NULL,NULL),
 (3,3,3,10,NULL,NULL,NULL,NULL,NULL,NULL,60,NULL,NULL,10,NULL),
 (4,4,4,8,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2,NULL,NULL,8);
+
+DROP TABLE IF EXISTS users; 
+CREATE TABLE users(
+    id INT auto_increment,
+    username varchar(225) NULL,
+    email varchar(225) NULL,
+    password varchar(225) NULL,
+    primary key(id)
+);
+INSERT INTO users(username,email,password)VALUES(NULL,NULL,NULL);
