@@ -243,7 +243,7 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 
 	<!-- モーダル -->
 
-	<form id="modal" action="webapp.php" method="GET"class="modal">
+	<form id="modal" name="form" action="webapp.php" method="GET"class="modal">
 
 		<!-- バツボタン -->
 		<span id="btn_close" class="btn_close"></span>
@@ -269,12 +269,12 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 						<br>
 						<span id="study_p" class="study_p"><i id="icon_check_three" class="fas fa-check-circle"></i>POSSE課題</span> -->
 
-						<input type="checkbox" id="study_n" class="study_n" name="1">N予備校</input>
+						<span class="span" id="1"><input type="checkbox"  name="1" onclick="study(this)">N予備校</input></span>
 
-						<input type="checkbox" id="study_d" class="study_d" name="2">ドットインストール</input>
+						<span class="span" id="2"><input type="checkbox" name="2" onclick="study(this)" >ドットインストール</input></span>
 						<br>
 
-						<input type="checkbox" id="study_p" class="study_p" name="3">POSSE課題</input>
+						<span class="span" id="3"><input type="checkbox" name="3"  onclick="study(this)">POSSE課題</input></span>
 					</div>
 
 

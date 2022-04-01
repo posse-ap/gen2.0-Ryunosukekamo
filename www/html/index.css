@@ -503,7 +503,6 @@ svg {
 .languages_study div span {
     border-radius: 15px;
     border-color: transparent;
-    background-color: #F5F5F8;
     width: 200px;
     padding: 4px 10px;
 }
@@ -538,11 +537,14 @@ svg {
 .contents_study div span {
     border-radius: 15px;
     border-color: transparent;
-    background-color: #F5F5F8;
     width: 200px;
     padding: 4px 10px;
+    cursor: pointer;
 }
-
+.span{
+    background-color: #F5F5F8;
+    
+}
 /* この三つを入れることでbrタグに高さを調節できる */
 
 br {
@@ -676,7 +678,8 @@ color: #000000;
 
 /* checkだけでは、効かないようだ */
 .check {
-    color: #0E70BC;
+    background-color:#E7F5FF;
+    /* background-color: #0E70BC; */
 }
 .contents_study i.check {
     color: #0E70BC;

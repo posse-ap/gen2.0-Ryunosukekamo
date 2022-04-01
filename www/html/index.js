@@ -103,47 +103,51 @@ document.getElementById('responsive_modal_record_post').addEventListener("click"
 // ------------------------------------------------------------------------------------------------------------
 // チェックした時の処理
 
-let study_n = document.getElementById('study_n');
-let icon_check_one = document.getElementById('icon_check_one');
+function study(kamo){
+    document.getElementById(kamo.name).classList.toggle('check');
+}
 
-study_n.addEventListener("click", function () {
-    icon_check_one.classList.toggle('check');
-    study_n.classList.toggle('add');
-});
+// let study_n = document.getElementById('study_n');
+// let icon_check_one = document.getElementById('icon_check_one');
 
-
-let study_d = document.getElementById('study_d');
-let icon_check_two = document.getElementById('icon_check_two');
-
-study_d.addEventListener("click", function () {
-    icon_check_two.classList.toggle('check');
-    study_d.classList.toggle('add');
-});
-
-let study_p = document.getElementById('study_p');
-let icon_check_three = document.getElementById('icon_check_three');
-
-study_p.addEventListener("click", function () {
-    icon_check_three.classList.toggle('check');
-    study_p.classList.toggle('add');
-});
-
-let study_HTML = document.getElementById('study_HTML');
-let icon_check_four = document.getElementById('icon_check_four');
-
-study_HTML.addEventListener("click", function () {
-    icon_check_four.classList.toggle('check');
-    study_HTML.classList.toggle('add');
-});
+// study_n.addEventListener("click", function () {
+//     icon_check_one.classList.toggle('check');
+//     study_n.classList.toggle('add');
+// });
 
 
-let study_CSS = document.getElementById('study_CSS');
-let icon_check_five = document.getElementById('icon_check_five');
+// let study_d = document.getElementById('study_d');
+// let icon_check_two = document.getElementById('icon_check_two');
 
-study_CSS.addEventListener("click", function () {
-    icon_check_five.classList.toggle('check');
-    study_CSS.classList.toggle('add');
-});
+// study_d.addEventListener("click", function () {
+//     icon_check_two.classList.toggle('check');
+//     study_d.classList.toggle('add');
+// });
+
+// let study_p = document.getElementById('study_p');
+// let icon_check_three = document.getElementById('icon_check_three');
+
+// study_p.addEventListener("click", function () {
+//     icon_check_three.classList.toggle('check');
+//     study_p.classList.toggle('add');
+// });
+
+// let study_HTML = document.getElementById('study_HTML');
+// let icon_check_four = document.getElementById('icon_check_four');
+
+// study_HTML.addEventListener("click", function () {
+//     icon_check_four.classList.toggle('check');
+//     study_HTML.classList.toggle('add');
+// });
+
+
+// let study_CSS = document.getElementById('study_CSS');
+// let icon_check_five = document.getElementById('icon_check_five');
+
+// study_CSS.addEventListener("click", function () {
+//     icon_check_five.classList.toggle('check');
+//     study_CSS.classList.toggle('add');
+// });
 
 let study_Js = document.getElementById('study_Js');
 let icon_check_six = document.getElementById('icon_check_six');
