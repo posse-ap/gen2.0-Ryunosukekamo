@@ -11,11 +11,10 @@ if(!$username=filter_input(INPUT_POST,'username')){
 if(!$email=filter_input(INPUT_POST,'email')){
     $err[]='メールアドレスを記入してください';
 }
-if(!$password=filter_input(INPUT_POST,'password')){
-    // 正規表現.8文字以上100文字以下、または、パスワードの値が英数字だったらOK。これでも弱いから、自分で調べる。例えば、大文字を混ぜるようにするとか。
-    if(!preg_match("/\A[a-z\d]{8,100}+\z/i",$password)){
-        $err[]='パスワードは、英数字８文字以上１００文字以下にして下さい。';
-    }
+$password=filter_input(INPUT_POST,'password');
+// 正規表現.8文字以上100文字以下、または、パスワードの値が英数字だったらOK。これでも弱いから、自分で調べる。例えば、大文字を混ぜるようにするとか。
+if(!preg_match("/\A[a-z\d]{8,100}+\z/i",$password)){
+    $err[]='パスワードは、英数字８文字以上１００文字以下にして下さい。';
 }
 
 // パスワードと確認用パスワードの比較
