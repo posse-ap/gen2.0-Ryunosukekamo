@@ -269,12 +269,12 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 						<br>
 						<span id="study_p" class="study_p"><i id="icon_check_three" class="fas fa-check-circle"></i>POSSE課題</span> -->
 
-						<span class="span" id="1"><input type="checkbox"  name="1" onclick="study(this)">N予備校</input></span>
+						<span class="span" id="1"><input type="checkbox" id="sample1"  name="1" onclick="study(this)"><label for="sample1">N予備校</label></input></span>
 
-						<span class="span" id="2"><input type="checkbox" name="2" onclick="study(this)" >ドットインストール</input></span>
+						<span class="span" id="2"><input type="checkbox" id="sample2" name="2" onclick="study(this)" ><label for="sample2">ドットインストール</label></input></span>
 						<br>
 
-						<span class="span" id="3"><input type="checkbox" name="3"  onclick="study(this)">POSSE課題</input></span>
+						<span class="span" id="3"><input type="checkbox" id="sample3" name="3"  onclick="study(this)"><label for="sample3">POSSE課題</label></input></span>
 					</div>
 
 
@@ -284,22 +284,15 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 				<div id="languages_study" class="languages_study">
 					<span>学習言語（複数選択可）</span>
 					<div>
-						<!-- <span id="study_HTML"><i id="icon_check_four" class="fas fa-check-circle"></i>HTML</span>
-						<span id="study_CSS"><i id="icon_check_five" class="fas fa-check-circle"></i>CSS</span>
-						<span id="study_Js"><i id="icon_check_six" class="fas fa-check-circle"></i>JavaScript</span><br>
-						<span id="study_PHP"><i id="icon_check_seven" class="fas fa-check-circle"></i>PHP</span>
-						<span id="study_Laravel"><i id="icon_check_eight" class="fas fa-check-circle"></i>Laravel</span>
-						<span id="study_SQL"><i id="icon_check_nine" class="fas fa-check-circle"></i>SQL</span>
-						<span id="study_SHELL"><i id="icon_check_ten" class="fas fa-check-circle"></i>SHELL</span><br>
-						<span id="study_others"><i id="icon_check_eleven" class="fas fa-check-circle"></i>情報処理システム基礎知識（その他）</span><br> -->
-						<input type="checkbox" id="study_HTML" name="4">HTML</input>
-						<input type="checkbox" id="study_Js" name="5">JavaScript</input><br>
-						<input type="checkbox" id="study_CSS" name="6">CSS</input>
-						<input type="checkbox" id="study_PHP" name="7">PHP</input>
-						<input type="checkbox" id="study_Laravel" name="8">Laravel</input>
-						<input type="checkbox" id="study_SQL" name="9">SQL</input>
-						<input type="checkbox" id="study_SHELL" name="10">SHELL</input><br>
-						<input type="checkbox" id="study_others" name="11">情報処理システム基礎知識（その他）</input><br>
+						
+					<span class="span" id="4"><input type="checkbox" id="sample4" name="4" onclick="study(this)"><label for="sample4">HTML</label></input></span>
+					<span class="span" id="5"><input type="checkbox" id="sample5" name="5" onclick="study(this)"><label for="sample5">JavaScript</label></input></span>
+					<span class="span" id="6"><input type="checkbox" id="sample6" name="6" onclick="study(this)"><label for="sample6">CSS</label></input></span><br>
+					<span class="span" id="7"><input type="checkbox" id="sample7" name="7" onclick="study(this)"><label for="sample7">PHP</label></input></span>
+					<span class="span" id="8"><input type="checkbox" id="sample8" name="8" onclick="study(this)"><label for="sample8">Laravel</label></input></span>
+					<span class="span" id="9"><input type="checkbox" id="sample9" name="9" onclick="study(this)"><label for="sample9">SQL</label></input></span>
+					<span class="span" id="10"><input type="checkbox" id="sample10" name="10" onclick="study(this)"><label for="sample10">SHELL</label></input></span><br>
+					<span class="span" id="11"><input type="checkbox" id="sample11" name="11" onclick="study(this)"><label for="sample11">情報処理システム基礎知識（その他）</label></input></span>
 
 					</div>
 
@@ -318,9 +311,7 @@ if(isset($_GET['calendar'],$_GET['study_time'])){
 					<span>Twitter用コメント</span>
 					<input type="text" id="twitter_text">
 				</div>
-
-				<!-- <p id="Tweet" class="Tweet"><i id='icon_check_twelve' class="fas fa-check-circle"></i>Twitterにシェアする</p> -->
-				<div id="Tweet" class="Tweet"><i id='icon_check_twelve' class="fas fa-check-circle"><span>Twitterにシェアする</span></i></div>
+				<input type="checkbox" id="tweet_checkbox" class="tweet_checkbox" name="12" onclick="study(this)"><label for="tweet_checkbox">Twitterにシェアする</label></input>
 			</div>
 			
 		</div>

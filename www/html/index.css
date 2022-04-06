@@ -511,19 +511,111 @@ svg {
     margin-top: 15px;
 }
 
-.contents_study i {
-    color: #CCCCCC;
-    margin-top: 10px;
-    /* margin-left: 10px;  */
+
+/* もとのチェックボックスを非表示にする */
+.contents_study input[type="checkbox"]{
+    display: none;
+}
+
+/* チェックボックスの代わりを成すラベル */
+.contents_study input[type="checkbox"]+label{
+    display: none;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+    padding-right: 10px;
+}
+
+/* ラベルの左に表示させる正方形のボックス□ */
+.contents_study input[type="checkbox"]+label::before{
+    content: "";
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    width: 17px;
+    height: 17px;
+    margin-top: -10px;
+    left: 0;
+    top: 50%;
+    border: 1px solid;
+    border-color: #585753;
+    background-color: #FFF;
+    border-radius: 50%;
+}
+
+.contents_study input[type="checkbox"]:checked+label::before{
+    background-color: #0E70BC;
+}
+
+/* チェックが入った時のレ点 */
+.contents_study input[type="checkbox"]:checked+label::after{
+    content: "";
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    width: 10px;
+    height: 7px;
+    margin-top: -9px;
+    top: 61%;
+    left: 3px;
+    transform: rotate(-45deg);
+    border-bottom: 3px solid;
+    border-left: 3px solid;
+    border-color: #FFFF;
 }
 
 /* 学習言語チェックボックス */
 
-.languages_study i {
-    color: #CCCCCC;
-    margin-top: 10px;
-    /* margin-left: 10px; */
-    /* margin-right: 10px; */
+.languages_study input[type="checkbox"]{
+    display: none;
+}
+
+/* チェックボックスの代わりを成すラベル */
+.languages_study input[type="checkbox"]+label{
+    display: none;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+    padding-right: 10px;
+}
+
+/* ラベルの左に表示させる正方形のボックス□ */
+.languages_study input[type="checkbox"]+label::before{
+    content: "";
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    width: 17px;
+    height: 17px;
+    margin-top: -10px;
+    left: 0;
+    top: 50%;
+    border: 1px solid;
+    border-color: #585753;
+    background-color: #FFF;
+    border-radius: 50%;
+}
+
+.languages_study input[type="checkbox"]:checked+label::before{
+    background-color: #0E70BC;
+}
+
+.languages_study input[type="checkbox"]:checked+label::after{
+    content: "";
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    width: 10px;
+    height: 7px;
+    margin-top: -9px;
+    top: 61%;
+    left: 3px;
+    transform: rotate(-45deg);
+    border-bottom: 3px solid;
+    border-left: 3px solid;
+    border-color: #FFFF;
 }
 
 /* 選択肢の上下の間隔*/
@@ -532,25 +624,27 @@ svg {
     margin-top: 3px;
 }
 
-/* 学習言語 */
-
 .contents_study div span {
     border-radius: 15px;
-    border-color: transparent;
-    width: 200px;
     padding: 4px 10px;
     cursor: pointer;
 }
+
+.languages_study div span {
+    border-radius: 15px;
+    padding: 4px 6px;
+    cursor: pointer;
+}
+/* 分かりづらいが、spanのclass名。<span class=spanにしている */
 .span{
     background-color: #F5F5F8;
     
 }
-/* この三つを入れることでbrタグに高さを調節できる */
-
-br {
+/* brでタグの高さを調節 */
+.contents_study br,.languages_study br {
     display: block;
     content: "";
-    margin: 8px 0;
+    margin: 15px 0;
 }
 
 
@@ -560,15 +654,66 @@ br {
     margin-top: 50px;
 }
 
-.input_study_time {
+/* .input_study_time {
     background-color: #F5F5F8;
     border-radius: 8px;
     border-color: transparent;
     height: 42px;
     width: 374px;
-}
+} */
 
 /* twitter用コメント */
+
+.tweet_checkbox[type="checkbox"]{
+    display: none;
+}
+
+/* チェックボックスの代わりを成すラベル */
+.tweet_checkbox[type="checkbox"]+label{
+    display: none;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+    padding-right: 10px;
+}
+
+/* ラベルの左に表示させる正方形のボックス□ */
+.tweet_checkbox[type="checkbox"]+label::before{
+    content: "";
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    width: 17px;
+    height: 17px;
+    margin-top: -10px;
+    left: 0;
+    top: 50%;
+    border: 1px solid;
+    border-color: #585753;
+    background-color: #FFF;
+    border-radius: 50%;
+}
+
+.tweet_checkbox[type="checkbox"]:checked+label::before{
+    background-color: #0E70BC;
+}
+
+.tweet_checkbox[type="checkbox"]:checked+label::after{
+    content: "";
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    width: 10px;
+    height: 7px;
+    margin-top: -9px;
+    top: 61%;
+    left: 3px;
+    transform: rotate(-45deg);
+    border-bottom: 3px solid;
+    border-left: 3px solid;
+    border-color: #FFFF;
+}
 
 .twitter input {
     width: 374px;
@@ -576,6 +721,14 @@ br {
     border-radius: 20px;
     border-color: transparent;
     background-color: #F5F5F8;
+}
+
+.input_study_time {
+    background-color: #F5F5F8;
+    border-radius: 8px;
+    border-color: transparent;
+    height: 42px;
+    width: 374px;
 }
 
 /* Twitterにシェアする */
@@ -681,21 +834,7 @@ color: #000000;
     background-color:#E7F5FF;
     /* background-color: #0E70BC; */
 }
-.contents_study i.check {
-    color: #0E70BC;
-}
 
-.languages_study i.check {
-    color: #0E70BC;
-}
-
-.contents_study span.add {
-    background-color: #E7F5FF;
-}
-
-.languages_study div span.add {
-    background-color: #E7F5FF;
-}
 
 /* ---------------------------------------------------------------------------- */
 

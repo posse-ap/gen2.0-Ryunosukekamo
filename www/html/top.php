@@ -23,6 +23,20 @@ if(count($err)>0){
     // 処理をとめる
     return;
 }
+
+// ログイン成功時の処理
+if(count($err)==0){
+    // ユーザーemailを変数に代入
+    $email=filter_input(INPUT_POST,'email');
+    // テーブルにあるemailと比較する。なぜか、$emailに'';
+    // https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1247269492
+    $sql=$dbh->prepare("SELECT *from users where email='$email'");
+    //  自分用メモ、このexecuteの引数に$emailを入れることでwhere email=?にできる。
+    $sql->execute();
+    //  fetchで結果を返す
+    $user=$sql->fetch(PDO::FETCH_NUM);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +53,7 @@ if(count($err)>0){
             <p><?php echo $e ?></p>
         <?php endforeach ?>
     <?php else:?>
+        <p><?php print_r($user); ?></p>
         <p>ユーザ登録が完了しました。</p>
     <?php endif?>
 
